@@ -1,0 +1,388 @@
+/* assets/css/main.css
+   ============================================================
+   Design system: "Marginalia"
+   A field-notes blog. The signature idea is the margin rail —
+   a thin ruled column of monospace annotations that runs beside
+   long-form content, echoing handwritten notes in a notebook.
+
+   Palette
+     --ink        #14171B  primary text / dark surfaces
+     --paper      #F6F4EF  light background
+     --paper-dark #1B1E23  dark background
+     --pine       #2F6F62  primary accent (links, focus, CTAs)
+     --ochre      #C08A2E  secondary accent (badges, highlights)
+     --rule       #DAD5C8  hairline rule color, light mode
+     --rule-dark  #33383D  hairline rule color, dark mode
+
+   Type
+     Display : "Space Grotesk"   -- headings, nav, UI labels
+     Body    : "Source Serif 4"  -- article prose
+     Mono    : "IBM Plex Mono"   -- meta, code, margin annotations
+   ============================================================ */
+
+:root {
+  --ink: #14171b;
+  --paper: #f6f4ef;
+  --paper-dark: #1b1e23;
+  --surface-dark: #22262c;
+  --pine: #2f6f62;
+  --pine-light: #e7efec;
+  --ochre: #c08a2e;
+  --ochre-light: #f6ecd8;
+  --rule: #dad5c8;
+  --rule-dark: #33383d;
+  --text-muted: #5b5f63;
+  --text-muted-dark: #9aa0a6;
+
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+html.dark body {
+  background-color: var(--paper-dark);
+  color: #eceae4;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display, nav, button, .btn {
+  font-family: var(--font-display);
+}
+
+code, pre, kbd, .font-mono, .meta, .annotation {
+  font-family: var(--font-mono);
+}
+
+/* ---------- Skip link ---------- */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--pine);
+  color: #fff;
+  padding: 10px 16px;
+  z-index: 100;
+  border-radius: 0 0 6px 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* ---------- Focus states ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--pine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Hairline rules ---------- */
+.rule {
+  border-color: var(--rule);
+}
+html.dark .rule {
+  border-color: var(--rule-dark);
+}
+
+/* ---------- Links inside prose ---------- */
+.prose a {
+  color: var(--pine);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+html.dark .prose a {
+  color: #7fbfae;
+}
+
+/* ---------- Reading progress bar ---------- */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--ochre);
+  z-index: 60;
+  transition: width 0.1s linear;
+}
+
+/* ---------- Margin annotation rail (signature element) ----------
+   A vertical ruled column that sits to the left of the article body
+   on wide viewports, carrying small monospace notes: section index,
+   estimated position, and reading milestones. Hidden below xl.
+------------------------------------------------------------------- */
+.margin-rail {
+  position: relative;
+  padding-left: var(--space-6);
+  border-left: 1px solid var(--rule);
+}
+html.dark .margin-rail {
+  border-left-color: var(--rule-dark);
+}
+.margin-rail .annotation {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+html.dark .margin-rail .annotation {
+  color: var(--text-muted-dark);
+}
+.margin-tick {
+  position: absolute;
+  left: -1px;
+  width: 9px;
+  height: 1px;
+  background: var(--rule);
+}
+html.dark .margin-tick {
+  background: var(--rule-dark);
+}
+
+/* ---------- Blog card ---------- */
+.blog-card {
+  border: 1px solid var(--rule);
+  background: #fff;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+html.dark .blog-card {
+  border-color: var(--rule-dark);
+  background: var(--surface-dark);
+}
+.blog-card:hover {
+  border-color: var(--pine);
+  transform: translateY(-2px);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--pine-light);
+  color: var(--pine);
+}
+html.dark .badge {
+  background: rgba(47, 111, 98, 0.2);
+  color: #7fbfae;
+}
+.badge.badge-ochre {
+  background: var(--ochre-light);
+  color: #8a641f;
+}
+html.dark .badge.badge-ochre {
+  background: rgba(192, 138, 46, 0.2);
+  color: var(--ochre);
+}
+
+/* ---------- Tag chip ---------- */
+.tag-chip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border: 1px solid var(--rule);
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+html.dark .tag-chip {
+  border-color: var(--rule-dark);
+  color: var(--text-muted-dark);
+}
+.tag-chip:hover,
+.tag-chip.active {
+  border-color: var(--pine);
+  color: var(--pine);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+.btn-primary:hover {
+  background: var(--pine);
+}
+html.dark .btn-primary {
+  background: var(--pine);
+  color: #fff;
+}
+html.dark .btn-primary:hover {
+  background: #38897a;
+}
+
+.btn-outline {
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--font-display);
+  padding: 9px 19px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+html.dark .btn-outline {
+  border-color: var(--rule-dark);
+  color: #eceae4;
+}
+.btn-outline:hover {
+  border-color: var(--pine);
+  color: var(--pine);
+}
+
+/* ---------- Code blocks ---------- */
+pre {
+  position: relative;
+  background: var(--ink);
+  color: #eceae4;
+  padding: var(--space-4);
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.copy-code-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #eceae4;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.copy-code-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- Theme toggle ---------- */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+}
+html.dark .theme-toggle {
+  border-color: var(--rule-dark);
+}
+
+/* ---------- Back to top ---------- */
+#back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 50;
+}
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+html.dark #back-to-top {
+  background: var(--pine);
+}
+
+/* ---------- Search modal ---------- */
+.search-backdrop {
+  background: rgba(20, 23, 27, 0.55);
+  backdrop-filter: blur(2px);
+}
+.search-highlight {
+  background: var(--ochre-light);
+  color: #8a641f;
+  border-radius: 2px;
+}
+html.dark .search-highlight {
+  background: rgba(192, 138, 46, 0.35);
+  color: #f0d9ab;
+}
+
+/* ---------- Sidebar / TOC active state ---------- */
+.toc-link.active {
+  color: var(--pine);
+  border-left-color: var(--pine) !important;
+}
+
+/* ---------- Skeleton loading ---------- */
+.skeleton {
+  background: linear-gradient(90deg, var(--rule) 25%, #eeeae0 37%, var(--rule) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+html.dark .skeleton {
+  background: linear-gradient(90deg, var(--rule-dark) 25%, #3a4046 37%, var(--rule-dark) 63%);
+  background-size: 400% 100%;
+}
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* ---------- Print styles ---------- */
+@media print {
+  nav, footer, #back-to-top, .no-print, .margin-rail, #reading-progress {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="page-title">Category — Marginalia</title>
+<meta id="meta-description" name="description" content="" />
+<link rel="icon" href="/public/favicon/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { darkMode: "class", theme: { extend: { fontFamily: {
+    display: ["Space Grotesk", "sans-serif"], body: ["Source Serif 4", "serif"], mono: ["IBM Plex Mono", "monospace"],
+  } } } };
+</script>
+<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+</head>
+<body class="font-body antialiased">
+<div id="navbar-root"></div>
+<div id="search-modal-root"></div>
+<main id="main-content">
+  <div class="relative aspect-[4/1] min-h-[180px] bg-[var(--rule)] overflow-hidden">
+    <img id="category-banner" src="" alt="" class="w-full h-full object-cover"
+      onerror="this.src='https://images.unsplash.com/photo-1481487196290-c152efe083f5?w=1200&h=300&fit=crop'" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-6 w-full">
+        <h1 id="category-title" class="font-display text-2xl sm:text-3xl font-semibold text-white"></h1>
+        <p id="category-desc" class="text-sm text-white/80 mt-1 max-w-xl"></p>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <div id="results-count" class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mb-4"></div>
+    <div id="blog-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+</main>
+<div id="footer-root"></div>
+<button id="back-to-top" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script type="module">
+  import { bootLayout, initIcons, initAnimations } from "./assets/js/layout.js";
+  import { getCategoryBySlug, categories } from "./data/categories.js";
+  import { getBlogsByCategory } from "./data/blogs.js";
+  import { renderBlogCard, bindBookmarkButtons } from "./components/blog-card.js";
+  import { qs } from "./assets/js/utils.js";
+
+  bootLayout("categories.html");
+
+  const slug = qs("slug");
+  const category = getCategoryBySlug(slug) || categories[0];
+  const posts = getBlogsByCategory(category.id);
+
+  document.getElementById("page-title").textContent = `${category.name} — Marginalia`;
+  document.getElementById("meta-description").setAttribute("content", category.description);
+  document.getElementById("category-banner").src = category.image;
+  document.getElementById("category-title").textContent = category.name;
+  document.getElementById("category-desc").textContent = category.description;
+  document.getElementById("results-count").textContent = `${posts.length} article${posts.length === 1 ? "" : "s"} in ${category.name}`;
+
+  document.getElementById("blog-grid").innerHTML = posts.length
+    ? posts.map((b) => renderBlogCard(b)).join("")
+    : `<p class="col-span-full text-center py-16 text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No articles in this category yet.</p>`;
+
+  bindBookmarkButtons();
+  initIcons();
+  initAnimations();
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Categories — Marginalia</title>
+<meta name="description" content="Browse Marginalia by category: engineering, design, product, and SEO." />
+<link rel="icon" href="/public/favicon/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { darkMode: "class", theme: { extend: { fontFamily: {
+    display: ["Space Grotesk", "sans-serif"], body: ["Source Serif 4", "serif"], mono: ["IBM Plex Mono", "monospace"],
+  } } } };
+</script>
+<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+</head>
+<body class="font-body antialiased">
+<div id="navbar-root"></div>
+<div id="search-modal-root"></div>
+<main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+  <div class="mb-10" data-aos="fade-up">
+    <span class="annotation font-mono text-xs">Browse</span>
+    <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2">Categories</h1>
+  </div>
+  <div id="category-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</main>
+<div id="footer-root"></div>
+<button id="back-to-top" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script type="module">
+  import { bootLayout, initIcons, initAnimations } from "./assets/js/layout.js";
+  import { categories } from "./data/categories.js";
+  import { getBlogsByCategory } from "./data/blogs.js";
+  bootLayout("categories.html");
+
+  document.getElementById("category-grid").innerHTML = categories
+    .map((c) => {
+      const count = getBlogsByCategory(c.id).length;
+      return `
+      <a href="category.html?slug=${c.slug}" class="blog-card rounded-lg overflow-hidden flex flex-col" data-aos="fade-up">
+        <div class="aspect-[3/1] bg-[var(--rule)] overflow-hidden">
+          <img src="${c.image}" alt="" loading="lazy"
+            onerror="this.src='https://images.unsplash.com/photo-1481487196290-c152efe083f5?w=600&h=200&fit=crop'"
+            class="w-full h-full object-cover" />
+        </div>
+        <div class="p-5">
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="font-display text-lg font-semibold">${c.name}</h2>
+            <span class="badge">${count} post${count === 1 ? "" : "s"}</span>
+          </div>
+          <p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">${c.description}</p>
+        </div>
+      </a>`;
+    })
+    .join("");
+
+  initIcons();
+  initAnimations();
+</script>
+</body>
+</html>

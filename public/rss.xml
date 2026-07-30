@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Marginalia</title>
+    <link>https://example.github.io/marginalia/index.html</link>
+    <description>Field notes on building things well.</description>
+    <language>en-us</language>
+    <item>
+      <title>Static Sites Still Win in 2026</title>
+      <link>https://example.github.io/marginalia/blog.html?slug=static-sites-still-win</link>
+      <description>A case for static HTML, CSS, and vanilla JS for content-driven sites.</description>
+      <pubDate>Tue, 02 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Designing a Token System That Survives Contact With Real Work</title>
+      <link>https://example.github.io/marginalia/blog.html?slug=designing-a-token-system</link>
+      <description>A practical walkthrough of building a design token system from scratch.</description>
+      <pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>SEO for Product Pages Nobody Is Searching For (Yet)</title>
+      <link>https://example.github.io/marginalia/blog.html?slug=seo-for-product-pages</link>
+      <description>Lessons from rewriting e-commerce collection pages around real Search Console data.</description>
+      <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
