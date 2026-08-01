@@ -1,7 +1,9 @@
 // assets/js/utils.js
 import { getAuthorById } from "../../data/authors.js";
 import { getCategoryBySlug, categories } from "../../data/categories.js";
-import { tags as allTags } from "../../data/tags.js";
+import { slugify } from "./slugify.js";
+
+export { slugify };
 
 export function qs(param) {
   return new URLSearchParams(window.location.search).get(param);
@@ -18,7 +20,11 @@ export function setQs(params) {
 
 export function formatDate(iso) {
   const d = new Date(iso + "T00:00:00");
-  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 export function categoryById(id) {
@@ -26,7 +32,9 @@ export function categoryById(id) {
 }
 
 export function tagById(id) {
-  return allTags.find((t) => t.id === id);
+  // Kept for backward compatibility; not used now that tags are derived
+  // from post data. Prefer tagsFor(blog) or slugify() directly.
+  return { id, name: id, slug: slugify(id) };
 }
 
 export function authorFor(blog) {
@@ -38,7 +46,7 @@ export function categoryFor(blog) {
 }
 
 export function tagsFor(blog) {
-  return blog.tags.map((id) => tagById(id)).filter(Boolean);
+  return (blog.tags || []).map((name) => ({ name, slug: slugify(name) }));
 }
 
 export function debounce(fn, wait = 200) {

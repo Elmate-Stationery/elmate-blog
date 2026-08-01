@@ -10,7 +10,7 @@
     />
     <link
       rel="canonical"
-      href="https://elmateseo-code.github.io/elmate-blog/blogs.html"
+      href="https://example.github.io/marginalia/blogs.html"
     />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="All Articles — Marginalia" />
@@ -146,7 +146,7 @@
         bindBookmarkButtons,
       } from "./components/blog-card.js";
       import { renderPagination } from "./components/pagination.js";
-      import { qs, setQs, debounce } from "./assets/js/utils.js";
+      import { qs, setQs, debounce, slugify } from "./assets/js/utils.js";
 
       bootLayout("blogs.html");
 
@@ -193,8 +193,9 @@
           list = list.filter((b) => b.category === catId);
         }
         if (state.tag) {
-          const tagId = tags.find((t) => t.slug === state.tag)?.id;
-          list = list.filter((b) => b.tags.includes(tagId));
+          list = list.filter((b) =>
+            b.tags.some((t) => slugify(t) === state.tag),
+          );
         }
         if (state.sort === "newest")
           list.sort(

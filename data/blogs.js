@@ -1,5 +1,7 @@
 // data/blogs.js
 // Metadata only. Article body lives in content/<markdown>.md
+import { slugify } from "../assets/js/slugify.js";
+
 export const blogs = [
   {
     id: "blog-001",
@@ -10,7 +12,7 @@ export const blogs = [
       "A case for static HTML, CSS, and vanilla JS for content-driven sites — and when you actually need more.",
     author: "author-najmul",
     category: "cat-engineering",
-    tags: ["tag-static-sites", "tag-performance", "tag-javascript"],
+    tags: ["Static Sites", "Performance", "JavaScript"],
     coverImage: "/public/images/blog/static-sites-cover.jpg",
     thumbnail: "/public/images/blog/static-sites-thumb.jpg",
     markdown: "content/static-sites-still-win.md",
@@ -34,7 +36,7 @@ export const blogs = [
       "A practical walkthrough of building a design token system from scratch, including naming and governance.",
     author: "author-rima",
     category: "cat-design",
-    tags: ["tag-design-systems", "tag-typography", "tag-css"],
+    tags: ["Design Systems", "Typography", "CSS"],
     coverImage: "/public/images/blog/token-system-cover.jpg",
     thumbnail: "/public/images/blog/token-system-thumb.jpg",
     markdown: "content/designing-a-token-system.md",
@@ -58,7 +60,7 @@ export const blogs = [
       "Lessons from rewriting e-commerce collection pages around real Search Console query data.",
     author: "author-najmul",
     category: "cat-seo",
-    tags: ["tag-seo", "tag-ecommerce", "tag-writing"],
+    tags: ["SEO", "E-commerce", "Writing"],
     coverImage: "/public/images/blog/seo-cover.jpg",
     thumbnail: "/public/images/blog/seo-thumb.jpg",
     markdown: "content/seo-for-product-pages.md",
@@ -82,7 +84,7 @@ export const blogs = [
       "A short, honest look at why reading-time estimates are inaccurate and why readers rely on them anyway.",
     author: "author-rima",
     category: "cat-product",
-    tags: ["tag-writing", "tag-accessibility"],
+    tags: ["Writing", "Accessibility"],
     coverImage: "/public/images/blog/reading-time-cover.jpg",
     thumbnail: "/public/images/blog/reading-time-thumb.jpg",
     markdown: "content/reading-time-is-a-lie.md",
@@ -106,7 +108,7 @@ export const blogs = [
       "A walkthrough of shipping fast, typo-tolerant search on a fully static blog using Fuse.js.",
     author: "author-najmul",
     category: "cat-engineering",
-    tags: ["tag-javascript", "tag-static-sites", "tag-performance"],
+    tags: ["JavaScript", "Static Sites", "Performance"],
     coverImage: "/public/images/blog/search-cover.jpg",
     thumbnail: "/public/images/blog/search-thumb.jpg",
     markdown: "content/building-search-without-a-server.md",
@@ -130,7 +132,7 @@ export const blogs = [
       "A pragmatic accessibility checklist for static, content-heavy websites — no framework required.",
     author: "author-rima",
     category: "cat-engineering",
-    tags: ["tag-accessibility", "tag-css"],
+    tags: ["Accessibility", "CSS"],
     coverImage: "/public/images/blog/a11y-cover.jpg",
     thumbnail: "/public/images/blog/a11y-thumb.jpg",
     markdown: "content/accessible-by-default.md",
@@ -145,6 +147,30 @@ export const blogs = [
     canonical: "",
     ogImage: "/public/images/og/a11y-og.jpg",
   },
+  {
+    id: "blog-007",
+    slug: "core-web-vitals-for-blogs",
+    title: "Core Web Vitals for a Blog Nobody's Auditing",
+    subtitle: "The five-afternoon checklist that quietly fixes years of drift",
+    description:
+      "A practical walkthrough of LCP, INP, and CLS for content sites — what actually moves the numbers, and what doesn't.",
+    author: "author-najmul",
+    category: "cat-engineering",
+    tags: ["Performance", "SEO", "Static Sites", "Najmul-shaon"],
+    coverImage: "/public/images/blog/core-web-vitals-cover.jpg",
+    thumbnail: "/public/images/blog/core-web-vitals-thumb.jpg",
+    markdown: "content/core-web-vitals-for-blogs.md",
+    publishDate: "2026-08-01",
+    updatedDate: "2026-08-01",
+    readingTime: 6,
+    featured: false,
+    featuredOrder: null,
+    seoTitle: "Core Web Vitals for a Blog Nobody's Auditing",
+    metaDescription:
+      "A practical checklist for improving LCP, INP, and CLS on content-driven static sites.",
+    canonical: "",
+    ogImage: "/public/images/og/core-web-vitals-og.jpg",
+  },
 ];
 
 export function getBlogBySlug(slug) {
@@ -155,8 +181,8 @@ export function getBlogsByCategory(categoryId) {
   return blogs.filter((b) => b.category === categoryId);
 }
 
-export function getBlogsByTag(tagId) {
-  return blogs.filter((b) => b.tags.includes(tagId));
+export function getBlogsByTag(tagSlug) {
+  return blogs.filter((b) => b.tags.some((t) => slugify(t) === tagSlug));
 }
 
 export function getFeaturedBlogs() {
@@ -171,13 +197,14 @@ export function getLatestBlogs(limit = blogs.length) {
     .slice(0, limit);
 }
 
-export function getRelatedBlogs(blog, limit = 3) {
+export function getRelatedBlogs(blog, limit = 4) {
+  const blogTagSlugs = blog.tags.map(slugify);
   return blogs
     .filter((b) => b.id !== blog.id)
     .map((b) => {
       let score = 0;
       if (b.category === blog.category) score += 2;
-      score += b.tags.filter((t) => blog.tags.includes(t)).length;
+      score += b.tags.filter((t) => blogTagSlugs.includes(slugify(t))).length;
       return { b, score };
     })
     .filter((entry) => entry.score > 0)

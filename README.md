@@ -10,15 +10,16 @@ A fast, static, SEO-friendly blog built with plain HTML5, Tailwind CSS, and vani
 
 **Tech stack:**
 
-| Layer      | Choice |
-|------------|--------|
-| Markup     | HTML5 |
-| Styling    | Tailwind CSS (CDN build) + a small custom design-token stylesheet |
-| Behavior   | Vanilla JavaScript, ES6 modules (`import`/`export`) — no framework, no bundler |
-| Content    | JavaScript objects (`data/*.js`) for metadata, Markdown files (`content/*.md`) for article bodies |
-| Hosting    | GitHub Pages (or any static file host) |
+| Layer    | Choice                                                                                            |
+| -------- | ------------------------------------------------------------------------------------------------- |
+| Markup   | HTML5                                                                                             |
+| Styling  | Tailwind CSS (CDN build) + a small custom design-token stylesheet                                 |
+| Behavior | Vanilla JavaScript, ES6 modules (`import`/`export`) — no framework, no bundler                    |
+| Content  | JavaScript objects (`data/*.js`) for metadata, Markdown files (`content/*.md`) for article bodies |
+| Hosting  | GitHub Pages (or any static file host)                                                            |
 
 **Libraries (all loaded via CDN — nothing to `npm install`):**
+
 - **Tailwind CSS** — utility-first styling
 - **Marked.js** — renders Markdown into HTML
 - **Highlight.js** — syntax highlighting for code blocks
@@ -54,7 +55,8 @@ marginalia/
 │   ├── js/
 │   │   ├── layout.js          Boots every page: mounts navbar/footer/search, theme, icons, animations
 │   │   ├── theme.js            Light/dark/system theme logic (persisted to localStorage)
-│   │   └── utils.js            Shared helpers: querystring, date formatting, bookmarks, debounce
+│   │   ├── utils.js            Shared helpers: querystring, date formatting, bookmarks, debounce
+│   │   └── slugify.js          Turns a tag name into a URL slug (used by data/tags.js)
 │   ├── fonts/, icons/, vendors/   Empty — reserved if you later choose to self-host assets instead of using CDNs
 │
 ├── components/                Render functions that return HTML strings (or mount into the DOM)
@@ -71,7 +73,7 @@ marginalia/
 │   ├── blogs.js                  Post metadata (title, slug, author, category, tags, dates, image paths, etc.)
 │   ├── authors.js
 │   ├── categories.js
-│   └── tags.js
+│   └── tags.js                   Auto-derived from data/blogs.js — don't hand-edit, see Section 6
 │   └── navigation.js
 │
 ├── content/                    Article bodies, one Markdown file per post
@@ -112,7 +114,7 @@ Because this relies on `fetch()` and ES module imports, **the site must be serve
 
 ## 4. Step-by-Step: Running Locally
 
-1. Make sure you have Node.js or Python installed (either works — you only need *something* that can serve static files).
+1. Make sure you have Node.js or Python installed (either works — you only need _something_ that can serve static files).
 2. From the project root, start a local server:
 
    ```bash
@@ -158,17 +160,19 @@ This project deploys via a **GitHub Actions workflow** (`.github/workflows/deplo
    - `title`, `subtitle`, `description`
    - `author` — must match an existing `id` in `data/authors.js` (or add a new author there first)
    - `category` — must match an existing `id` in `data/categories.js`
-   - `tags` — array of existing tag `id`s from `data/tags.js`
+   - `tags` — array of plain tag names, e.g. `["JavaScript", "Performance"]`. Tags are **not** a fixed list — any name you type here is picked up automatically (see the note below).
    - `coverImage`, `thumbnail` — paths under `public/images/blog/`
    - `markdown` — path to the file from step 1, e.g. `"content/your-post-slug.md"`
    - `publishDate`, `updatedDate`, `readingTime` (minutes, estimated)
    - `featured` / `featuredOrder` — set `featured: true` to surface it on the home page
    - `seoTitle`, `metaDescription`, `ogImage` — used for `<title>`, meta description, and social share cards
 3. Add the referenced images to `public/images/blog/`.
-4. *(No manual step needed)* `sitemap.xml` and `rss.xml` regenerate automatically on your next deploy — see Section 7.
+4. _(No manual step needed)_ `sitemap.xml` and `rss.xml` regenerate automatically on your next deploy — see Section 7.
 5. Refresh the site locally — the new post appears automatically in `blogs.html`, its category page, its tag pages, search results, and the home page (if featured/latest).
 
-**Adding a new author, category, or tag:** add an object to the relevant file in `data/` (`authors.js`, `categories.js`, `tags.js`) following the existing pattern before referencing its `id` from a post.
+**Adding a new author or category:** add an object to `data/authors.js` or `data/categories.js` following the existing pattern before referencing its `id` from a post.
+
+**Tags work differently — they're automatic.** `data/tags.js` doesn't hold a hand-maintained list; it scans every post in `data/blogs.js` and builds the tag list, tag cloud, and per-tag pages from whatever names actually appear there. Type a new tag directly into a post's `tags` array and it just works — no registration step, no ID to look up. Tag URLs (`tag.html?slug=...`) are generated by slugifying the tag name (e.g. `"E-commerce"` → `ecommerce`), so keep tag names reasonably consistent in spelling/casing across posts — `"SEO"` and `"seo"` will collapse to the same tag page, but `"SEO"` and `"Search Engine Optimization"` will not.
 
 ---
 
@@ -177,8 +181,9 @@ This project deploys via a **GitHub Actions workflow** (`.github/workflows/deplo
 `public/sitemap.xml` and `public/rss.xml` are **generated files** — don't hand-edit them, they get overwritten on the next deploy.
 
 **How it works:**
+
 - `scripts/generate-seo.mjs` reads every post from `data/blogs.js` (plus a fixed list of static pages) and writes fresh `sitemap.xml` and `rss.xml` files.
-- `.github/workflows/deploy.yml` runs this script automatically on every push to `main`, *before* deploying to GitHub Pages. So the moment you commit a new post to `data/blogs.js`, the next deploy ships an updated sitemap and RSS feed — no manual step required.
+- `.github/workflows/deploy.yml` runs this script automatically on every push to `main`, _before_ deploying to GitHub Pages. So the moment you commit a new post to `data/blogs.js`, the next deploy ships an updated sitemap and RSS feed — no manual step required.
 - This requires **Settings → Pages → Source = "GitHub Actions"** (set once — see Section 5, step 3). The older "deploy from branch" method serves the raw repo contents as-is and would skip generation entirely.
 
 **Run it manually** any time (e.g. to preview the output locally before pushing) with:
@@ -215,15 +220,15 @@ Change a token there (e.g. `--pine`, `--ochre`, `--font-display`) and it updates
 
 ## 9. Feature Reference
 
-| Area | Details |
-|---|---|
-| Search | Fuse.js fuzzy search; keyboard shortcut `/` opens the modal, `Esc` closes it; also available as filters on `blogs.html` and as a full page at `search.html` |
-| Filtering & sorting | Category dropdown, tag chips, sort (newest/oldest/quickest read), grid/list view toggle, pagination — all on `blogs.html`, state reflected in the URL query string |
-| Article page | Table of contents with scroll-spy highlighting, reading progress bar, clickable heading anchors, copy-code buttons on code blocks, share buttons (Facebook, X, LinkedIn, WhatsApp, Telegram, copy-link), related posts (by shared category/tags), prev/next navigation, author box |
-| Personalization | Light/dark/system theme (persisted in `localStorage`), bookmarked articles, recently viewed history — all stored client-side only |
-| SEO | Per-page `<title>`/meta description, canonical URLs, Open Graph + Twitter Card tags, JSON-LD `Article`/`Blog` schema, `robots.txt`, `sitemap.xml`, `rss.xml` |
-| Accessibility | Semantic HTML, skip-to-content link, visible focus states, alt text on all images, `prefers-reduced-motion` support |
-| Performance | Lazy-loaded images, CDN-hosted libraries, debounced search input, no framework/bundle overhead |
+| Area                | Details                                                                                                                                                                                                                                                                            |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Search              | Fuse.js fuzzy search; keyboard shortcut `/` opens the modal, `Esc` closes it; also available as filters on `blogs.html` and as a full page at `search.html`                                                                                                                        |
+| Filtering & sorting | Category dropdown, tag chips, sort (newest/oldest/quickest read), grid/list view toggle, pagination — all on `blogs.html`, state reflected in the URL query string                                                                                                                 |
+| Article page        | Table of contents with scroll-spy highlighting, reading progress bar, clickable heading anchors, copy-code buttons on code blocks, share buttons (Facebook, X, LinkedIn, WhatsApp, Telegram, copy-link), related posts (by shared category/tags), prev/next navigation, author box |
+| Personalization     | Light/dark/system theme (persisted in `localStorage`), bookmarked articles, recently viewed history — all stored client-side only                                                                                                                                                  |
+| SEO                 | Per-page `<title>`/meta description, canonical URLs, Open Graph + Twitter Card tags, JSON-LD `Article`/`Blog` schema, `robots.txt`, `sitemap.xml`, `rss.xml`                                                                                                                       |
+| Accessibility       | Semantic HTML, skip-to-content link, visible focus states, alt text on all images, `prefers-reduced-motion` support                                                                                                                                                                |
+| Performance         | Lazy-loaded images, CDN-hosted libraries, debounced search input, no framework/bundle overhead                                                                                                                                                                                     |
 
 ---
 
@@ -237,11 +242,11 @@ Change a token there (e.g. `--pine`, `--ochre`, `--font-display`) and it updates
 
 ## 11. Troubleshooting
 
-| Symptom | Likely cause |
-|---|---|
-| Blank page, console errors about CORS/modules | Site opened via `file://` instead of a local server — see Section 4 |
-| New post doesn't appear | Check the `slug` is unique, and that `author`/`category`/`tag` IDs referenced in `data/blogs.js` actually exist in their respective data files |
-| Broken image | File path in `data/blogs.js` (or `authors.js`/`categories.js`) doesn't match the actual file in `public/images/` |
-| Search returns nothing it should find | Fuse.js searches `title`, `description`, `author`, `category`, and `tags` fields only — not article body text |
-| Newsletter/contact form shows a "would be subscribed" message instead of sending | No Formspree endpoint configured — see Section 8 |
-| Sitemap/RSS not updating after deploy | Confirm **Settings → Pages → Source** is set to **"GitHub Actions"**, not "Deploy from a branch" — check the Actions tab for the workflow run and its logs |
+| Symptom                                                                          | Likely cause                                                                                                                                               |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Blank page, console errors about CORS/modules                                    | Site opened via `file://` instead of a local server — see Section 4                                                                                        |
+| New post doesn't appear                                                          | Check the `slug` is unique, and that `author`/`category`/`tag` IDs referenced in `data/blogs.js` actually exist in their respective data files             |
+| Broken image                                                                     | File path in `data/blogs.js` (or `authors.js`/`categories.js`) doesn't match the actual file in `public/images/`                                           |
+| Search returns nothing it should find                                            | Fuse.js searches `title`, `description`, `author`, `category`, and `tags` fields only — not article body text                                              |
+| Newsletter/contact form shows a "would be subscribed" message instead of sending | No Formspree endpoint configured — see Section 8                                                                                                           |
+| Sitemap/RSS not updating after deploy                                            | Confirm **Settings → Pages → Source** is set to **"GitHub Actions"**, not "Deploy from a branch" — check the Actions tab for the workflow run and its logs |

@@ -1,302 +1,435 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title id="page-title">Article — Marginalia</title>
-<meta id="meta-description" name="description" content="" />
-<link id="canonical-link" rel="canonical" href="" />
-<meta id="og-title" property="og:type" content="article" />
-<meta id="og-desc" property="og:description" content="" />
-<meta id="og-image" property="og:image" content="" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="/public/favicon/favicon.ico" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = { darkMode: "class", theme: { extend: { fontFamily: {
-    display: ["Space Grotesk", "sans-serif"], body: ["Source Serif 4", "serif"], mono: ["IBM Plex Mono", "monospace"],
-  } } } };
-</script>
-<link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-<link rel="stylesheet" href="https://unpkg.com/highlight.js@11.9.0/styles/atom-one-dark.min.css" />
-<script type="application/ld+json" id="article-schema"></script>
-</head>
-<body class="font-body antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Article — Marginalia</title>
+    <meta id="meta-description" name="description" content="" />
+    <link id="canonical-link" rel="canonical" href="" />
+    <meta id="og-title" property="og:type" content="article" />
+    <meta id="og-desc" property="og:description" content="" />
+    <meta id="og-image" property="og:image" content="" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/public/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Source Serif 4", "serif"],
+              mono: ["IBM Plex Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/highlight.js@11.9.0/styles/atom-one-dark.min.css"
+    />
+    <script type="application/ld+json" id="article-schema"></script>
+  </head>
+  <body class="font-body antialiased">
+    <div id="navbar-root"></div>
+    <div id="search-modal-root"></div>
 
-<div id="navbar-root"></div>
-<div id="search-modal-root"></div>
+    <main id="main-content">
+      <article class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+        <!-- Breadcrumb -->
+        <nav
+          aria-label="Breadcrumb"
+          class="text-xs font-mono text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mb-6"
+          id="breadcrumb"
+        ></nav>
 
-<main id="main-content">
-  <article class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+        <header class="max-w-3xl" data-aos="fade-up">
+          <a id="category-badge" href="#" class="badge inline-block mb-4"></a>
+          <h1
+            id="article-title"
+            class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight"
+          ></h1>
+          <p
+            id="article-subtitle"
+            class="text-lg text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mt-4"
+          ></p>
 
-    <!-- Breadcrumb -->
-    <nav aria-label="Breadcrumb" class="text-xs font-mono text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mb-6" id="breadcrumb"></nav>
+          <div class="flex flex-wrap items-center gap-4 mt-6 text-sm">
+            <div class="flex items-center gap-2">
+              <img
+                id="author-avatar"
+                src=""
+                alt=""
+                class="w-9 h-9 rounded-full object-cover bg-[var(--rule)]"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop'
+                "
+              />
+              <div>
+                <p id="author-name" class="font-medium leading-none"></p>
+                <p
+                  class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mt-1 font-mono"
+                >
+                  <span id="publish-date"></span> &middot;
+                  <span id="reading-time"></span> min read
+                </p>
+              </div>
+            </div>
+            <span
+              id="updated-note"
+              class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] font-mono"
+            ></span>
+            <button
+              id="article-bookmark"
+              class="ml-auto theme-toggle hover:border-[var(--ochre)]"
+              aria-label="Bookmark this article"
+            >
+              <i data-lucide="bookmark" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </header>
 
-    <header class="max-w-3xl" data-aos="fade-up">
-      <a id="category-badge" href="#" class="badge inline-block mb-4"></a>
-      <h1 id="article-title" class="font-display text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight"></h1>
-      <p id="article-subtitle" class="text-lg text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mt-4"></p>
+        <img
+          id="cover-image"
+          src=""
+          alt=""
+          loading="lazy"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          onerror="
+            this.src =
+              'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=600&fit=crop'
+          "
+          class="w-full aspect-[2/1] object-cover rounded-lg mt-8 mb-4 bg-[var(--rule)]"
+        />
+        <p
+          class="text-xs text-center text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mb-10 font-mono"
+          id="cover-caption"
+        ></p>
 
-      <div class="flex flex-wrap items-center gap-4 mt-6 text-sm">
-        <div class="flex items-center gap-2">
-          <img id="author-avatar" src="" alt="" class="w-9 h-9 rounded-full object-cover bg-[var(--rule)]"
-            onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop'" />
-          <div>
-            <p id="author-name" class="font-medium leading-none"></p>
-            <p class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mt-1 font-mono">
-              <span id="publish-date"></span> &middot; <span id="reading-time"></span> min read
-            </p>
+        <div class="grid lg:grid-cols-[220px,1fr,240px] gap-10">
+          <!-- Margin rail (signature element) -->
+          <div class="margin-rail hidden lg:block order-1">
+            <p class="annotation">Article index</p>
+            <p class="text-sm mt-1" id="rail-index">—</p>
+            <p class="annotation mt-6">Word count</p>
+            <p class="text-sm mt-1" id="rail-words">—</p>
+            <p class="annotation mt-6">Share</p>
+            <div class="flex flex-col gap-2 mt-2" id="share-buttons"></div>
+          </div>
+
+          <!-- Article body -->
+          <div class="order-2 min-w-0">
+            <div
+              id="article-content"
+              class="prose prose-lg max-w-none dark:prose-invert prose-headings:font-display prose-headings:font-semibold prose-pre:bg-[var(--ink)]"
+            ></div>
+
+            <div
+              class="flex flex-wrap gap-2 mt-10 pt-6 border-t rule"
+              id="article-tags"
+            ></div>
+
+            <!-- Author box -->
+            <div
+              class="mt-10 p-6 rounded-lg border rule flex gap-4"
+              id="author-box"
+            ></div>
+
+            <!-- Prev / Next -->
+            <div class="grid sm:grid-cols-2 gap-4 mt-10" id="prev-next"></div>
+
+            <!-- Related -->
+            <div class="mt-14">
+              <h2 class="font-display text-xl font-semibold mb-5">
+                Related articles
+              </h2>
+              <div id="related-grid" class="grid sm:grid-cols-2 gap-5"></div>
+            </div>
+
+            <!-- Comments -->
+            <div class="mt-14 pt-8 border-t rule">
+              <h2 class="font-display text-xl font-semibold mb-4">
+                Discussion
+              </h2>
+              <p
+                class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]"
+              >
+                Comments run on GitHub Discussions via Giscus. Enable it by
+                setting <code>giscus.enabled</code> and your repo details in
+                <code>data/config.js</code>.
+              </p>
+            </div>
+          </div>
+
+          <!-- TOC -->
+          <div class="order-3 hidden lg:block">
+            <div class="sticky top-24">
+              <h3
+                class="font-display text-sm font-semibold uppercase tracking-wide mb-3"
+              >
+                On this page
+              </h3>
+              <nav id="toc" class="space-y-1 text-sm"></nav>
+            </div>
           </div>
         </div>
-        <span id="updated-note" class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] font-mono"></span>
-        <button id="article-bookmark" class="ml-auto theme-toggle hover:border-[var(--ochre)]" aria-label="Bookmark this article">
-          <i data-lucide="bookmark" class="w-4 h-4"></i>
-        </button>
-      </div>
-    </header>
+      </article>
+    </main>
 
-    <img id="cover-image" src="" alt="" loading="lazy" data-aos="fade-up" data-aos-delay="100"
-      onerror="this.src='https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=600&fit=crop'"
-      class="w-full aspect-[2/1] object-cover rounded-lg mt-8 mb-4 bg-[var(--rule)]" />
-    <p class="text-xs text-center text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mb-10 font-mono" id="cover-caption"></p>
+    <div id="footer-root"></div>
+    <button id="back-to-top" aria-label="Back to top">
+      <i data-lucide="arrow-up" class="w-4 h-4"></i>
+    </button>
 
-    <div class="grid lg:grid-cols-[220px,1fr,240px] gap-10">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/highlight.js@11.9.0/lib/highlight.js"></script>
 
-      <!-- Margin rail (signature element) -->
-      <div class="margin-rail hidden lg:block order-1">
-        <p class="annotation">Article index</p>
-        <p class="text-sm mt-1" id="rail-index">—</p>
-        <p class="annotation mt-6">Word count</p>
-        <p class="text-sm mt-1" id="rail-words">—</p>
-        <p class="annotation mt-6">Share</p>
-        <div class="flex flex-col gap-2 mt-2" id="share-buttons"></div>
-      </div>
+    <script type="module">
+      import {
+        bootLayout,
+        initIcons,
+        initAnimations,
+      } from "./assets/js/layout.js";
+      import { getBlogBySlug, getRelatedBlogs, blogs } from "./data/blogs.js";
+      import { categories } from "./data/categories.js";
+      import { getAuthorById } from "./data/authors.js";
+      import { siteConfig } from "./data/config.js";
+      import {
+        qs,
+        formatDate,
+        isBookmarked,
+        toggleBookmark,
+        pushHistory,
+        tagsFor,
+      } from "./assets/js/utils.js";
+      import {
+        renderBlogCard,
+        bindBookmarkButtons,
+      } from "./components/blog-card.js";
+      import { socialIconMarkup } from "./assets/js/social-icons.js";
 
-      <!-- Article body -->
-      <div class="order-2 min-w-0">
-        <div id="article-content" class="prose prose-lg max-w-none dark:prose-invert prose-headings:font-display prose-headings:font-semibold prose-pre:bg-[var(--ink)]"></div>
+      bootLayout("");
 
-        <div class="flex flex-wrap gap-2 mt-10 pt-6 border-t rule" id="article-tags"></div>
+      const slug = qs("slug");
+      const blog = getBlogBySlug(slug) || blogs[0];
+      const category = categories.find((c) => c.id === blog.category);
+      const author = getAuthorById(blog.author);
 
-        <!-- Author box -->
-        <div class="mt-10 p-6 rounded-lg border rule flex gap-4" id="author-box"></div>
+      // SEO
+      document.getElementById("page-title").textContent =
+        `${blog.seoTitle || blog.title} — ${siteConfig.siteName}`;
+      document
+        .getElementById("meta-description")
+        .setAttribute("content", blog.metaDescription || blog.description);
+      document
+        .getElementById("canonical-link")
+        .setAttribute(
+          "href",
+          blog.canonical || `${siteConfig.url}/blog.html?slug=${blog.slug}`,
+        );
+      document.getElementById("og-title").setAttribute("content", blog.title);
+      document
+        .getElementById("og-desc")
+        .setAttribute("content", blog.metaDescription || blog.description);
+      document
+        .getElementById("og-image")
+        .setAttribute("content", blog.ogImage || blog.coverImage);
+      document.getElementById("article-schema").textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: blog.title,
+        description: blog.metaDescription || blog.description,
+        author: { "@type": "Person", name: author?.name },
+        datePublished: blog.publishDate,
+        dateModified: blog.updatedDate,
+        image: blog.ogImage || blog.coverImage,
+      });
 
-        <!-- Prev / Next -->
-        <div class="grid sm:grid-cols-2 gap-4 mt-10" id="prev-next"></div>
-
-        <!-- Related -->
-        <div class="mt-14">
-          <h2 class="font-display text-xl font-semibold mb-5">Related articles</h2>
-          <div id="related-grid" class="grid sm:grid-cols-3 gap-5"></div>
-        </div>
-
-        <!-- Comments -->
-        <div class="mt-14 pt-8 border-t rule">
-          <h2 class="font-display text-xl font-semibold mb-4">Discussion</h2>
-          <p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">
-            Comments run on GitHub Discussions via Giscus. Enable it by setting <code>giscus.enabled</code> and your repo details in <code>data/config.js</code>.
-          </p>
-        </div>
-      </div>
-
-      <!-- TOC -->
-      <div class="order-3 hidden lg:block">
-        <div class="sticky top-24">
-          <h3 class="font-display text-sm font-semibold uppercase tracking-wide mb-3">On this page</h3>
-          <nav id="toc" class="space-y-1 text-sm"></nav>
-        </div>
-      </div>
-    </div>
-  </article>
-</main>
-
-<div id="footer-root"></div>
-<button id="back-to-top" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>
-
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://unpkg.com/highlight.js@11.9.0/lib/highlight.js"></script>
-
-<script type="module">
-  import { bootLayout, initIcons, initAnimations } from "./assets/js/layout.js";
-  import { getBlogBySlug, getRelatedBlogs, blogs } from "./data/blogs.js";
-  import { categories } from "./data/categories.js";
-  import { tags as allTags } from "./data/tags.js";
-  import { getAuthorById } from "./data/authors.js";
-  import { siteConfig } from "./data/config.js";
-  import { qs, formatDate, isBookmarked, toggleBookmark, pushHistory } from "./assets/js/utils.js";
-  import { renderBlogCard, bindBookmarkButtons } from "./components/blog-card.js";
-
-  bootLayout("");
-
-  const slug = qs("slug");
-  const blog = getBlogBySlug(slug) || blogs[0];
-  const category = categories.find((c) => c.id === blog.category);
-  const author = getAuthorById(blog.author);
-
-  // SEO
-  document.getElementById("page-title").textContent = `${blog.seoTitle || blog.title} — ${siteConfig.siteName}`;
-  document.getElementById("meta-description").setAttribute("content", blog.metaDescription || blog.description);
-  document.getElementById("canonical-link").setAttribute("href", blog.canonical || `${siteConfig.url}/blog.html?slug=${blog.slug}`);
-  document.getElementById("og-title").setAttribute("content", blog.title);
-  document.getElementById("og-desc").setAttribute("content", blog.metaDescription || blog.description);
-  document.getElementById("og-image").setAttribute("content", blog.ogImage || blog.coverImage);
-  document.getElementById("article-schema").textContent = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: blog.title,
-    description: blog.metaDescription || blog.description,
-    author: { "@type": "Person", name: author?.name },
-    datePublished: blog.publishDate,
-    dateModified: blog.updatedDate,
-    image: blog.ogImage || blog.coverImage,
-  });
-
-  // Breadcrumb
-  document.getElementById("breadcrumb").innerHTML = `
+      // Breadcrumb
+      document.getElementById("breadcrumb").innerHTML = `
     <a href="index.html" class="hover:text-[var(--pine)]">Home</a> /
     <a href="blogs.html" class="hover:text-[var(--pine)]">Blogs</a> /
     ${category ? `<a href="category.html?slug=${category.slug}" class="hover:text-[var(--pine)]">${category.name}</a> /` : ""}
     <span>${blog.title}</span>`;
 
-  // Header
-  const catBadge = document.getElementById("category-badge");
-  if (category) {
-    catBadge.textContent = category.name;
-    catBadge.href = `category.html?slug=${category.slug}`;
-  } else catBadge.remove();
-  document.getElementById("article-title").textContent = blog.title;
-  document.getElementById("article-subtitle").textContent = blog.subtitle || "";
-  document.getElementById("author-avatar").src = author?.avatar || "";
-  document.getElementById("author-name").textContent = author?.name || "Marginalia";
-  document.getElementById("publish-date").textContent = formatDate(blog.publishDate);
-  document.getElementById("reading-time").textContent = blog.readingTime;
-  if (blog.updatedDate && blog.updatedDate !== blog.publishDate) {
-    document.getElementById("updated-note").textContent = `Updated ${formatDate(blog.updatedDate)}`;
-  }
-  document.getElementById("cover-image").src = blog.coverImage;
-  document.getElementById("cover-image").alt = blog.title;
-  document.getElementById("cover-caption").textContent = blog.title;
-
-  // Bookmark
-  const bmBtn = document.getElementById("article-bookmark");
-  bmBtn.setAttribute("aria-pressed", String(isBookmarked(blog.slug)));
-  bmBtn.querySelector("i").classList.toggle("text-[var(--ochre)]", isBookmarked(blog.slug));
-  bmBtn.addEventListener("click", () => {
-    const active = toggleBookmark(blog.slug);
-    bmBtn.setAttribute("aria-pressed", String(active));
-    bmBtn.querySelector("i").classList.toggle("text-[var(--ochre)]", active);
-  });
-
-  // Fetch + render markdown
-  const contentEl = document.getElementById("article-content");
-  fetch(blog.markdown)
-    .then((r) => r.text())
-    .then((md) => {
-      contentEl.innerHTML = marked.parse(md, { headerIds: true, mangle: false });
-
-      // Word count + rail index
-      const words = md.split(/\s+/).filter(Boolean).length;
-      document.getElementById("rail-words").textContent = `${words.toLocaleString()} words`;
-      document.getElementById("rail-index").textContent = `${blog.readingTime} min · ${category?.name || "General"}`;
-
-      // Code blocks: highlight + copy button
-      contentEl.querySelectorAll("pre code").forEach((block) => {
-        if (window.hljs) window.hljs.highlightElement(block);
-        const pre = block.parentElement;
-        const btn = document.createElement("button");
-        btn.className = "copy-code-btn";
-        btn.textContent = "Copy";
-        btn.addEventListener("click", () => {
-          navigator.clipboard.writeText(block.textContent);
-          btn.textContent = "Copied!";
-          setTimeout(() => (btn.textContent = "Copy"), 1500);
-        });
-        pre.appendChild(btn);
-      });
-
-      // Anchor links + TOC
-      const headings = contentEl.querySelectorAll("h2, h3");
-      const toc = document.getElementById("toc");
-      const tocLinks = [];
-      headings.forEach((h, i) => {
-        const id = h.id || `section-${i}`;
-        h.id = id;
-        h.classList.add("group", "scroll-mt-24");
-        const anchor = document.createElement("a");
-        anchor.href = `#${id}`;
-        anchor.className = "ml-2 opacity-0 group-hover:opacity-60 text-sm no-underline";
-        anchor.textContent = "#";
-        anchor.setAttribute("aria-label", "Copy link to this section");
-        h.appendChild(anchor);
-
-        const link = document.createElement("a");
-        link.href = `#${id}`;
-        link.textContent = h.textContent.replace("#", "").trim();
-        link.className = `toc-link block border-l-2 pl-3 py-1 ${h.tagName === "H3" ? "pl-6 text-xs" : ""} border-transparent text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] hover:text-[var(--pine)]`;
-        toc.appendChild(link);
-        tocLinks.push({ id, link });
-      });
-
-      if (tocLinks.length) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              const match = tocLinks.find((t) => t.id === entry.target.id);
-              if (match) match.link.classList.toggle("active", entry.isIntersecting);
-            });
-          },
-          { rootMargin: "-100px 0px -70% 0px" }
-        );
-        headings.forEach((h) => observer.observe(h));
-      } else {
-        document.getElementById("toc").innerHTML = `<p class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No sections in this article.</p>`;
+      // Header
+      const catBadge = document.getElementById("category-badge");
+      if (category) {
+        catBadge.textContent = category.name;
+        catBadge.href = `category.html?slug=${category.slug}`;
+      } else catBadge.remove();
+      document.getElementById("article-title").textContent = blog.title;
+      document.getElementById("article-subtitle").textContent =
+        blog.subtitle || "";
+      document.getElementById("author-avatar").src = author?.avatar || "";
+      document.getElementById("author-name").textContent =
+        author?.name || "Marginalia";
+      document.getElementById("publish-date").textContent = formatDate(
+        blog.publishDate,
+      );
+      document.getElementById("reading-time").textContent = blog.readingTime;
+      if (blog.updatedDate && blog.updatedDate !== blog.publishDate) {
+        document.getElementById("updated-note").textContent =
+          `Updated ${formatDate(blog.updatedDate)}`;
       }
+      document.getElementById("cover-image").src = blog.coverImage;
+      document.getElementById("cover-image").alt = blog.title;
+      document.getElementById("cover-caption").textContent = blog.title;
 
-      initIcons();
-    })
-    .catch(() => {
-      contentEl.innerHTML = `<p class="text-[var(--text-muted)]">Could not load article content.</p>`;
-    });
+      // Bookmark
+      const bmBtn = document.getElementById("article-bookmark");
+      bmBtn.setAttribute("aria-pressed", String(isBookmarked(blog.slug)));
+      bmBtn
+        .querySelector("i, svg")
+        ?.classList.toggle("text-[var(--ochre)]", isBookmarked(blog.slug));
+      bmBtn.addEventListener("click", () => {
+        const active = toggleBookmark(blog.slug);
+        bmBtn.setAttribute("aria-pressed", String(active));
+        bmBtn
+          .querySelector("i, svg")
+          ?.classList.toggle("text-[var(--ochre)]", active);
+      });
 
-  // Tags
-  document.getElementById("article-tags").innerHTML = blog.tags
-    .map((tid) => {
-      const t = allTags.find((x) => x.id === tid);
-      return t ? `<a href="tag.html?slug=${t.slug}" class="tag-chip">#${t.name}</a>` : "";
-    })
-    .join("");
+      // Fetch + render markdown
+      const contentEl = document.getElementById("article-content");
+      fetch(blog.markdown)
+        .then((r) => r.text())
+        .then((md) => {
+          contentEl.innerHTML = marked.parse(md, {
+            headerIds: true,
+            mangle: false,
+          });
 
-  // Share buttons
-  const shareUrl = encodeURIComponent(`${siteConfig.url}/blog.html?slug=${blog.slug}`);
-  const shareTitle = encodeURIComponent(blog.title);
-  const shareLinks = [
-    ["facebook", `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`],
-    ["twitter", `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`],
-    ["linkedin", `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`],
-    ["message-circle", `https://wa.me/?text=${shareTitle}%20${shareUrl}`],
-    ["send", `https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`],
-  ];
-  document.getElementById("share-buttons").innerHTML =
-    shareLinks
-      .map(([icon, href]) => `<a href="${href}" target="_blank" rel="noopener" class="theme-toggle hover:border-[var(--pine)]" aria-label="Share on ${icon}"><i data-lucide="${icon}" class="w-4 h-4"></i></a>`)
-      .join("") +
-    `<button id="copy-link" class="theme-toggle hover:border-[var(--pine)]" aria-label="Copy link"><i data-lucide="link" class="w-4 h-4"></i></button>`;
-  document.getElementById("copy-link")?.addEventListener("click", (e) => {
-    navigator.clipboard.writeText(decodeURIComponent(shareUrl));
-    e.currentTarget.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i>`;
-    initIcons();
-  });
+          // Word count + rail index
+          const words = md.split(/\s+/).filter(Boolean).length;
+          document.getElementById("rail-words").textContent =
+            `${words.toLocaleString()} words`;
+          document.getElementById("rail-index").textContent =
+            `${blog.readingTime} min · ${category?.name || "General"}`;
 
-  // Author box
-  if (author) {
-    document.getElementById("author-box").innerHTML = `
+          // Code blocks: highlight + copy button
+          contentEl.querySelectorAll("pre code").forEach((block) => {
+            if (window.hljs) window.hljs.highlightElement(block);
+            const pre = block.parentElement;
+            const btn = document.createElement("button");
+            btn.className = "copy-code-btn";
+            btn.textContent = "Copy";
+            btn.addEventListener("click", () => {
+              navigator.clipboard.writeText(block.textContent);
+              btn.textContent = "Copied!";
+              setTimeout(() => (btn.textContent = "Copy"), 1500);
+            });
+            pre.appendChild(btn);
+          });
+
+          // Anchor links + TOC
+          const headings = contentEl.querySelectorAll("h2, h3");
+          const toc = document.getElementById("toc");
+          const tocLinks = [];
+          headings.forEach((h, i) => {
+            const id = h.id || `section-${i}`;
+            h.id = id;
+            h.classList.add("group", "scroll-mt-24");
+            const anchor = document.createElement("a");
+            anchor.href = `#${id}`;
+            anchor.className =
+              "ml-2 opacity-0 group-hover:opacity-60 text-sm no-underline";
+            anchor.textContent = "#";
+            anchor.setAttribute("aria-label", "Copy link to this section");
+            h.appendChild(anchor);
+
+            const link = document.createElement("a");
+            link.href = `#${id}`;
+            link.textContent = h.textContent.replace("#", "").trim();
+            link.className = `toc-link block border-l-2 pl-3 py-1 ${h.tagName === "H3" ? "pl-6 text-xs" : ""} border-transparent text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] hover:text-[var(--pine)]`;
+            toc.appendChild(link);
+            tocLinks.push({ id, link });
+          });
+
+          if (tocLinks.length) {
+            const observer = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  const match = tocLinks.find((t) => t.id === entry.target.id);
+                  if (match)
+                    match.link.classList.toggle("active", entry.isIntersecting);
+                });
+              },
+              { rootMargin: "-100px 0px -70% 0px" },
+            );
+            headings.forEach((h) => observer.observe(h));
+          } else {
+            document.getElementById("toc").innerHTML =
+              `<p class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No sections in this article.</p>`;
+          }
+
+          initIcons();
+        })
+        .catch(() => {
+          contentEl.innerHTML = `<p class="text-[var(--text-muted)]">Could not load article content.</p>`;
+        });
+
+      // Tags
+      document.getElementById("article-tags").innerHTML = tagsFor(blog)
+        .map(
+          (t) =>
+            `<a href="tag.html?slug=${t.slug}" class="tag-chip">#${t.name}</a>`,
+        )
+        .join("");
+
+      // Share buttons
+      const shareUrl = encodeURIComponent(
+        `${siteConfig.url}/blog.html?slug=${blog.slug}`,
+      );
+      const shareTitle = encodeURIComponent(blog.title);
+      const shareLinks = [
+        [
+          "facebook",
+          `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
+        ],
+        [
+          "twitter",
+          `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`,
+        ],
+        [
+          "linkedin",
+          `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`,
+        ],
+        ["message-circle", `https://wa.me/?text=${shareTitle}%20${shareUrl}`],
+        ["send", `https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`],
+      ];
+      document.getElementById("share-buttons").innerHTML =
+        shareLinks
+          .map(
+            ([icon, href]) =>
+              `<a href="${href}" target="_blank" rel="noopener" class="theme-toggle hover:border-[var(--pine)]" aria-label="Share on ${icon}">${socialIconMarkup(icon)}</a>`,
+          )
+          .join("") +
+        `<button id="copy-link" class="theme-toggle hover:border-[var(--pine)]" aria-label="Copy link"><i data-lucide="link" class="w-4 h-4"></i></button>`;
+      document.getElementById("copy-link")?.addEventListener("click", (e) => {
+        navigator.clipboard.writeText(decodeURIComponent(shareUrl));
+        e.currentTarget.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i>`;
+        initIcons();
+      });
+
+      // Author box
+      if (author) {
+        document.getElementById("author-box").innerHTML = `
       <img src="${author.avatar}" alt="" class="w-16 h-16 rounded-full object-cover shrink-0 bg-[var(--rule)]"
         onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop'" />
       <div>
@@ -304,32 +437,32 @@
         <p class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] font-mono mb-2">${author.designation}</p>
         <p class="text-sm">${author.bio}</p>
       </div>`;
-  }
+      }
 
-  // Prev / next
-  const idx = blogs.findIndex((b) => b.id === blog.id);
-  const prev = blogs[idx - 1];
-  const next = blogs[idx + 1];
-  const navCard = (b, label, align) =>
-    b
-      ? `<a href="blog.html?slug=${b.slug}" class="blog-card rounded-lg p-5 flex flex-col ${align === "right" ? "text-right items-end" : ""}">
+      // Prev / next
+      const idx = blogs.findIndex((b) => b.id === blog.id);
+      const prev = blogs[idx - 1];
+      const next = blogs[idx + 1];
+      const navCard = (b, label, align) =>
+        b
+          ? `<a href="blog.html?slug=${b.slug}" class="blog-card rounded-lg p-5 flex flex-col ${align === "right" ? "text-right items-end" : ""}">
           <span class="annotation">${label}</span>
           <span class="font-display font-medium mt-1">${b.title}</span>
         </a>`
-      : "<div></div>";
-  document.getElementById("prev-next").innerHTML =
-    navCard(prev, "← Previous", "left") + navCard(next, "Next →", "right");
+          : "<div></div>";
+      document.getElementById("prev-next").innerHTML =
+        navCard(prev, "← Previous", "left") + navCard(next, "Next →", "right");
 
-  // Related
-  const related = getRelatedBlogs(blog, 3);
-  document.getElementById("related-grid").innerHTML = related.length
-    ? related.map((b) => renderBlogCard(b)).join("")
-    : `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No related articles yet.</p>`;
+      // Related
+      const related = getRelatedBlogs(blog, 4);
+      document.getElementById("related-grid").innerHTML = related.length
+        ? related.map((b) => renderBlogCard(b)).join("")
+        : `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No related articles yet.</p>`;
 
-  pushHistory(blog.slug);
-  bindBookmarkButtons();
-  initIcons();
-  initAnimations();
-</script>
-</body>
+      pushHistory(blog.slug);
+      bindBookmarkButtons();
+      initIcons();
+      initAnimations();
+    </script>
+  </body>
 </html>
