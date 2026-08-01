@@ -1,0 +1,10 @@
+{
+  "name": "marginalia-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static blog — no build step for the site itself; this package.json exists only to run the sitemap/RSS generator script.",
+  "scripts": {
+    "generate:seo": "node scripts/generate-seo.mjs"
+  }
+}
