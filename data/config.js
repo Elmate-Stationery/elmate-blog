@@ -7,7 +7,7 @@ export const siteConfig = {
   tagline: "Field notes on building things well",
   siteDescription:
     "Marginalia is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
-  url: "https://example.github.io/marginalia",
+  url: "https://elmateseo-code.github.io/elmate-blog",
   logo: "/public/images/logo/logo.png",
   logoMark: "M", // fallback text mark if no logo image is present
   favicon: "/public/favicon/favicon.ico",
