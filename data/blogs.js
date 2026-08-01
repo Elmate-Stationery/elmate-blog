@@ -67,8 +67,8 @@ export const blogs = [
     publishDate: "2026-05-08",
     updatedDate: "2026-05-08",
     readingTime: 7,
-    featured: false,
-    featuredOrder: null,
+    featured: true,
+    featuredOrder: 4,
     seoTitle: "SEO for Product Pages: Matching Copy to Real Search Behavior",
     metaDescription:
       "How to rewrite e-commerce product and collection pages around actual Search Console query data.",
