@@ -161,12 +161,12 @@ This project deploys via a **GitHub Actions workflow** (`.github/workflows/deplo
    - `author` — must match an existing `id` in `data/authors.js` (or add a new author there first)
    - `category` — must match an existing `id` in `data/categories.js`
    - `tags` — array of plain tag names, e.g. `["JavaScript", "Performance"]`. Tags are **not** a fixed list — any name you type here is picked up automatically (see the note below).
-   - `coverImage`, `thumbnail` — paths under `public/images/blog/`
+   - `coverImage`, `thumbnail` — paths under `public/elmate-blog/public/images/blog/`
    - `markdown` — path to the file from step 1, e.g. `"content/your-post-slug.md"`
    - `publishDate`, `updatedDate`, `readingTime` (minutes, estimated)
    - `featured` / `featuredOrder` — set `featured: true` to surface it on the home page
    - `seoTitle`, `metaDescription`, `ogImage` — used for `<title>`, meta description, and social share cards
-3. Add the referenced images to `public/images/blog/`.
+3. Add the referenced images to `public/elmate-blog/public/images/blog/`.
 4. _(No manual step needed)_ `sitemap.xml` and `rss.xml` regenerate automatically on your next deploy — see Section 7.
 5. Refresh the site locally — the new post appears automatically in `blogs.html`, its category page, its tag pages, search results, and the home page (if featured/latest).
 
@@ -235,7 +235,7 @@ Change a token there (e.g. `--pine`, `--ochre`, `--font-display`) and it updates
 ## 10. Notes on Placeholder Content
 
 - All six sample posts, author bios, and category descriptions are placeholder content — replace with your own via the workflow in Section 6.
-- Images under `public/images/` are generated placeholders (solid color blocks labeled in the site's palette). File paths are already wired up in `data/blogs.js`, `data/categories.js`, and `data/authors.js` — just replace the image files at those same paths.
+- Images under `public/elmate-blog/public/images/` are generated placeholders (solid color blocks labeled in the site's palette). File paths are already wired up in `data/blogs.js`, `data/categories.js`, and `data/authors.js` — just replace the image files at those same paths.
 - `data/config.js` → `siteConfig.url` currently holds a placeholder GitHub Pages URL; update it before deploying (see Section 5, step 1).
 
 ---
@@ -246,7 +246,7 @@ Change a token there (e.g. `--pine`, `--ochre`, `--font-display`) and it updates
 | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Blank page, console errors about CORS/modules                                    | Site opened via `file://` instead of a local server — see Section 4                                                                                        |
 | New post doesn't appear                                                          | Check the `slug` is unique, and that `author`/`category`/`tag` IDs referenced in `data/blogs.js` actually exist in their respective data files             |
-| Broken image                                                                     | File path in `data/blogs.js` (or `authors.js`/`categories.js`) doesn't match the actual file in `public/images/`                                           |
+| Broken image                                                                     | File path in `data/blogs.js` (or `authors.js`/`categories.js`) doesn't match the actual file in `public/elmate-blog/public/images/`                        |
 | Search returns nothing it should find                                            | Fuse.js searches `title`, `description`, `author`, `category`, and `tags` fields only — not article body text                                              |
 | Newsletter/contact form shows a "would be subscribed" message instead of sending | No Formspree endpoint configured — see Section 8                                                                                                           |
 | Sitemap/RSS not updating after deploy                                            | Confirm **Settings → Pages → Source** is set to **"GitHub Actions"**, not "Deploy from a branch" — check the Actions tab for the workflow run and its logs |
