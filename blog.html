@@ -71,10 +71,6 @@
                 src=""
                 alt=""
                 class="w-9 h-9 rounded-full object-cover bg-[var(--rule)]"
-                onerror="
-                  this.src =
-                    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop'
-                "
               />
               <div>
                 <p id="author-name" class="font-medium leading-none"></p>
@@ -107,10 +103,7 @@
           loading="lazy"
           data-aos="fade-up"
           data-aos-delay="100"
-          onerror="
-            this.src =
-              'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=600&fit=crop'
-          "
+       
           class="w-full aspect-[2/1] object-cover rounded-lg mt-8 mb-4 bg-[var(--rule)]"
         />
         <p
@@ -431,7 +424,7 @@
       if (author) {
         document.getElementById("author-box").innerHTML = `
       <img src="${author.avatar}" alt="" class="w-16 h-16 rounded-full object-cover shrink-0 bg-[var(--rule)]"
-        onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop'" />
+       
       <div>
         <p class="font-display font-semibold">${author.name}</p>
         <p class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] font-mono mb-2">${author.designation}</p>
