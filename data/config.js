@@ -8,7 +8,7 @@ export const siteConfig = {
   siteDescription:
     "Marginalia is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
   url: "https://elmate-stationery.github.io/elmate-blog/",
-  logo: "/images/logo/logo.png",
+  logo: "/elmate-blog/public/images/logo/logo.png",
   logoMark: "M", // fallback text mark if no logo image is present
   favicon: "/public/favicon/favicon.ico",
 
@@ -17,7 +17,7 @@ export const siteConfig = {
     defaultTitle: "Marginalia — Field notes on building things well",
     metaDescription:
       "Practical, no-fluff writing on product development, front-end engineering, and design systems.",
-    ogImage: "/images/og/default-og.jpg",
+    ogImage: "/elmate-blog/public/images/og/default-og.jpg",
     twitterHandle: "@marginalia",
     locale: "en_US",
   },
