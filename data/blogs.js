@@ -13,7 +13,7 @@ export const blogs = [
     author: "author-najmul",
     category: "cat-engineering",
     tags: ["Static Sites", "Performance", "JavaScript"],
-    coverImage: "/images/blog/static-sites-cover.jpg",
+    coverImage: "/elmate-blog/images/blog/static-sites-cover.jpg",
     thumbnail: "/images/blog/static-sites-thumb.jpg",
     markdown: "content/static-sites-still-win.md",
     publishDate: "2026-06-02",
