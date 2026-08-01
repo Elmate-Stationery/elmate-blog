@@ -3,7 +3,7 @@
 // Edit this file to rebrand the entire site.
 
 export const siteConfig = {
-  siteName: "Marginalia",
+  siteName: "Elmate Stationery",
   tagline: "Field notes on building things well",
   siteDescription:
     "Marginalia is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
@@ -62,7 +62,7 @@ export const siteConfig = {
   },
 
   pagination: {
-    perPage: 6,
+    perPage: 15,
   },
 
   analytics: {
