@@ -106,7 +106,7 @@ export function mountSearchModal() {
         return `
         <a href="blog.html?slug=${item.slug}" class="flex gap-3 p-3 rounded hover:bg-[var(--pine-light)] dark:hover:bg-white/5 transition-colors">
           <img src="${item.thumbnail}" alt="" loading="lazy"
-            onerror="this.src='https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=100&h=100&fit=crop'"
+           
             class="w-12 h-12 rounded object-cover shrink-0" />
           <div class="min-w-0">
             <p class="text-sm font-medium line-clamp-1">${highlight(item.title, titleMatch?.indices)}</p>

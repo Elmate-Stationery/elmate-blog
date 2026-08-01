@@ -18,7 +18,6 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
     <article class="blog-card rounded-lg overflow-hidden flex flex-col sm:flex-row" data-aos="fade-up">
       <a href="blog.html?slug=${blog.slug}" class="sm:w-56 shrink-0 block aspect-video sm:aspect-square overflow-hidden bg-[var(--rule)]">
         <img src="${blog.thumbnail}" alt="" loading="lazy"
-          onerror="this.src='https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=600&fit=crop'"
           class="w-full h-full object-cover" />
       </a>
       <div class="p-5 flex flex-col gap-2 flex-1">
@@ -45,7 +44,7 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
   <article class="blog-card rounded-lg overflow-hidden flex flex-col h-full" data-aos="fade-up">
     <a href="blog.html?slug=${blog.slug}" class="block aspect-video overflow-hidden bg-[var(--rule)] relative">
       <img src="${blog.thumbnail}" alt="" loading="lazy"
-        onerror="this.src='https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop'"
+       
         class="w-full h-full object-cover" />
       ${blog.featured ? `<span class="badge badge-ochre absolute top-3 left-3">Featured</span>` : ""}
     </a>
