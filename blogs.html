@@ -1,210 +1,311 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>All Articles — Marginalia</title>
-<meta name="description" content="Browse every article on Marginalia — filter by category, tag, or search, sorted by newest or most read." />
-<link rel="canonical" href="https://example.github.io/marginalia/blogs.html" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="All Articles — Marginalia" />
-<meta property="og:description" content="Browse every article on Marginalia — filter by category, tag, or search." />
-<link rel="icon" href="/public/favicon/favicon.ico" />
-<link rel="manifest" href="/public/site.webmanifest" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = { darkMode: "class", theme: { extend: { fontFamily: {
-    display: ["Space Grotesk", "sans-serif"], body: ["Source Serif 4", "serif"], mono: ["IBM Plex Mono", "monospace"],
-  } } } };
-</script>
-<link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-</head>
-<body class="font-body antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Articles — Marginalia</title>
+    <meta
+      name="description"
+      content="Browse every article on Marginalia — filter by category, tag, or search, sorted by newest or most read."
+    />
+    <link
+      rel="canonical"
+      href="https://elmateseo-code.github.io/elmate-blog/blogs.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="All Articles — Marginalia" />
+    <meta
+      property="og:description"
+      content="Browse every article on Marginalia — filter by category, tag, or search."
+    />
+    <link rel="icon" href="/public/favicon/favicon.ico" />
+    <link rel="manifest" href="/public/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Source Serif 4", "serif"],
+              mono: ["IBM Plex Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  </head>
+  <body class="font-body antialiased">
+    <div id="navbar-root"></div>
+    <div id="search-modal-root"></div>
 
-<div id="navbar-root"></div>
-<div id="search-modal-root"></div>
-
-<main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-  <div class="mb-8" data-aos="fade-up">
-    <span class="annotation font-mono text-xs">Archive</span>
-    <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2">All articles</h1>
-  </div>
-
-  <!-- Filters -->
-  <div class="flex flex-col md:flex-row gap-4 md:items-center md:justify-between mb-8" data-aos="fade-up">
-    <div class="relative flex-1 max-w-sm">
-      <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"></i>
-      <input id="filter-search" type="text" placeholder="Search title or description…"
-        class="w-full pl-9 pr-3 py-2.5 rounded border rule bg-transparent text-sm focus:outline-none" />
-    </div>
-    <div class="flex flex-wrap gap-2 items-center">
-      <select id="filter-category" class="text-sm border rule rounded px-3 py-2 bg-transparent">
-        <option value="">All categories</option>
-      </select>
-      <select id="filter-sort" class="text-sm border rule rounded px-3 py-2 bg-transparent">
-        <option value="newest">Newest first</option>
-        <option value="oldest">Oldest first</option>
-        <option value="reading-asc">Quickest read</option>
-      </select>
-      <div class="flex border rule rounded overflow-hidden">
-        <button id="view-grid" class="p-2 hover:bg-[var(--pine-light)] dark:hover:bg-white/5" aria-label="Grid view" aria-pressed="true"><i data-lucide="layout-grid" class="w-4 h-4"></i></button>
-        <button id="view-list" class="p-2 hover:bg-[var(--pine-light)] dark:hover:bg-white/5" aria-label="List view" aria-pressed="false"><i data-lucide="list" class="w-4 h-4"></i></button>
+    <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+      <div class="mb-8" data-aos="fade-up">
+        <span class="annotation font-mono text-xs">Archive</span>
+        <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2">
+          All articles
+        </h1>
       </div>
-    </div>
-  </div>
 
-  <div id="tag-filter-row" class="flex flex-wrap gap-2 mb-10"></div>
+      <!-- Filters -->
+      <div
+        class="flex flex-col md:flex-row gap-4 md:items-center md:justify-between mb-8"
+        data-aos="fade-up"
+      >
+        <div class="relative flex-1 max-w-sm">
+          <i
+            data-lucide="search"
+            class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"
+          ></i>
+          <input
+            id="filter-search"
+            type="text"
+            placeholder="Search title or description…"
+            class="w-full pl-9 pr-3 py-2.5 rounded border rule bg-transparent text-sm focus:outline-none"
+          />
+        </div>
+        <div class="flex flex-wrap gap-2 items-center">
+          <select
+            id="filter-category"
+            class="text-sm border rule rounded px-3 py-2 bg-transparent"
+          >
+            <option value="">All categories</option>
+          </select>
+          <select
+            id="filter-sort"
+            class="text-sm border rule rounded px-3 py-2 bg-transparent"
+          >
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="reading-asc">Quickest read</option>
+          </select>
+          <div class="flex border rule rounded overflow-hidden">
+            <button
+              id="view-grid"
+              class="p-2 hover:bg-[var(--pine-light)] dark:hover:bg-white/5"
+              aria-label="Grid view"
+              aria-pressed="true"
+            >
+              <i data-lucide="layout-grid" class="w-4 h-4"></i>
+            </button>
+            <button
+              id="view-list"
+              class="p-2 hover:bg-[var(--pine-light)] dark:hover:bg-white/5"
+              aria-label="List view"
+              aria-pressed="false"
+            >
+              <i data-lucide="list" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
-  <div id="results-count" class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mb-4"></div>
-  <div id="blog-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-  <div id="pagination-root"></div>
-</main>
+      <div id="tag-filter-row" class="flex flex-wrap gap-2 mb-10"></div>
 
-<div id="footer-root"></div>
-<button id="back-to-top" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>
+      <div
+        id="results-count"
+        class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mb-4"
+      ></div>
+      <div
+        id="blog-grid"
+        class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      ></div>
+      <div id="pagination-root"></div>
+    </main>
 
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    <div id="footer-root"></div>
+    <button id="back-to-top" aria-label="Back to top">
+      <i data-lucide="arrow-up" class="w-4 h-4"></i>
+    </button>
 
-<script type="module">
-  import { bootLayout, initIcons, initAnimations } from "./assets/js/layout.js";
-  import { blogs } from "./data/blogs.js";
-  import { categories } from "./data/categories.js";
-  import { tags } from "./data/tags.js";
-  import { siteConfig } from "./data/config.js";
-  import { renderBlogCard, bindBookmarkButtons } from "./components/blog-card.js";
-  import { renderPagination } from "./components/pagination.js";
-  import { qs, setQs, debounce } from "./assets/js/utils.js";
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
-  bootLayout("blogs.html");
+    <script type="module">
+      import {
+        bootLayout,
+        initIcons,
+        initAnimations,
+      } from "./assets/js/layout.js";
+      import { blogs } from "./data/blogs.js";
+      import { categories } from "./data/categories.js";
+      import { tags } from "./data/tags.js";
+      import { siteConfig } from "./data/config.js";
+      import {
+        renderBlogCard,
+        bindBookmarkButtons,
+      } from "./components/blog-card.js";
+      import { renderPagination } from "./components/pagination.js";
+      import { qs, setQs, debounce } from "./assets/js/utils.js";
 
-  const catSelect = document.getElementById("filter-category");
-  categories.forEach((c) => {
-    const opt = document.createElement("option");
-    opt.value = c.slug;
-    opt.textContent = c.name;
-    catSelect.appendChild(opt);
-  });
+      bootLayout("blogs.html");
 
-  const tagRow = document.getElementById("tag-filter-row");
-  tagRow.innerHTML = tags
-    .map((t) => `<button class="tag-chip" data-tag="${t.slug}">#${t.name}</button>`)
-    .join("");
+      const catSelect = document.getElementById("filter-category");
+      categories.forEach((c) => {
+        const opt = document.createElement("option");
+        opt.value = c.slug;
+        opt.textContent = c.name;
+        catSelect.appendChild(opt);
+      });
 
-  const state = {
-    search: qs("q") || "",
-    category: qs("category") || "",
-    tag: qs("tag") || "",
-    sort: qs("sort") || "newest",
-    view: "grid",
-    page: Number(qs("page")) || 1,
-  };
-  document.getElementById("filter-search").value = state.search;
-  catSelect.value = state.category;
-  document.getElementById("filter-sort").value = state.sort;
+      const tagRow = document.getElementById("tag-filter-row");
+      tagRow.innerHTML = tags
+        .map(
+          (t) =>
+            `<button class="tag-chip" data-tag="${t.slug}">#${t.name}</button>`,
+        )
+        .join("");
 
-  function applyFilters() {
-    let list = [...blogs];
-    if (state.search) {
-      const q = state.search.toLowerCase();
-      list = list.filter(
-        (b) => b.title.toLowerCase().includes(q) || b.description.toLowerCase().includes(q)
+      const state = {
+        search: qs("q") || "",
+        category: qs("category") || "",
+        tag: qs("tag") || "",
+        sort: qs("sort") || "newest",
+        view: "grid",
+        page: Number(qs("page")) || 1,
+      };
+      document.getElementById("filter-search").value = state.search;
+      catSelect.value = state.category;
+      document.getElementById("filter-sort").value = state.sort;
+
+      function applyFilters() {
+        let list = [...blogs];
+        if (state.search) {
+          const q = state.search.toLowerCase();
+          list = list.filter(
+            (b) =>
+              b.title.toLowerCase().includes(q) ||
+              b.description.toLowerCase().includes(q),
+          );
+        }
+        if (state.category) {
+          const catId = categories.find((c) => c.slug === state.category)?.id;
+          list = list.filter((b) => b.category === catId);
+        }
+        if (state.tag) {
+          const tagId = tags.find((t) => t.slug === state.tag)?.id;
+          list = list.filter((b) => b.tags.includes(tagId));
+        }
+        if (state.sort === "newest")
+          list.sort(
+            (a, b) => new Date(b.publishDate) - new Date(a.publishDate),
+          );
+        if (state.sort === "oldest")
+          list.sort(
+            (a, b) => new Date(a.publishDate) - new Date(b.publishDate),
+          );
+        if (state.sort === "reading-asc")
+          list.sort((a, b) => a.readingTime - b.readingTime);
+        return list;
+      }
+
+      function render() {
+        const filtered = applyFilters();
+        const perPage = siteConfig.pagination.perPage;
+        const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+        state.page = Math.min(state.page, totalPages);
+        const start = (state.page - 1) * perPage;
+        const pageItems = filtered.slice(start, start + perPage);
+
+        document.getElementById("results-count").textContent =
+          `${filtered.length} article${filtered.length === 1 ? "" : "s"} found`;
+
+        const grid = document.getElementById("blog-grid");
+        grid.className =
+          state.view === "grid"
+            ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            : "flex flex-col gap-5";
+        grid.innerHTML = pageItems.length
+          ? pageItems
+              .map((b) =>
+                renderBlogCard(b, {
+                  layout: state.view === "list" ? "list" : "grid",
+                }),
+              )
+              .join("")
+          : `<p class="col-span-full text-center py-16 text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No articles match these filters. Try clearing a filter.</p>`;
+
+        tagRow
+          .querySelectorAll("[data-tag]")
+          .forEach((btn) =>
+            btn.classList.toggle("active", btn.dataset.tag === state.tag),
+          );
+
+        const pagRoot = document.getElementById("pagination-root");
+        pagRoot.innerHTML = "";
+        const pag = renderPagination(state.page, totalPages, (p) => {
+          state.page = p;
+          setQs({ page: p });
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        if (pag) pagRoot.appendChild(pag);
+
+        bindBookmarkButtons();
+        initIcons();
+      }
+
+      document.getElementById("filter-search").addEventListener(
+        "input",
+        debounce((e) => {
+          state.search = e.target.value.trim();
+          state.page = 1;
+          setQs({ q: state.search || null, page: null });
+          render();
+        }, 200),
       );
-    }
-    if (state.category) {
-      const catId = categories.find((c) => c.slug === state.category)?.id;
-      list = list.filter((b) => b.category === catId);
-    }
-    if (state.tag) {
-      const tagId = tags.find((t) => t.slug === state.tag)?.id;
-      list = list.filter((b) => b.tags.includes(tagId));
-    }
-    if (state.sort === "newest") list.sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
-    if (state.sort === "oldest") list.sort((a, b) => new Date(a.publishDate) - new Date(b.publishDate));
-    if (state.sort === "reading-asc") list.sort((a, b) => a.readingTime - b.readingTime);
-    return list;
-  }
+      catSelect.addEventListener("change", (e) => {
+        state.category = e.target.value;
+        state.page = 1;
+        setQs({ category: state.category || null, page: null });
+        render();
+      });
+      document.getElementById("filter-sort").addEventListener("change", (e) => {
+        state.sort = e.target.value;
+        setQs({ sort: state.sort });
+        render();
+      });
+      tagRow.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-tag]");
+        if (!btn) return;
+        state.tag = state.tag === btn.dataset.tag ? "" : btn.dataset.tag;
+        state.page = 1;
+        setQs({ tag: state.tag || null, page: null });
+        render();
+      });
+      document.getElementById("view-grid").addEventListener("click", () => {
+        state.view = "grid";
+        document
+          .getElementById("view-grid")
+          .setAttribute("aria-pressed", "true");
+        document
+          .getElementById("view-list")
+          .setAttribute("aria-pressed", "false");
+        render();
+      });
+      document.getElementById("view-list").addEventListener("click", () => {
+        state.view = "list";
+        document
+          .getElementById("view-list")
+          .setAttribute("aria-pressed", "true");
+        document
+          .getElementById("view-grid")
+          .setAttribute("aria-pressed", "false");
+        render();
+      });
 
-  function render() {
-    const filtered = applyFilters();
-    const perPage = siteConfig.pagination.perPage;
-    const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
-    state.page = Math.min(state.page, totalPages);
-    const start = (state.page - 1) * perPage;
-    const pageItems = filtered.slice(start, start + perPage);
-
-    document.getElementById("results-count").textContent = `${filtered.length} article${filtered.length === 1 ? "" : "s"} found`;
-
-    const grid = document.getElementById("blog-grid");
-    grid.className = state.view === "grid" ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-6" : "flex flex-col gap-5";
-    grid.innerHTML = pageItems.length
-      ? pageItems.map((b) => renderBlogCard(b, { layout: state.view === "list" ? "list" : "grid" })).join("")
-      : `<p class="col-span-full text-center py-16 text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No articles match these filters. Try clearing a filter.</p>`;
-
-    tagRow.querySelectorAll("[data-tag]").forEach((btn) => btn.classList.toggle("active", btn.dataset.tag === state.tag));
-
-    const pagRoot = document.getElementById("pagination-root");
-    pagRoot.innerHTML = "";
-    const pag = renderPagination(state.page, totalPages, (p) => {
-      state.page = p;
-      setQs({ page: p });
       render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-    if (pag) pagRoot.appendChild(pag);
-
-    bindBookmarkButtons();
-    initIcons();
-  }
-
-  document.getElementById("filter-search").addEventListener(
-    "input",
-    debounce((e) => {
-      state.search = e.target.value.trim();
-      state.page = 1;
-      setQs({ q: state.search || null, page: null });
-      render();
-    }, 200)
-  );
-  catSelect.addEventListener("change", (e) => {
-    state.category = e.target.value;
-    state.page = 1;
-    setQs({ category: state.category || null, page: null });
-    render();
-  });
-  document.getElementById("filter-sort").addEventListener("change", (e) => {
-    state.sort = e.target.value;
-    setQs({ sort: state.sort });
-    render();
-  });
-  tagRow.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-tag]");
-    if (!btn) return;
-    state.tag = state.tag === btn.dataset.tag ? "" : btn.dataset.tag;
-    state.page = 1;
-    setQs({ tag: state.tag || null, page: null });
-    render();
-  });
-  document.getElementById("view-grid").addEventListener("click", () => {
-    state.view = "grid";
-    document.getElementById("view-grid").setAttribute("aria-pressed", "true");
-    document.getElementById("view-list").setAttribute("aria-pressed", "false");
-    render();
-  });
-  document.getElementById("view-list").addEventListener("click", () => {
-    state.view = "list";
-    document.getElementById("view-list").setAttribute("aria-pressed", "true");
-    document.getElementById("view-grid").setAttribute("aria-pressed", "false");
-    render();
-  });
-
-  render();
-  initAnimations();
-</script>
-</body>
+      initAnimations();
+    </script>
+  </body>
 </html>
