@@ -7,7 +7,7 @@ export const siteConfig = {
   tagline: "Field notes on building things well",
   siteDescription:
     "Marginalia is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
-  url: "https://elmateseo-code.github.io/elmate-blog",
+  url: "https://elmate-stationery.github.io/elmate-blog/",
   logo: "/public/images/logo/logo.png",
   logoMark: "M", // fallback text mark if no logo image is present
   favicon: "/public/favicon/favicon.ico",
@@ -42,15 +42,15 @@ export const siteConfig = {
       { label: "Blogs", href: "blogs.html" },
       { label: "Categories", href: "categories.html" },
       { label: "Tags", href: "tags.html" },
-      { label: "About", href: "about.html" },
-      { label: "Contact", href: "contact.html" },
+      // { label: "About", href: "about.html" },
+      // { label: "Contact", href: "contact.html" },
     ],
   },
 
   footerLinks: {
     quickLinks: [
-      { label: "About", href: "about.html" },
-      { label: "Contact", href: "contact.html" },
+      // { label: "About", href: "about.html" },
+      // { label: "Contact", href: "contact.html" },
       { label: "Privacy Policy", href: "privacy-policy.html" },
       { label: "Terms & Conditions", href: "terms.html" },
     ],

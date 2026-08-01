@@ -3,25 +3,32 @@ import { siteConfig } from "../data/config.js";
 import { categories } from "../data/categories.js";
 import { tags } from "../data/tags.js";
 import { renderNewsletter } from "./newsletter.js";
+import { socialIconMarkup } from "../assets/js/social-icons.js";
 
 export function renderFooter() {
   const year = new Date().getFullYear();
 
   const quickLinks = siteConfig.footerLinks.quickLinks
-    .map((l) => `<li><a href="${l.href}" class="hover:text-[var(--pine)] transition-colors">${l.label}</a></li>`)
+    .map(
+      (l) =>
+        `<li><a href="${l.href}" class="hover:text-[var(--pine)] transition-colors">${l.label}</a></li>`,
+    )
     .join("");
 
   const catLinks = categories
     .slice(0, 5)
     .map(
       (c) =>
-        `<li><a href="category.html?slug=${c.slug}" class="hover:text-[var(--pine)] transition-colors">${c.name}</a></li>`
+        `<li><a href="category.html?slug=${c.slug}" class="hover:text-[var(--pine)] transition-colors">${c.name}</a></li>`,
     )
     .join("");
 
   const tagChips = tags
     .slice(0, 8)
-    .map((t) => `<a href="tag.html?slug=${t.slug}" class="tag-chip">#${t.name}</a>`)
+    .map(
+      (t) =>
+        `<a href="tag.html?slug=${t.slug}" class="tag-chip">#${t.name}</a>`,
+    )
     .join("");
 
   const socialIcons = [
@@ -34,7 +41,7 @@ export function renderFooter() {
     .filter(([, href]) => href)
     .map(
       ([icon, href]) =>
-        `<a href="${href}" aria-label="${icon}" class="theme-toggle hover:border-[var(--pine)] transition-colors"><i data-lucide="${icon}" class="w-4 h-4"></i></a>`
+        `<a href="${href}" aria-label="${icon}" class="theme-toggle hover:border-[var(--pine)] transition-colors">${socialIconMarkup(icon)}</a>`,
     )
     .join("");
 
