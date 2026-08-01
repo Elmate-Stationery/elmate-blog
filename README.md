@@ -1,106 +1,247 @@
-# Marginalia — Static Blog (GitHub Pages)
+# Marginalia — Static Blog
 
-A fast, dependency-free, SEO-friendly blog. No build step, no backend, no database —
-just HTML, Tailwind CSS (via CDN), and vanilla JavaScript ES6 modules. Deploys straight
-to GitHub Pages.
+A fast, static, SEO-friendly blog built with plain HTML5, Tailwind CSS, and vanilla JavaScript (ES6 modules). No backend, no database, no build step. Designed to be hosted for free on GitHub Pages.
 
-## Quick start
+---
 
-1. **Preview locally.** Because this uses ES6 modules (`fetch` for markdown, `import`/`export`),
-   you need to serve the files over HTTP — opening `index.html` directly (`file://`) will not work.
+## 1. Project Overview
+
+**What it is:** A content-driven blog website. All content (posts, authors, categories, tags, site settings) lives in plain JavaScript data files and Markdown files. There is no CMS, no server, and no compilation step — you edit files directly and the site updates immediately.
+
+**Tech stack:**
+
+| Layer      | Choice |
+|------------|--------|
+| Markup     | HTML5 |
+| Styling    | Tailwind CSS (CDN build) + a small custom design-token stylesheet |
+| Behavior   | Vanilla JavaScript, ES6 modules (`import`/`export`) — no framework, no bundler |
+| Content    | JavaScript objects (`data/*.js`) for metadata, Markdown files (`content/*.md`) for article bodies |
+| Hosting    | GitHub Pages (or any static file host) |
+
+**Libraries (all loaded via CDN — nothing to `npm install`):**
+- **Tailwind CSS** — utility-first styling
+- **Marked.js** — renders Markdown into HTML
+- **Highlight.js** — syntax highlighting for code blocks
+- **AOS** — scroll-reveal animations
+- **Lucide** — icon set
+- **Fuse.js** — fuzzy, typo-tolerant client-side search
+
+**Design system:** Space Grotesk (headings/UI), Source Serif 4 (article body), IBM Plex Mono (metadata/code) on an ink/paper palette with a pine-green primary accent and ochre secondary accent. The signature visual element is the **margin rail** on article pages — a ruled sidebar of monospace annotations styled after handwritten notebook notes.
+
+---
+
+## 2. Project Structure
+
+```
+marginalia/
+│
+├── index.html              Home page
+├── blogs.html               All-articles listing (search, filter, sort, paginate)
+├── blog.html                 Single article (reads ?slug=... from the URL)
+├── categories.html          All categories
+├── category.html             Single category (reads ?slug=...)
+├── tags.html                 Tag cloud
+├── tag.html                   Single tag (reads ?slug=...)
+├── search.html               Dedicated search page
+├── about.html                About page
+├── contact.html               Contact page + form
+├── privacy-policy.html
+├── terms.html
+├── 404.html
+│
+├── assets/
+│   ├── css/main.css          Design tokens (colors, type, spacing) + custom component styles
+│   ├── js/
+│   │   ├── layout.js          Boots every page: mounts navbar/footer/search, theme, icons, animations
+│   │   ├── theme.js            Light/dark/system theme logic (persisted to localStorage)
+│   │   └── utils.js            Shared helpers: querystring, date formatting, bookmarks, debounce
+│   ├── fonts/, icons/, vendors/   Empty — reserved if you later choose to self-host assets instead of using CDNs
+│
+├── components/                Render functions that return HTML strings (or mount into the DOM)
+│   ├── navbar.js
+│   ├── footer.js
+│   ├── sidebar.js
+│   ├── blog-card.js
+│   ├── pagination.js
+│   ├── search-modal.js
+│   └── newsletter.js
+│
+├── data/                      All site content and configuration
+│   ├── config.js                Site name, SEO defaults, social links, nav, footer links, analytics, theme default
+│   ├── blogs.js                  Post metadata (title, slug, author, category, tags, dates, image paths, etc.)
+│   ├── authors.js
+│   ├── categories.js
+│   └── tags.js
+│   └── navigation.js
+│
+├── content/                    Article bodies, one Markdown file per post
+│   └── your-post-slug.md
+│
+├── public/
+│   ├── favicon/                 favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png
+│   ├── images/
+│   │   ├── logo/, authors/, categories/, blog/, og/
+│   ├── robots.txt
+│   ├── sitemap.xml              Auto-generated — see Section 7, don't hand-edit
+│   ├── rss.xml                    Auto-generated — see Section 7, don't hand-edit
+│   └── site.webmanifest / manifest.json
+│
+├── scripts/
+│   └── generate-seo.mjs        Regenerates sitemap.xml + rss.xml from data/blogs.js
+│
+├── .github/workflows/
+│   └── deploy.yml               Runs generate-seo.mjs then deploys to GitHub Pages on every push
+│
+├── package.json                 Only needed to run the generator script (no site build step)
+└── README.md
+```
+
+---
+
+## 3. How the Site Works (Architecture)
+
+1. Every HTML page is a static shell with two empty mount points — `#navbar-root` and `#footer-root` — plus page-specific content containers (e.g. `#blog-grid`, `#article-content`).
+2. A `<script type="module">` block at the bottom of each page imports `assets/js/layout.js` and calls `bootLayout()`, which renders the navbar, footer, and search modal, then initializes theme, icons, and animations.
+3. The page then imports whatever `data/*.js` it needs (e.g. `blogs.js`) and whatever `components/*.js` it needs (e.g. `blog-card.js`), and renders content into the page's containers using plain DOM/`innerHTML` calls.
+4. List/detail pages (`blog.html`, `category.html`, `tag.html`) read an identifier from the URL query string (`?slug=...`) with the `qs()` helper in `utils.js`, look up the matching record in `data/`, and render it.
+5. Article bodies are not stored as HTML — `blog.html` `fetch()`s the Markdown file referenced in the post's metadata (`markdown: "content/your-post.md"`) and renders it client-side with Marked.js.
+
+Because this relies on `fetch()` and ES module imports, **the site must be served over HTTP** — opening files directly via `file://` will not work (see Section 4).
+
+---
+
+## 4. Step-by-Step: Running Locally
+
+1. Make sure you have Node.js or Python installed (either works — you only need *something* that can serve static files).
+2. From the project root, start a local server:
 
    ```bash
-   # any static server works, e.g.:
+   # Option A — Node
    npx serve .
-   # or
+
+   # Option B — Python
    python3 -m http.server 8000
    ```
 
-   Then open `http://localhost:8000`.
+3. Open the printed URL in your browser (typically `http://localhost:3000` or `http://localhost:8000`).
+4. Navigate the site as a visitor would. Any edits to `data/*.js`, `content/*.md`, or `assets/css/main.css` are reflected on a page refresh — no build/compile step.
 
-2. **Deploy to GitHub Pages.**
-   - Push this folder to a GitHub repository.
-   - Repo → Settings → Pages → Source: deploy from the `main` branch, root folder.
-   - Your site will be live at `https://<username>.github.io/<repo>/`.
-   - Update `data/config.js` → `siteConfig.url` to match your final URL (used for canonical
-     tags, Open Graph, and RSS).
+---
 
-## Project structure
+## 5. Step-by-Step: Deploying to GitHub Pages
+
+This project deploys via a **GitHub Actions workflow** (`.github/workflows/deploy.yml`), not the plain "deploy from branch" option — this is what lets `sitemap.xml`/`rss.xml` regenerate automatically (see Section 7).
+
+1. Update `data/config.js` → `siteConfig.url` to your final site URL (it feeds canonical tags, Open Graph data, and the sitemap/RSS generator).
+2. Create a new GitHub repository and push this project to it:
+
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/<your-username>/<your-repo>.git
+   git push -u origin main
+   ```
+
+3. In the repository on GitHub: **Settings → Pages → Source** → select **"GitHub Actions"** (not "Deploy from a branch").
+4. That's it — pushing to `main` triggers the workflow, which regenerates the sitemap/RSS and publishes the site. Check the **Actions** tab to watch it run. The site will be live at `https://<your-username>.github.io/<your-repo>/` within a minute or two.
+5. Re-run step 1 if your repo name changes, since GitHub Pages URLs are path-based unless you're using a custom domain or a `username.github.io` root repo.
+
+---
+
+## 6. Step-by-Step: Publishing a New Post
+
+1. Write the article body as Markdown and save it to `content/your-post-slug.md`.
+2. Open `data/blogs.js` and copy an existing post object as a template. Fill in:
+   - `slug` — must match the URL you'll link to (`blog.html?slug=your-post-slug`)
+   - `title`, `subtitle`, `description`
+   - `author` — must match an existing `id` in `data/authors.js` (or add a new author there first)
+   - `category` — must match an existing `id` in `data/categories.js`
+   - `tags` — array of existing tag `id`s from `data/tags.js`
+   - `coverImage`, `thumbnail` — paths under `public/images/blog/`
+   - `markdown` — path to the file from step 1, e.g. `"content/your-post-slug.md"`
+   - `publishDate`, `updatedDate`, `readingTime` (minutes, estimated)
+   - `featured` / `featuredOrder` — set `featured: true` to surface it on the home page
+   - `seoTitle`, `metaDescription`, `ogImage` — used for `<title>`, meta description, and social share cards
+3. Add the referenced images to `public/images/blog/`.
+4. *(No manual step needed)* `sitemap.xml` and `rss.xml` regenerate automatically on your next deploy — see Section 7.
+5. Refresh the site locally — the new post appears automatically in `blogs.html`, its category page, its tag pages, search results, and the home page (if featured/latest).
+
+**Adding a new author, category, or tag:** add an object to the relevant file in `data/` (`authors.js`, `categories.js`, `tags.js`) following the existing pattern before referencing its `id` from a post.
+
+---
+
+## 7. Auto-Updating Sitemap & RSS
+
+`public/sitemap.xml` and `public/rss.xml` are **generated files** — don't hand-edit them, they get overwritten on the next deploy.
+
+**How it works:**
+- `scripts/generate-seo.mjs` reads every post from `data/blogs.js` (plus a fixed list of static pages) and writes fresh `sitemap.xml` and `rss.xml` files.
+- `.github/workflows/deploy.yml` runs this script automatically on every push to `main`, *before* deploying to GitHub Pages. So the moment you commit a new post to `data/blogs.js`, the next deploy ships an updated sitemap and RSS feed — no manual step required.
+- This requires **Settings → Pages → Source = "GitHub Actions"** (set once — see Section 5, step 3). The older "deploy from branch" method serves the raw repo contents as-is and would skip generation entirely.
+
+**Run it manually** any time (e.g. to preview the output locally before pushing) with:
+
+```bash
+npm run generate:seo
+```
+
+This only needs Node.js — nothing else in the project requires a `node_modules` install. The generated files always reflect exactly what's in `data/blogs.js` at the time the script runs, so there's no risk of the sitemap drifting out of sync with real content.
+
+---
+
+## 8. Step-by-Step: Customizing the Site
+
+**Site-wide settings** (name, logo, tagline, SEO defaults, social links, navigation, footer links, contact info, pagination size, default theme, analytics IDs, Giscus comment settings) are all controlled from one file:
 
 ```
-index.html, blogs.html, blog.html, ...   → pages (see spec)
-assets/css/main.css                       → design tokens + custom styles
-assets/js/                                → theme, layout bootstrap, shared utils
-components/                               → reusable JS render functions (navbar, footer,
-                                             blog-card, pagination, search-modal, sidebar,
-                                             newsletter)
-data/                                     → all site content lives here as JS objects:
-                                             blogs.js, authors.js, categories.js, tags.js,
-                                             navigation.js, config.js
-content/*.md                              → article bodies, one markdown file per post,
-                                             referenced by data/blogs.js → markdown field
-public/                                   → images, favicon, robots.txt, sitemap.xml,
-                                             rss.xml, manifest
+data/config.js
 ```
 
-## Publishing a new post
+**Visual design** (colors, fonts, spacing) is controlled by CSS custom properties at the top of:
 
-1. Add a markdown file to `content/your-post-slug.md`.
-2. Add a metadata object to `data/blogs.js` (copy an existing entry as a template) —
-   set `slug`, `title`, `author`, `category`, `tags`, image paths, dates, and
-   `markdown: "content/your-post-slug.md"`.
-3. Add any new author/category/tag to their respective `data/*.js` file first if they
-   don't already exist.
-4. Add images to `public/images/blog/` at the paths referenced in the post's metadata.
-5. Add a `<url>` entry to `public/sitemap.xml` and an `<item>` to `public/rss.xml` (optional
-   but recommended for SEO).
+```
+assets/css/main.css
+```
 
-No build step is required — the site picks up new posts automatically on next page load.
+Change a token there (e.g. `--pine`, `--ochre`, `--font-display`) and it updates everywhere it's used. Tailwind utility classes handle layout throughout the HTML; bespoke, reused visual patterns (cards, badges, buttons, the margin-rail) are defined as named classes in this same file.
 
-## Customizing the design
+**Forms:** the newsletter form (in the footer) and the contact form work as static UI out of the box. To make them actually send submissions, set `siteConfig.contact.formspreeEndpoint` in `data/config.js` to a Formspree endpoint URL.
 
-Everything site-wide (name, logo, SEO defaults, social links, nav, footer links, pagination
-size, theme default, analytics IDs, Giscus comments) is controlled from **`data/config.js`**.
+**Comments:** disabled by default. Enable by setting `giscus.enabled: true` in `data/config.js` and filling in your GitHub Discussions repo details.
 
-Design tokens (color, type, spacing) are defined as CSS custom properties at the top of
-**`assets/css/main.css`** — change values there to re-theme the entire site. Tailwind utility
-classes are used throughout for layout; bespoke components (cards, badges, buttons, the
-margin-rail signature element on article pages) are defined in that same file.
+---
 
-## Libraries used (all via CDN, no npm install needed)
+## 9. Feature Reference
 
-- **Tailwind CSS** (CDN build) — utility-first styling
-- **Marked.js** — markdown → HTML rendering
-- **Highlight.js** — code syntax highlighting
-- **AOS** — scroll-reveal animations
-- **Lucide** — icon set
-- **Fuse.js** — fuzzy client-side search (used in the nav search modal, `/blogs.html`
-  filters, and `/search.html`)
+| Area | Details |
+|---|---|
+| Search | Fuse.js fuzzy search; keyboard shortcut `/` opens the modal, `Esc` closes it; also available as filters on `blogs.html` and as a full page at `search.html` |
+| Filtering & sorting | Category dropdown, tag chips, sort (newest/oldest/quickest read), grid/list view toggle, pagination — all on `blogs.html`, state reflected in the URL query string |
+| Article page | Table of contents with scroll-spy highlighting, reading progress bar, clickable heading anchors, copy-code buttons on code blocks, share buttons (Facebook, X, LinkedIn, WhatsApp, Telegram, copy-link), related posts (by shared category/tags), prev/next navigation, author box |
+| Personalization | Light/dark/system theme (persisted in `localStorage`), bookmarked articles, recently viewed history — all stored client-side only |
+| SEO | Per-page `<title>`/meta description, canonical URLs, Open Graph + Twitter Card tags, JSON-LD `Article`/`Blog` schema, `robots.txt`, `sitemap.xml`, `rss.xml` |
+| Accessibility | Semantic HTML, skip-to-content link, visible focus states, alt text on all images, `prefers-reduced-motion` support |
+| Performance | Lazy-loaded images, CDN-hosted libraries, debounced search input, no framework/bundle overhead |
 
-## Features implemented
+---
 
-- Fully responsive, mobile-first, light/dark/system theme (persisted in `localStorage`)
-- Instant fuzzy search (keyboard shortcut `/` to open, `Esc` to close) with match highlighting
-- Category and tag filtering, sorting, grid/list view toggle, and pagination on `/blogs.html`
-- Full single-post experience: table of contents with scroll-spy, reading progress bar,
-  copyable heading anchors, copy-code buttons, share buttons (Facebook/X/LinkedIn/WhatsApp/
-  Telegram/copy-link), related posts, prev/next navigation, author box
-- Bookmarks and reading history stored in `localStorage`
-- SEO: per-page meta title/description, canonical URLs, Open Graph + Twitter Card tags,
-  JSON-LD `Article`/`Blog` schema, `robots.txt`, `sitemap.xml`, `rss.xml`
-- Accessibility: semantic HTML, skip-to-content link, visible focus states, alt text on all
-  images, reduced-motion support
-- Newsletter and contact forms (UI works standalone; wire up a Formspree endpoint in
-  `data/config.js` → `contact.formspreeEndpoint` to make them functional)
-- Giscus (GitHub Discussions) comments are stubbed and ready to enable via `data/config.js`
-  → `giscus`
+## 10. Notes on Placeholder Content
 
-## Notes on placeholder content
+- All six sample posts, author bios, and category descriptions are placeholder content — replace with your own via the workflow in Section 6.
+- Images under `public/images/` are generated placeholders (solid color blocks labeled in the site's palette). File paths are already wired up in `data/blogs.js`, `data/categories.js`, and `data/authors.js` — just replace the image files at those same paths.
+- `data/config.js` → `siteConfig.url` currently holds a placeholder GitHub Pages URL; update it before deploying (see Section 5, step 1).
 
-- All blog post content, author bios, and category descriptions are sample content —
-  replace with your own.
-- Images in `public/images/` are generated placeholders (solid-color labels in the site's
-  palette). Replace them with real photography/illustrations; file paths are already wired
-  up in `data/blogs.js`, `data/categories.js`, and `data/authors.js`.
-- `data/config.js` → `siteConfig.url` uses a placeholder GitHub Pages URL — update it before
-  deploying, since it feeds canonical tags and Open Graph data.
+---
+
+## 11. Troubleshooting
+
+| Symptom | Likely cause |
+|---|---|
+| Blank page, console errors about CORS/modules | Site opened via `file://` instead of a local server — see Section 4 |
+| New post doesn't appear | Check the `slug` is unique, and that `author`/`category`/`tag` IDs referenced in `data/blogs.js` actually exist in their respective data files |
+| Broken image | File path in `data/blogs.js` (or `authors.js`/`categories.js`) doesn't match the actual file in `public/images/` |
+| Search returns nothing it should find | Fuse.js searches `title`, `description`, `author`, `category`, and `tags` fields only — not article body text |
+| Newsletter/contact form shows a "would be subscribed" message instead of sending | No Formspree endpoint configured — see Section 8 |
+| Sitemap/RSS not updating after deploy | Confirm **Settings → Pages → Source** is set to **"GitHub Actions"**, not "Deploy from a branch" — check the Actions tab for the workflow run and its logs |
