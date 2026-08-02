@@ -13,9 +13,8 @@ export const blogs = [
     author: "author-najmul",
     category: "cat-engineering",
     tags: ["Static Sites", "Performance", "JavaScript"],
-    coverImage:
-      "/elmate-blog/public/elmate-blog/public/images/blog/static-sites-cover.jpg",
-    thumbnail: "/elmate-blog/public/images/blog/static-sites-thumb.jpg",
+    coverImage: "/public/images/blog/static-sites-cover.jpg",
+    thumbnail: "/public/images/blog/static-sites-thumb.jpg",
     markdown: "content/static-sites-still-win.md",
     publishDate: "2026-06-02",
     updatedDate: "2026-06-04",
@@ -26,7 +25,7 @@ export const blogs = [
     metaDescription:
       "Why plain HTML, CSS, and vanilla JS remain the best default for content-driven websites in 2026.",
     canonical: "",
-    ogImage: "/elmate-blog/public/images/og/static-sites-og.jpg",
+    ogImage: "/public/images/og/static-sites-og.jpg",
   },
   {
     id: "blog-002",
@@ -38,8 +37,8 @@ export const blogs = [
     author: "author-rima",
     category: "cat-design",
     tags: ["Design Systems", "Typography", "CSS"],
-    coverImage: "/elmate-blog/public/images/blog/token-system-cover.jpg",
-    thumbnail: "/elmate-blog/public/images/blog/token-system-thumb.jpg",
+    coverImage: "/public/images/blog/token-system-cover.jpg",
+    thumbnail: "/public/images/blog/token-system-thumb.jpg",
     markdown: "content/designing-a-token-system.md",
     publishDate: "2026-05-20",
     updatedDate: "2026-05-20",
@@ -50,7 +49,7 @@ export const blogs = [
     metaDescription:
       "How to build a color, type, and spacing token system your team will actually follow.",
     canonical: "",
-    ogImage: "/elmate-blog/public/images/og/token-system-og.jpg",
+    ogImage: "/public/images/og/token-system-og.jpg",
   },
   {
     id: "blog-003",
@@ -62,19 +61,19 @@ export const blogs = [
     author: "author-najmul",
     category: "cat-seo",
     tags: ["SEO", "E-commerce", "Writing"],
-    coverImage: "/elmate-blog/public/images/blog/seo-cover.jpg",
-    thumbnail: "/elmate-blog/public/images/blog/seo-thumb.jpg",
+    coverImage: "/public/images/blog/seo-cover.jpg",
+    thumbnail: "/public/images/blog/seo-thumb.jpg",
     markdown: "content/seo-for-product-pages.md",
     publishDate: "2026-05-08",
     updatedDate: "2026-05-08",
     readingTime: 7,
     featured: true,
-    featuredOrder: 4,
+    featuredOrder: null,
     seoTitle: "SEO for Product Pages: Matching Copy to Real Search Behavior",
     metaDescription:
       "How to rewrite e-commerce product and collection pages around actual Search Console query data.",
     canonical: "",
-    ogImage: "/elmate-blog/public/images/og/seo-og.jpg",
+    ogImage: "/public/images/og/seo-og.jpg",
   },
   {
     id: "blog-004",
@@ -86,19 +85,19 @@ export const blogs = [
     author: "author-rima",
     category: "cat-product",
     tags: ["Writing", "Accessibility"],
-    coverImage: "/elmate-blog/public/images/blog/reading-time-cover.jpg",
-    thumbnail: "/elmate-blog/public/images/blog/reading-time-thumb.jpg",
+    coverImage: "/public/images/blog/reading-time-cover.jpg",
+    thumbnail: "/public/images/blog/reading-time-thumb.jpg",
     markdown: "content/reading-time-is-a-lie.md",
     publishDate: "2026-04-22",
     updatedDate: "2026-04-22",
     readingTime: 4,
-    featured: false,
+    featured: true,
     featuredOrder: null,
     seoTitle: "Reading Time Estimates Are a Lie (And That's Fine)",
     metaDescription:
       "Why reading-time estimates are inaccurate, and what they're actually useful for.",
     canonical: "",
-    ogImage: "/elmate-blog/public/images/og/reading-time-og.jpg",
+    ogImage: "/public/images/og/reading-time-og.jpg",
   },
   {
     id: "blog-005",
@@ -110,8 +109,8 @@ export const blogs = [
     author: "author-najmul",
     category: "cat-engineering",
     tags: ["JavaScript", "Static Sites", "Performance"],
-    coverImage: "/elmate-blog/public/images/blog/search-cover.jpg",
-    thumbnail: "/elmate-blog/public/images/blog/search-thumb.jpg",
+    coverImage: "/public/images/blog/search-cover.jpg",
+    thumbnail: "/public/images/blog/search-thumb.jpg",
     markdown: "content/building-search-without-a-server.md",
     publishDate: "2026-04-10",
     updatedDate: "2026-04-15",
@@ -122,7 +121,7 @@ export const blogs = [
     metaDescription:
       "How to ship fast, typo-tolerant search on a static site using Fuse.js — no server required.",
     canonical: "",
-    ogImage: "/elmate-blog/public/images/og/search-og.jpg",
+    ogImage: "/public/images/og/search-og.jpg",
   },
   {
     id: "blog-006",
@@ -134,19 +133,19 @@ export const blogs = [
     author: "author-rima",
     category: "cat-engineering",
     tags: ["Accessibility", "CSS"],
-    coverImage: "/elmate-blog/public/images/blog/a11y-cover.jpg",
-    thumbnail: "/elmate-blog/public/images/blog/a11y-thumb.jpg",
+    coverImage: "/public/images/blog/a11y-cover.jpg",
+    thumbnail: "/public/images/blog/a11y-thumb.jpg",
     markdown: "content/accessible-by-default.md",
     publishDate: "2026-03-28",
     updatedDate: "2026-03-28",
     readingTime: 6,
-    featured: false,
+    featured: true,
     featuredOrder: null,
     seoTitle: "Accessible by Default: A Checklist for Content Sites",
     metaDescription:
       "A pragmatic accessibility checklist for static, content-heavy websites.",
     canonical: "",
-    ogImage: "/elmate-blog/public/images/og/a11y-og.jpg",
+    ogImage: "/public/images/og/a11y-og.jpg",
   },
   {
     id: "blog-007",
@@ -157,20 +156,20 @@ export const blogs = [
       "A practical walkthrough of LCP, INP, and CLS for content sites — what actually moves the numbers, and what doesn't.",
     author: "author-najmul",
     category: "cat-engineering",
-    tags: ["Performance", "SEO", "Static Sites", "Najmul-shaon"],
-    coverImage: "/elmate-blog/public/images/blog/core-web-vitals-cover.jpg",
-    thumbnail: "/elmate-blog/public/images/blog/core-web-vitals-thumb.jpg",
+    tags: ["Performance", "SEO", "Static Sites"],
+    coverImage: "/public/images/blog/core-web-vitals-cover.jpg",
+    thumbnail: "/public/images/blog/core-web-vitals-thumb.jpg",
     markdown: "content/core-web-vitals-for-blogs.md",
     publishDate: "2026-08-01",
     updatedDate: "2026-08-01",
     readingTime: 6,
-    featured: false,
+    featured: true,
     featuredOrder: null,
     seoTitle: "Core Web Vitals for a Blog Nobody's Auditing",
     metaDescription:
       "A practical checklist for improving LCP, INP, and CLS on content-driven static sites.",
     canonical: "",
-    ogImage: "/elmate-blog/public/images/og/core-web-vitals-og.jpg",
+    ogImage: "/public/images/og/core-web-vitals-og.jpg",
   },
 ];
 
@@ -186,10 +185,11 @@ export function getBlogsByTag(tagSlug) {
   return blogs.filter((b) => b.tags.some((t) => slugify(t) === tagSlug));
 }
 
-export function getFeaturedBlogs() {
+export function getFeaturedBlogs(limit = blogs.length) {
   return blogs
     .filter((b) => b.featured)
-    .sort((a, b) => (a.featuredOrder ?? 99) - (b.featuredOrder ?? 99));
+    .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate))
+    .slice(0, limit);
 }
 
 export function getLatestBlogs(limit = blogs.length) {
@@ -198,7 +198,7 @@ export function getLatestBlogs(limit = blogs.length) {
     .slice(0, limit);
 }
 
-export function getRelatedBlogs(blog, limit = 4) {
+export function getRelatedBlogs(blog, limit = 3) {
   const blogTagSlugs = blog.tags.map(slugify);
   return blogs
     .filter((b) => b.id !== blog.id)
