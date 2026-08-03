@@ -84,7 +84,7 @@ Elmate Stationery Blogs/
 │   └── your-post-slug.md
 │
 ├── public/
-│   ├── favicon/                 favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png
+│   ├── favicon/                 favicon.png, apple-touch-icon.png, icon-192.png, icon-512.png
 │   ├── images/
 │   │   ├── logo/, authors/, categories/, blog/, og/
 │   ├── robots.txt

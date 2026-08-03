@@ -10,7 +10,7 @@ export const brands = [
     id: "brand-civors",
     title: "Civors Bangladesh",
     slogan: "Authorized importer of Civors stationery in Bangladesh",
-    logo: "public/images/brands/civors-logo.png",
+    logo: "public/images/brands/Civors-Logo.png",
     url: "https://civorsbd.com",
   },
   {

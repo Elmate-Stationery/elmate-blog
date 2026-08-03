@@ -89,7 +89,6 @@ export function renderFooter() {
 
       <div class="mt-10 pt-6 border-t rule flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">
         <span>&copy; ${year} <a href="https://www.elmatestationery.com">Elmate Stationery</a>. All rights reserved.</span>
-        <span>Built with HTML, Tailwind CSS &amp; vanilla JS.</span>
       </div>
     </div>
   </footer>`;

@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studio — Elmate Stationery</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="../public/favicon/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Source Serif 4", "serif"],
+              mono: ["IBM Plex Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      .studio-input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid var(--rule);
+        border-radius: 6px;
+        background: transparent;
+        font-size: 14px;
+      }
+      html.dark .studio-input {
+        border-color: var(--rule-dark);
+      }
+      .studio-label {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+      }
+      html.dark .studio-label {
+        color: var(--text-muted-dark);
+      }
+      .studio-block {
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+        padding: 14px;
+        background: #fff;
+      }
+      html.dark .studio-block {
+        border-color: var(--rule-dark);
+        background: var(--surface-dark);
+      }
+      .studio-output {
+        white-space: pre-wrap;
+        font-family: var(--font-mono);
+        font-size: 12.5px;
+        line-height: 1.6;
+        background: var(--ink);
+        color: #eceae4;
+        padding: 16px;
+        border-radius: 8px;
+        max-height: 340px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body class="font-body antialiased">
+    <div id="navbar-root"></div>
+    <div id="search-modal-root"></div>
+
+    <main id="main-content" class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+      <!-- Login gate -->
+      <section id="login-gate" class="max-w-sm mx-auto py-16">
+        <span class="annotation font-mono text-xs">Restricted</span>
+        <h1 class="font-display text-2xl font-semibold mt-2 mb-1">
+          Studio access
+        </h1>
+        <p
+          class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mb-6"
+        >
+          Sign in to generate new post content.
+        </p>
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label for="login-email" class="studio-label">Email</label>
+            <input
+              id="login-email"
+              type="email"
+              required
+              class="studio-input"
+              autocomplete="username"
+            />
+          </div>
+          <div>
+            <label for="login-password" class="studio-label">Password</label>
+            <input
+              id="login-password"
+              type="password"
+              required
+              class="studio-input"
+              autocomplete="current-password"
+            />
+          </div>
+          <button type="submit" class="btn-primary w-full">Sign in</button>
+          <p id="login-error" class="text-sm text-red-500 hidden">
+            Incorrect email or password.
+          </p>
+        </form>
+      </section>
+
+      <!-- Studio app (hidden until authed) -->
+      <section id="studio-app" class="hidden">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <span class="annotation font-mono text-xs">Content tool</span>
+            <h1 class="font-display text-2xl sm:text-3xl font-semibold mt-2">
+              New post generator
+            </h1>
+          </div>
+          <div class="flex items-center gap-3">
+            <span
+              id="save-indicator"
+              class="text-xs font-mono text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]"
+            ></span>
+            <button id="new-draft-btn" class="btn-outline text-sm">
+              New draft
+            </button>
+            <button id="logout-btn" class="btn-outline text-sm">Log out</button>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+          <!-- Left: form -->
+          <div class="space-y-6">
+            <!-- Metadata -->
+            <div class="studio-block space-y-4">
+              <h2
+                class="font-display font-semibold text-sm uppercase tracking-wide"
+              >
+                Post details
+              </h2>
+
+              <div>
+                <label class="studio-label" for="f-title">Title</label>
+                <input
+                  id="f-title"
+                  class="studio-input"
+                  placeholder="Post title"
+                />
+              </div>
+
+              <div>
+                <label class="studio-label" for="f-slug"
+                  >Slug
+                  <span class="opacity-60 normal-case"
+                    >(auto from title, editable)</span
+                  ></label
+                >
+                <input
+                  id="f-slug"
+                  class="studio-input"
+                  placeholder="post-title"
+                />
+              </div>
+
+              <div>
+                <label class="studio-label" for="f-subtitle">Subtitle</label>
+                <input
+                  id="f-subtitle"
+                  class="studio-input"
+                  placeholder="Short subtitle"
+                />
+              </div>
+
+              <div>
+                <label class="studio-label" for="f-description"
+                  >Description</label
+                >
+                <textarea
+                  id="f-description"
+                  rows="2"
+                  class="studio-input"
+                  placeholder="One or two sentences for cards and search results"
+                ></textarea>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="studio-label" for="f-author">Author</label>
+                  <select id="f-author" class="studio-input"></select>
+                </div>
+                <div>
+                  <label class="studio-label" for="f-category">Category</label>
+                  <select id="f-category" class="studio-input"></select>
+                </div>
+              </div>
+
+              <div>
+                <label class="studio-label" for="f-tags"
+                  >Tags
+                  <span class="opacity-60 normal-case"
+                    >(comma separated — any name works)</span
+                  ></label
+                >
+                <input
+                  id="f-tags"
+                  class="studio-input"
+                  placeholder="JavaScript, Performance"
+                />
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="studio-label" for="f-publishdate"
+                    >Publish date</label
+                  >
+                  <input id="f-publishdate" type="date" class="studio-input" />
+                </div>
+                <div>
+                  <label class="studio-label" for="f-readingtime"
+                    >Reading time
+                    <span class="opacity-60 normal-case"
+                      >(auto, editable)</span
+                    ></label
+                  >
+                  <input
+                    id="f-readingtime"
+                    type="number"
+                    min="1"
+                    class="studio-input"
+                  />
+                </div>
+              </div>
+
+              <label class="flex items-center gap-2 text-sm">
+                <input id="f-featured" type="checkbox" class="w-4 h-4" />
+                Featured on homepage
+              </label>
+
+              <details>
+                <summary class="text-sm cursor-pointer select-none">
+                  Images &amp; SEO overrides
+                </summary>
+                <div class="space-y-4 mt-4">
+                  <div>
+                    <label class="studio-label" for="f-cover"
+                      >Cover image path</label
+                    >
+                    <input
+                      id="f-cover"
+                      class="studio-input"
+                      placeholder="public/images/blog/post-title-cover.jpg"
+                    />
+                  </div>
+                  <div>
+                    <label class="studio-label" for="f-thumb"
+                      >Thumbnail path</label
+                    >
+                    <input
+                      id="f-thumb"
+                      class="studio-input"
+                      placeholder="public/images/blog/post-title-thumb.jpg"
+                    />
+                  </div>
+                  <div>
+                    <label class="studio-label" for="f-og">OG image path</label>
+                    <input
+                      id="f-og"
+                      class="studio-input"
+                      placeholder="public/images/og/post-title-og.jpg"
+                    />
+                  </div>
+                  <div>
+                    <label class="studio-label" for="f-seotitle"
+                      >SEO title</label
+                    >
+                    <input
+                      id="f-seotitle"
+                      class="studio-input"
+                      placeholder="Defaults to Title"
+                    />
+                  </div>
+                  <div>
+                    <label class="studio-label" for="f-metadesc"
+                      >Meta description</label
+                    >
+                    <textarea
+                      id="f-metadesc"
+                      rows="2"
+                      class="studio-input"
+                      placeholder="Defaults to Description"
+                    ></textarea>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <!-- Blocks -->
+            <div class="studio-block space-y-4">
+              <div class="flex items-center justify-between">
+                <h2
+                  class="font-display font-semibold text-sm uppercase tracking-wide"
+                >
+                  Content blocks
+                </h2>
+                <span
+                  id="word-count"
+                  class="text-xs font-mono text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]"
+                ></span>
+              </div>
+              <div id="blocks-list" class="space-y-3"></div>
+              <div class="flex flex-wrap gap-2 pt-2 border-t rule">
+                <button
+                  data-add-block="h2"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Heading (H2)
+                </button>
+                <button
+                  data-add-block="h3"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Heading (H3)
+                </button>
+                <button
+                  data-add-block="p"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Paragraph
+                </button>
+                <button
+                  data-add-block="ul"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Bullet list
+                </button>
+                <button
+                  data-add-block="ol"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Numbered list
+                </button>
+                <button
+                  data-add-block="quote"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Quote
+                </button>
+                <button
+                  data-add-block="code"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Code
+                </button>
+                <button
+                  data-add-block="image"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Image
+                </button>
+                <button
+                  data-add-block="btn"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  + Button/CTA
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: output -->
+          <div class="space-y-6">
+            <div class="studio-block space-y-3">
+              <div class="flex items-center justify-between">
+                <h2
+                  class="font-display font-semibold text-sm uppercase tracking-wide"
+                >
+                  Markdown file
+                </h2>
+                <div class="flex gap-2">
+                  <button
+                    id="copy-md-btn"
+                    class="btn-outline text-xs px-3 py-1.5"
+                  >
+                    Copy
+                  </button>
+                  <button
+                    id="download-md-btn"
+                    class="btn-outline text-xs px-3 py-1.5"
+                  >
+                    Download .md
+                  </button>
+                </div>
+              </div>
+              <p
+                class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]"
+              >
+                Save this as <code id="md-filename">content/your-slug.md</code>
+              </p>
+              <pre id="md-output" class="studio-output"></pre>
+            </div>
+
+            <div class="studio-block space-y-3">
+              <div class="flex items-center justify-between">
+                <h2
+                  class="font-display font-semibold text-sm uppercase tracking-wide"
+                >
+                  blogs.js entry
+                </h2>
+                <button
+                  id="copy-obj-btn"
+                  class="btn-outline text-xs px-3 py-1.5"
+                >
+                  Copy
+                </button>
+              </div>
+              <p
+                class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]"
+              >
+                Paste this object inside the <code>blogs</code> array in
+                <code>data/blogs.js</code>
+              </p>
+              <pre id="obj-output" class="studio-output"></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footer-root"></div>
+    <button id="back-to-top" aria-label="Back to top">
+      <i data-lucide="arrow-up" class="w-4 h-4"></i>
+    </button>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
+    <script type="module">
+      import { bootLayout, initIcons } from "../assets/js/layout.js";
+      import { studioAuth } from "../data/studio-auth.js";
+      import { authors } from "../data/authors.js";
+      import { categories } from "../data/categories.js";
+      import { slugify } from "../assets/js/slugify.js";
+
+      bootLayout("");
+
+      const SESSION_KEY = "studio:authed";
+      const DRAFT_KEY = "studio:draft";
+
+      const gate = document.getElementById("login-gate");
+      const app = document.getElementById("studio-app");
+
+      async function sha256(text) {
+        const buf = await crypto.subtle.digest(
+          "SHA-256",
+          new TextEncoder().encode(text),
+        );
+        return [...new Uint8Array(buf)]
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
+      }
+
+      function showApp() {
+        gate.classList.add("hidden");
+        app.classList.remove("hidden");
+        initStudio();
+      }
+
+      if (sessionStorage.getItem(SESSION_KEY) === "1") {
+        showApp();
+      }
+
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document
+            .getElementById("login-email")
+            .value.trim()
+            .toLowerCase();
+          const password = document.getElementById("login-password").value;
+          const errorEl = document.getElementById("login-error");
+          const hash = await sha256(password);
+
+          if (
+            email === studioAuth.email.toLowerCase() &&
+            hash === studioAuth.passwordHash
+          ) {
+            sessionStorage.setItem(SESSION_KEY, "1");
+            errorEl.classList.add("hidden");
+            showApp();
+          } else {
+            errorEl.classList.remove("hidden");
+          }
+        });
+
+      document.getElementById("logout-btn").addEventListener("click", () => {
+        sessionStorage.removeItem(SESSION_KEY);
+        location.reload();
+      });
+
+      initIcons();
+
+      // ---------------- Studio app logic ----------------
+      let studioInitialized = false;
+
+      function initStudio() {
+        if (studioInitialized) return;
+        studioInitialized = true;
+
+        const authorSelect = document.getElementById("f-author");
+        authors.forEach((a) => {
+          const opt = document.createElement("option");
+          opt.value = a.id;
+          opt.textContent = a.name;
+          authorSelect.appendChild(opt);
+        });
+
+        const categorySelect = document.getElementById("f-category");
+        categories.forEach((c) => {
+          const opt = document.createElement("option");
+          opt.value = c.id;
+          opt.textContent = c.name;
+          categorySelect.appendChild(opt);
+        });
+
+        const blockTypeLabels = {
+          h2: "Heading (H2)",
+          h3: "Heading (H3)",
+          p: "Paragraph",
+          ul: "Bullet list",
+          ol: "Numbered list",
+          quote: "Quote",
+          code: "Code",
+          image: "Image",
+          btn: "Button / CTA",
+        };
+
+        let state = {
+          meta: {
+            title: "",
+            slug: "",
+            slugTouched: false,
+            subtitle: "",
+            description: "",
+            author: authors[0]?.id || "",
+            category: categories[0]?.id || "",
+            tags: "",
+            publishDate: new Date().toISOString().slice(0, 10),
+            readingTime: 1,
+            readingTimeTouched: false,
+            featured: false,
+            cover: "",
+            thumb: "",
+            og: "",
+            seoTitle: "",
+            metaDesc: "",
+          },
+          blocks: [{ id: crypto.randomUUID(), type: "p", content: "" }],
+        };
+
+        function loadDraft() {
+          try {
+            const saved = JSON.parse(localStorage.getItem(DRAFT_KEY));
+            if (saved && saved.meta && Array.isArray(saved.blocks)) {
+              state = saved;
+            }
+          } catch {
+            /* ignore corrupt draft */
+          }
+        }
+        loadDraft();
+
+        function saveDraft() {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+          const indicator = document.getElementById("save-indicator");
+          indicator.textContent =
+            "Draft saved " + new Date().toLocaleTimeString();
+        }
+
+        function wordCount() {
+          return state.blocks.reduce(
+            (sum, b) =>
+              sum +
+              (b.content || "").trim().split(/\s+/).filter(Boolean).length,
+            0,
+          );
+        }
+
+        function blockToMarkdown(b) {
+          const content = (b.content || "").trim();
+          switch (b.type) {
+            case "h2":
+              return `## ${content}`;
+            case "h3":
+              return `### ${content}`;
+            case "p":
+              return content;
+            case "quote":
+              return content
+                .split("\n")
+                .map((l) => `> ${l}`)
+                .join("\n");
+            case "ul":
+              return content
+                .split("\n")
+                .filter(Boolean)
+                .map((l) => `- ${l}`)
+                .join("\n");
+            case "ol":
+              return content
+                .split("\n")
+                .filter(Boolean)
+                .map((l, i) => `${i + 1}. ${l}`)
+                .join("\n");
+            case "code":
+              return "```" + (b.lang || "") + "\n" + content + "\n```";
+            case "image":
+              return `![${b.alt || ""}](${b.url || ""})`;
+            case "btn":
+              return `<a href="${b.url || "#"}" class="btn-primary" target="_blank" rel="noopener">${content || "Learn more"}</a>`;
+            default:
+              return content;
+          }
+        }
+
+        function buildMarkdown() {
+          return (
+            state.blocks.map(blockToMarkdown).filter(Boolean).join("\n\n") +
+            "\n"
+          );
+        }
+
+        function buildObjectLiteral() {
+          const m = state.meta;
+          const slug = m.slug || slugify(m.title);
+          const tags = m.tags
+            .split(",")
+            .map((t) => t.trim())
+            .filter(Boolean);
+          const jsStr = (v) => JSON.stringify(v || "");
+          return `{
+    id: "blog-${slug}",
+    slug: "${slug}",
+    title: ${jsStr(m.title)},
+    subtitle: ${jsStr(m.subtitle)},
+    description: ${jsStr(m.description)},
+    author: "${m.author}",
+    category: "${m.category}",
+    tags: [${tags.map((t) => jsStr(t)).join(", ")}],
+    coverImage: "${m.cover || `public/images/blog/${slug}-cover.jpg`}",
+    thumbnail: "${m.thumb || `public/images/blog/${slug}-thumb.jpg`}",
+    markdown: "content/${slug}.md",
+    publishDate: "${m.publishDate}",
+    updatedDate: "${m.publishDate}",
+    readingTime: ${m.readingTime || 1},
+    featured: ${m.featured ? "true" : "false"},
+    featuredOrder: ${m.featured ? "1" : "null"},
+    seoTitle: ${jsStr(m.seoTitle || m.title)},
+    metaDescription: ${jsStr(m.metaDesc || m.description)},
+    canonical: "",
+    ogImage: "${m.og || `public/images/og/${slug}-og.jpg`}",
+  },`;
+        }
+
+        function render() {
+          // metadata fields
+          document.getElementById("f-title").value = state.meta.title;
+          document.getElementById("f-slug").value = state.meta.slug;
+          document.getElementById("f-subtitle").value = state.meta.subtitle;
+          document.getElementById("f-description").value =
+            state.meta.description;
+          document.getElementById("f-author").value = state.meta.author;
+          document.getElementById("f-category").value = state.meta.category;
+          document.getElementById("f-tags").value = state.meta.tags;
+          document.getElementById("f-publishdate").value =
+            state.meta.publishDate;
+          document.getElementById("f-readingtime").value =
+            state.meta.readingTime;
+          document.getElementById("f-featured").checked = state.meta.featured;
+          document.getElementById("f-cover").value = state.meta.cover;
+          document.getElementById("f-thumb").value = state.meta.thumb;
+          document.getElementById("f-og").value = state.meta.og;
+          document.getElementById("f-seotitle").value = state.meta.seoTitle;
+          document.getElementById("f-metadesc").value = state.meta.metaDesc;
+
+          // blocks
+          const list = document.getElementById("blocks-list");
+          list.innerHTML = state.blocks
+            .map(
+              (b, i) => `
+        <div class="studio-block" data-block-id="${b.id}">
+          <div class="flex items-center justify-between mb-2">
+            <select data-field="type" class="studio-input w-auto text-xs py-1">
+              ${Object.entries(blockTypeLabels)
+                .map(
+                  ([val, label]) =>
+                    `<option value="${val}" ${b.type === val ? "selected" : ""}>${label}</option>`,
+                )
+                .join("")}
+            </select>
+            <div class="flex gap-1">
+              <button data-action="up" ${i === 0 ? "disabled" : ""} class="theme-toggle disabled:opacity-30" aria-label="Move up"><i data-lucide="chevron-up" class="w-4 h-4"></i></button>
+              <button data-action="down" ${i === state.blocks.length - 1 ? "disabled" : ""} class="theme-toggle disabled:opacity-30" aria-label="Move down"><i data-lucide="chevron-down" class="w-4 h-4"></i></button>
+              <button data-action="remove" class="theme-toggle hover:border-red-400" aria-label="Remove block"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+          ${
+            b.type === "image"
+              ? `<input data-field="url" placeholder="Image URL or path" class="studio-input mb-2" value="${(b.url || "").replace(/"/g, "&quot;")}" />
+                 <input data-field="alt" placeholder="Alt text" class="studio-input" value="${(b.alt || "").replace(/"/g, "&quot;")}" />`
+              : b.type === "btn"
+                ? `<input data-field="content" placeholder="Button label" class="studio-input mb-2" value="${(b.content || "").replace(/"/g, "&quot;")}" />
+                 <input data-field="url" placeholder="Link URL" class="studio-input" value="${(b.url || "").replace(/"/g, "&quot;")}" />`
+                : b.type === "code"
+                  ? `<input data-field="lang" placeholder="Language (optional, e.g. js)" class="studio-input mb-2" value="${(b.lang || "").replace(/"/g, "&quot;")}" />
+                 <textarea data-field="content" rows="4" placeholder="Code" class="studio-input font-mono">${b.content || ""}</textarea>`
+                  : b.type === "ul" || b.type === "ol"
+                    ? `<textarea data-field="content" rows="3" placeholder="One item per line" class="studio-input">${b.content || ""}</textarea>`
+                    : `<textarea data-field="content" rows="${b.type === "p" ? 4 : 2}" placeholder="Text" class="studio-input">${b.content || ""}</textarea>`
+          }
+        </div>`,
+            )
+            .join("");
+
+          document.getElementById("word-count").textContent =
+            `${wordCount()} words`;
+          if (!state.meta.readingTimeTouched) {
+            state.meta.readingTime = Math.max(1, Math.round(wordCount() / 200));
+            document.getElementById("f-readingtime").value =
+              state.meta.readingTime;
+          }
+
+          const slug = state.meta.slug || slugify(state.meta.title);
+          document.getElementById("md-filename").textContent =
+            `content/${slug || "your-slug"}.md`;
+          document.getElementById("md-output").textContent = buildMarkdown();
+          document.getElementById("obj-output").textContent =
+            buildObjectLiteral();
+
+          initIcons();
+        }
+
+        // ---- metadata field bindings ----
+        document.getElementById("f-title").addEventListener("input", (e) => {
+          state.meta.title = e.target.value;
+          if (!state.meta.slugTouched)
+            state.meta.slug = slugify(e.target.value);
+          render();
+          saveDraft();
+        });
+        document.getElementById("f-slug").addEventListener("input", (e) => {
+          state.meta.slug = e.target.value;
+          state.meta.slugTouched = true;
+          render();
+          saveDraft();
+        });
+        [
+          ["f-subtitle", "subtitle"],
+          ["f-description", "description"],
+          ["f-author", "author"],
+          ["f-category", "category"],
+          ["f-tags", "tags"],
+          ["f-publishdate", "publishDate"],
+          ["f-cover", "cover"],
+          ["f-thumb", "thumb"],
+          ["f-og", "og"],
+          ["f-seotitle", "seoTitle"],
+          ["f-metadesc", "metaDesc"],
+        ].forEach(([id, key]) => {
+          document.getElementById(id).addEventListener("input", (e) => {
+            state.meta[key] = e.target.value;
+            render();
+            saveDraft();
+          });
+          document.getElementById(id).addEventListener("change", (e) => {
+            state.meta[key] = e.target.value;
+            render();
+            saveDraft();
+          });
+        });
+        document
+          .getElementById("f-readingtime")
+          .addEventListener("input", (e) => {
+            state.meta.readingTime = Number(e.target.value) || 1;
+            state.meta.readingTimeTouched = true;
+            render();
+            saveDraft();
+          });
+        document
+          .getElementById("f-featured")
+          .addEventListener("change", (e) => {
+            state.meta.featured = e.target.checked;
+            render();
+            saveDraft();
+          });
+
+        // ---- block add buttons ----
+        document.querySelectorAll("[data-add-block]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            state.blocks.push({
+              id: crypto.randomUUID(),
+              type: btn.dataset.addBlock,
+              content: "",
+            });
+            render();
+            saveDraft();
+          });
+        });
+
+        // ---- block editing (delegated) ----
+        document
+          .getElementById("blocks-list")
+          .addEventListener("input", (e) => {
+            const blockEl = e.target.closest("[data-block-id]");
+            if (!blockEl) return;
+            const block = state.blocks.find(
+              (b) => b.id === blockEl.dataset.blockId,
+            );
+            const field = e.target.dataset.field;
+            if (block && field) {
+              block[field] = e.target.value;
+              document.getElementById("word-count").textContent =
+                `${wordCount()} words`;
+              document.getElementById("md-output").textContent =
+                buildMarkdown();
+              document.getElementById("obj-output").textContent =
+                buildObjectLiteral();
+              saveDraft();
+            }
+          });
+        document
+          .getElementById("blocks-list")
+          .addEventListener("change", (e) => {
+            const blockEl = e.target.closest("[data-block-id]");
+            if (!blockEl) return;
+            const block = state.blocks.find(
+              (b) => b.id === blockEl.dataset.blockId,
+            );
+            if (block && e.target.dataset.field === "type") {
+              block.type = e.target.value;
+              render();
+              saveDraft();
+            }
+          });
+        document
+          .getElementById("blocks-list")
+          .addEventListener("click", (e) => {
+            const actionBtn = e.target.closest("[data-action]");
+            if (!actionBtn) return;
+            const blockEl = e.target.closest("[data-block-id]");
+            const idx = state.blocks.findIndex(
+              (b) => b.id === blockEl.dataset.blockId,
+            );
+            if (idx === -1) return;
+            if (actionBtn.dataset.action === "remove") {
+              if (state.blocks.length > 1) state.blocks.splice(idx, 1);
+            } else if (actionBtn.dataset.action === "up" && idx > 0) {
+              [state.blocks[idx - 1], state.blocks[idx]] = [
+                state.blocks[idx],
+                state.blocks[idx - 1],
+              ];
+            } else if (
+              actionBtn.dataset.action === "down" &&
+              idx < state.blocks.length - 1
+            ) {
+              [state.blocks[idx + 1], state.blocks[idx]] = [
+                state.blocks[idx],
+                state.blocks[idx + 1],
+              ];
+            }
+            render();
+            saveDraft();
+          });
+
+        // ---- copy / download ----
+        document.getElementById("copy-md-btn").addEventListener("click", () => {
+          navigator.clipboard.writeText(buildMarkdown());
+        });
+        document
+          .getElementById("copy-obj-btn")
+          .addEventListener("click", () => {
+            navigator.clipboard.writeText(buildObjectLiteral());
+          });
+        document
+          .getElementById("download-md-btn")
+          .addEventListener("click", () => {
+            const slug =
+              state.meta.slug || slugify(state.meta.title) || "untitled";
+            const blob = new Blob([buildMarkdown()], { type: "text/markdown" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = `${slug}.md`;
+            a.click();
+            URL.revokeObjectURL(a.href);
+          });
+
+        // ---- new draft ----
+        document
+          .getElementById("new-draft-btn")
+          .addEventListener("click", () => {
+            if (
+              !confirm(
+                "Start a new draft? This clears the current form (it will no longer be saved).",
+              )
+            )
+              return;
+            state = {
+              meta: {
+                title: "",
+                slug: "",
+                slugTouched: false,
+                subtitle: "",
+                description: "",
+                author: authors[0]?.id || "",
+                category: categories[0]?.id || "",
+                tags: "",
+                publishDate: new Date().toISOString().slice(0, 10),
+                readingTime: 1,
+                readingTimeTouched: false,
+                featured: false,
+                cover: "",
+                thumb: "",
+                og: "",
+                seoTitle: "",
+                metaDesc: "",
+              },
+              blocks: [{ id: crypto.randomUUID(), type: "p", content: "" }],
+            };
+            render();
+            saveDraft();
+          });
+
+        render();
+      }
+    </script>
+  </body>
+</html>

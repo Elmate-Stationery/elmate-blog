@@ -3,23 +3,22 @@
 // Edit this file to rebrand the entire site.
 
 export const siteConfig = {
-  siteName: "Elmate Stationery Blogs",
+  siteName: "Elmate Stationery",
   tagline: "Field notes on building things well",
   siteDescription:
-    "Elmate Stationery Blogs is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
+    "Elmate Stationery is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
   url: "https://elmate-stationery.github.io/elmate-blog",
-  logo: "/public/images/logo/Elmate-Stationery-logo.png",
+  logo: "public/images/logo/Elmate-Stationery-logo.png",
   logoMark: "M", // fallback text mark if no logo image is present
-  favicon: "public/favicon/favicon.ico",
+  favicon: "public/favicon/favicon.png",
 
   defaultSEO: {
-    titleTemplate: "%s — Elmate Stationery Blogs",
-    defaultTitle:
-      "Elmate Stationery Blogs — Field notes on building things well",
+    titleTemplate: "%s — Elmate Stationery",
+    defaultTitle: "Elmate Stationery — Field notes on building things well",
     metaDescription:
       "Practical, no-fluff writing on product development, front-end engineering, and design systems.",
     ogImage: "public/images/og/default-og.jpg",
-    twitterHandle: "@Elmate Stationery Blogs",
+    twitterHandle: "@Elmate Stationery",
     locale: "en_US",
   },
 
@@ -32,7 +31,7 @@ export const siteConfig = {
   },
 
   contact: {
-    email: "hello@Elmate Stationery Blogs.blog",
+    email: "hello@Elmate Stationery.blog",
     location: "Dhaka, Bangladesh",
     formspreeEndpoint: "", // e.g. "https://formspree.io/f/xxxxxx" — leave blank to disable
   },
@@ -54,12 +53,13 @@ export const siteConfig = {
       { label: "Contact", href: "contact/" },
       { label: "Privacy Policy", href: "privacy-policy/" },
       { label: "Terms & Conditions", href: "terms/" },
+      { label: "Studio", href: "studio/" },
     ],
   },
 
   theme: {
     default: "system", // "light" | "dark" | "system"
-    storageKey: "Elmate Stationery Blogs:theme",
+    storageKey: "Elmate Stationery:theme",
   },
 
   pagination: {
@@ -68,7 +68,7 @@ export const siteConfig = {
 
   analytics: {
     googleAnalyticsId: "", // e.g. "G-XXXXXXX"
-    plausibleDomain: "", // e.g. "Elmate Stationery Blogs.blog"
+    plausibleDomain: "", // e.g. "Elmate Stationery.blog"
   },
 
   giscus: {
