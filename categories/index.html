@@ -1,49 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Categories — Marginalia</title>
-<meta name="description" content="Browse Marginalia by category: engineering, design, product, and SEO." />
-<link rel="icon" href="../public/favicon/favicon.ico" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = { darkMode: "class", theme: { extend: { fontFamily: {
-    display: ["Space Grotesk", "sans-serif"], body: ["Source Serif 4", "serif"], mono: ["IBM Plex Mono", "monospace"],
-  } } } };
-</script>
-<link rel="stylesheet" href="../assets/css/main.css" />
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-</head>
-<body class="font-body antialiased">
-<div id="navbar-root"></div>
-<div id="search-modal-root"></div>
-<main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-  <div class="mb-10" data-aos="fade-up">
-    <span class="annotation font-mono text-xs">Browse</span>
-    <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2">Categories</h1>
-  </div>
-  <div id="category-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-</main>
-<div id="footer-root"></div>
-<button id="back-to-top" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
-<script type="module">
-  import { bootLayout, initIcons, initAnimations } from "../assets/js/layout.js";
-  import { categories } from "../data/categories.js";
-  import { getBlogsByCategory } from "../data/blogs.js";
-  import { SITE_ROOT } from "../assets/js/site-root.js";
-  bootLayout("categories/");
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories — Elmate Stationery Blogs</title>
+    <meta
+      name="description"
+      content="Browse Elmate Stationery Blogs by category: engineering, design, product, and SEO."
+    />
+    <link rel="icon" href="../public/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Source Serif 4", "serif"],
+              mono: ["IBM Plex Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  </head>
+  <body class="font-body antialiased">
+    <div id="navbar-root"></div>
+    <div id="search-modal-root"></div>
+    <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+      <div class="mb-10" data-aos="fade-up">
+        <span class="annotation font-mono text-xs">Browse</span>
+        <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2">
+          Categories
+        </h1>
+      </div>
+      <div
+        id="category-grid"
+        class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      ></div>
+    </main>
+    <div id="footer-root"></div>
+    <button id="back-to-top" aria-label="Back to top">
+      <i data-lucide="arrow-up" class="w-4 h-4"></i>
+    </button>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    <script type="module">
+      import {
+        bootLayout,
+        initIcons,
+        initAnimations,
+      } from "../assets/js/layout.js";
+      import { categories } from "../data/categories.js";
+      import { getBlogsByCategory } from "../data/blogs.js";
+      import { SITE_ROOT } from "../assets/js/site-root.js";
+      bootLayout("categories/");
 
-  document.getElementById("category-grid").innerHTML = categories
-    .map((c) => {
-      const count = getBlogsByCategory(c.id).length;
-      return `
+      document.getElementById("category-grid").innerHTML = categories
+        .map((c) => {
+          const count = getBlogsByCategory(c.id).length;
+          return `
       <a href="${SITE_ROOT}category/?slug=${c.slug}" class="blog-card rounded-lg overflow-hidden flex flex-col" data-aos="fade-up">
         <div class="aspect-[3/1] bg-[var(--rule)] overflow-hidden">
           <img src="${SITE_ROOT}${c.image}" alt="" loading="lazy"
@@ -58,11 +84,11 @@
           <p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">${c.description}</p>
         </div>
       </a>`;
-    })
-    .join("");
+        })
+        .join("");
 
-  initIcons();
-  initAnimations();
-</script>
-</body>
+      initIcons();
+      initAnimations();
+    </script>
+  </body>
 </html>

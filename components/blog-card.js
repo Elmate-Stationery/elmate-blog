@@ -1,5 +1,11 @@
 // components/blog-card.js
-import { authorFor, categoryFor, formatDate, isBookmarked, tagsFor } from "../assets/js/utils.js";
+import {
+  authorFor,
+  categoryFor,
+  formatDate,
+  isBookmarked,
+  tagsFor,
+} from "../assets/js/utils.js";
 import { escapeHtml } from "../assets/js/utils.js";
 import { SITE_ROOT } from "../assets/js/site-root.js";
 
@@ -26,7 +32,7 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
         </h3>
         <p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] line-clamp-2">${escapeHtml(blog.description)}</p>
         <div class="flex items-center gap-3 text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mt-1 font-mono">
-          <span>${author ? author.name : "Marginalia"}</span>
+          <span>${author ? author.name : "Elmate Stationery Blogs"}</span>
           <span>&middot;</span>
           <span>${formatDate(blog.publishDate)}</span>
           <span>&middot;</span>
@@ -48,7 +54,7 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
       <div class="flex items-center justify-between">
         ${category ? `<a href="${SITE_ROOT}category/?slug=${category.slug}" class="badge">${category.name}</a>` : "<span></span>"}
         <button class="bookmark-btn text-[var(--text-muted)] hover:text-[var(--ochre)] transition-colors" data-slug="${blog.slug}" aria-label="Bookmark this article" aria-pressed="${bookmarked}">
-          <i data-lucide="bookmark" class="w-4 h-4 ${bookmarked ? 'fill-current text-[var(--ochre)]' : ''}"></i>
+          <i data-lucide="bookmark" class="w-4 h-4 ${bookmarked ? "fill-current text-[var(--ochre)]" : ""}"></i>
         </button>
       </div>
       <h3 class="font-display text-lg font-semibold leading-snug">
@@ -58,11 +64,14 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
       <div class="flex flex-wrap gap-1.5 mt-1">
         ${tagsFor(blog)
           .slice(0, 2)
-          .map((t) => `<a href="${SITE_ROOT}tag/?slug=${t.slug}" class="tag-chip">#${escapeHtml(t.name)}</a>`)
+          .map(
+            (t) =>
+              `<a href="${SITE_ROOT}tag/?slug=${t.slug}" class="tag-chip">#${escapeHtml(t.name)}</a>`,
+          )
           .join("")}
       </div>
       <div class="flex items-center gap-3 text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mt-2 pt-3 border-t rule font-mono">
-        <span>${author ? author.name : "Marginalia"}</span>
+        <span>${author ? author.name : "Elmate Stationery Blogs"}</span>
         <span>&middot;</span>
         <span>${formatDate(blog.publishDate)}</span>
         <span>&middot;</span>

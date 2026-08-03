@@ -1,92 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Search — Marginalia</title>
-<meta name="description" content="Search Marginalia by title, category, tag, author, or description." />
-<link rel="icon" href="../public/favicon/favicon.ico" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = { darkMode: "class", theme: { extend: { fontFamily: {
-    display: ["Space Grotesk", "sans-serif"], body: ["Source Serif 4", "serif"], mono: ["IBM Plex Mono", "monospace"],
-  } } } };
-</script>
-<link rel="stylesheet" href="../assets/css/main.css" />
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-</head>
-<body class="font-body antialiased">
-<div id="navbar-root"></div>
-<div id="search-modal-root"></div>
-<main id="main-content" class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-  <div class="mb-8" data-aos="fade-up">
-    <span class="annotation font-mono text-xs">Find something</span>
-    <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2">Search</h1>
-  </div>
-  <div class="relative mb-6" data-aos="fade-up">
-    <i data-lucide="search" class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"></i>
-    <input id="page-search-input" type="text" placeholder="Search by title, category, tag, author, or description…"
-      class="w-full pl-11 pr-4 py-3.5 rounded-lg border rule bg-transparent text-base focus:outline-none" autofocus />
-  </div>
-  <div id="page-search-results" class="space-y-3"></div>
-</main>
-<div id="footer-root"></div>
-<button id="back-to-top" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
-<script type="module">
-  import { bootLayout, initIcons, initAnimations } from "../assets/js/layout.js";
-  import { blogs } from "../data/blogs.js";
-  import { renderBlogCard, bindBookmarkButtons } from "../components/blog-card.js";
-  import { qs, setQs, debounce } from "../assets/js/utils.js";
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search — Elmate Stationery Blogs</title>
+    <meta
+      name="description"
+      content="Search Elmate Stationery Blogs by title, category, tag, author, or description."
+    />
+    <link rel="icon" href="../public/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Source Serif 4", "serif"],
+              mono: ["IBM Plex Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  </head>
+  <body class="font-body antialiased">
+    <div id="navbar-root"></div>
+    <div id="search-modal-root"></div>
+    <main id="main-content" class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+      <div class="mb-8" data-aos="fade-up">
+        <span class="annotation font-mono text-xs">Find something</span>
+        <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2">
+          Search
+        </h1>
+      </div>
+      <div class="relative mb-6" data-aos="fade-up">
+        <i
+          data-lucide="search"
+          class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"
+        ></i>
+        <input
+          id="page-search-input"
+          type="text"
+          placeholder="Search by title, category, tag, author, or description…"
+          class="w-full pl-11 pr-4 py-3.5 rounded-lg border rule bg-transparent text-base focus:outline-none"
+          autofocus
+        />
+      </div>
+      <div id="page-search-results" class="space-y-3"></div>
+    </main>
+    <div id="footer-root"></div>
+    <button id="back-to-top" aria-label="Back to top">
+      <i data-lucide="arrow-up" class="w-4 h-4"></i>
+    </button>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    <script type="module">
+      import {
+        bootLayout,
+        initIcons,
+        initAnimations,
+      } from "../assets/js/layout.js";
+      import { blogs } from "../data/blogs.js";
+      import {
+        renderBlogCard,
+        bindBookmarkButtons,
+      } from "../components/blog-card.js";
+      import { qs, setQs, debounce } from "../assets/js/utils.js";
 
-  bootLayout("");
+      bootLayout("");
 
-  const fuse = new Fuse(blogs, {
-    keys: [
-      { name: "title", weight: 0.5 },
-      { name: "description", weight: 0.2 },
-      { name: "author", weight: 0.1 },
-      { name: "category", weight: 0.1 },
-      { name: "tags", weight: 0.1 },
-    ],
-    threshold: 0.35,
-    ignoreLocation: true,
-  });
+      const fuse = new Fuse(blogs, {
+        keys: [
+          { name: "title", weight: 0.5 },
+          { name: "description", weight: 0.2 },
+          { name: "author", weight: 0.1 },
+          { name: "category", weight: 0.1 },
+          { name: "tags", weight: 0.1 },
+        ],
+        threshold: 0.35,
+        ignoreLocation: true,
+      });
 
-  const input = document.getElementById("page-search-input");
-  const results = document.getElementById("page-search-results");
-  const initial = qs("q") || "";
-  input.value = initial;
+      const input = document.getElementById("page-search-input");
+      const results = document.getElementById("page-search-results");
+      const initial = qs("q") || "";
+      input.value = initial;
 
-  function render(query) {
-    if (!query) {
-      results.innerHTML = `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] text-center py-12">Start typing to search across every article.</p>`;
-      return;
-    }
-    const hits = fuse.search(query).map((h) => h.item);
-    results.innerHTML = hits.length
-      ? hits.map((b) => renderBlogCard(b, { layout: "list" })).join("")
-      : `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] text-center py-12">No results for "${query}". Try a broader term.</p>`;
-    bindBookmarkButtons();
-    initIcons();
-  }
+      function render(query) {
+        if (!query) {
+          results.innerHTML = `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] text-center py-12">Start typing to search across every article.</p>`;
+          return;
+        }
+        const hits = fuse.search(query).map((h) => h.item);
+        results.innerHTML = hits.length
+          ? hits.map((b) => renderBlogCard(b, { layout: "list" })).join("")
+          : `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] text-center py-12">No results for "${query}". Try a broader term.</p>`;
+        bindBookmarkButtons();
+        initIcons();
+      }
 
-  input.addEventListener(
-    "input",
-    debounce((e) => {
-      const q = e.target.value.trim();
-      setQs({ q: q || null });
-      render(q);
-    }, 180)
-  );
+      input.addEventListener(
+        "input",
+        debounce((e) => {
+          const q = e.target.value.trim();
+          setQs({ q: q || null });
+          render(q);
+        }, 180),
+      );
 
-  render(initial);
-  initAnimations();
-</script>
-</body>
+      render(initial);
+      initAnimations();
+    </script>
+  </body>
 </html>

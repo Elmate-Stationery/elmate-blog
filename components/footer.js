@@ -10,20 +10,26 @@ export function renderFooter() {
   const year = new Date().getFullYear();
 
   const quickLinks = siteConfig.footerLinks.quickLinks
-    .map((l) => `<li><a href="${SITE_ROOT}${l.href}" class="hover:text-[var(--pine)] transition-colors">${l.label}</a></li>`)
+    .map(
+      (l) =>
+        `<li><a href="${SITE_ROOT}${l.href}" class="hover:text-[var(--pine)] transition-colors">${l.label}</a></li>`,
+    )
     .join("");
 
   const catLinks = categories
     .slice(0, 5)
     .map(
       (c) =>
-        `<li><a href="${SITE_ROOT}category/?slug=${c.slug}" class="hover:text-[var(--pine)] transition-colors">${c.name}</a></li>`
+        `<li><a href="${SITE_ROOT}category/?slug=${c.slug}" class="hover:text-[var(--pine)] transition-colors">${c.name}</a></li>`,
     )
     .join("");
 
   const tagChips = tags
     .slice(0, 8)
-    .map((t) => `<a href="${SITE_ROOT}tag/?slug=${t.slug}" class="tag-chip">#${t.name}</a>`)
+    .map(
+      (t) =>
+        `<a href="${SITE_ROOT}tag/?slug=${t.slug}" class="tag-chip">#${t.name}</a>`,
+    )
     .join("");
 
   const socialIcons = [
@@ -36,7 +42,7 @@ export function renderFooter() {
     .filter(([, href]) => href)
     .map(
       ([icon, href]) =>
-        `<a href="${href}" aria-label="${icon}" class="theme-toggle hover:border-[var(--pine)] transition-colors">${socialIconMarkup(icon)}</a>`
+        `<a href="${href}" aria-label="${icon}" class="theme-toggle hover:border-[var(--pine)] transition-colors">${socialIconMarkup(icon)}</a>`,
     )
     .join("");
 
@@ -69,7 +75,7 @@ export function renderFooter() {
       <div class="mt-8 flex flex-wrap gap-2">${tagChips}</div>
 
       <div class="mt-10 pt-6 border-t rule flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">
-        <span>&copy; ${year} ${siteConfig.siteName}. All rights reserved.</span>
+        <span>&copy; ${year} <a href="https://www.elmatestationery.com">Elmate Stationery</a>. All rights reserved.</span>
         <span>Built with HTML, Tailwind CSS &amp; vanilla JS.</span>
       </div>
     </div>
