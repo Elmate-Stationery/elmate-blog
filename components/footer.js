@@ -2,6 +2,7 @@
 import { siteConfig } from "../data/config.js";
 import { categories } from "../data/categories.js";
 import { tags } from "../data/tags.js";
+import { brands } from "../data/brands.js";
 import { renderNewsletter } from "./newsletter.js";
 import { socialIconMarkup } from "../assets/js/social-icons.js";
 import { SITE_ROOT } from "../assets/js/site-root.js";
@@ -21,6 +22,13 @@ export function renderFooter() {
     .map(
       (c) =>
         `<li><a href="${SITE_ROOT}category/?slug=${c.slug}" class="hover:text-[var(--pine)] transition-colors">${c.name}</a></li>`,
+    )
+    .join("");
+
+  const brandLinks = brands
+    .map(
+      (b) =>
+        `<li><a href="${b.url}" target="_blank" rel="noopener" class="hover:text-[var(--pine)] transition-colors">${b.title}</a></li>`,
     )
     .join("");
 
@@ -51,11 +59,11 @@ export function renderFooter() {
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14">
       ${renderNewsletter()}
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mt-14">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-10 mt-14">
         <div class="col-span-2">
-          <a href="${SITE_ROOT}" class="flex items-center gap-2 font-display font-semibold text-lg mb-3">
-            <span class="w-8 h-8 rounded flex items-center justify-center bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--pine)]">${siteConfig.logoMark}</span>
-            ${siteConfig.siteName}
+          <a href="https://www.elmatestationery.com" target="_blank" class="flex items-center mb-3" aria-label="${siteConfig.siteName} — Home">
+            <img src="${SITE_ROOT}${siteConfig.logo}" alt="${siteConfig.siteName}" class="h-9 w-auto"
+              onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'font-display font-semibold text-lg', textContent: '${siteConfig.siteName}' }))" />
           </a>
           <p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] max-w-xs">${siteConfig.siteDescription}</p>
           <div class="flex gap-2 mt-4">${socialIcons}</div>
@@ -64,6 +72,11 @@ export function renderFooter() {
         <div>
           <h3 class="font-display text-sm font-semibold mb-3 uppercase tracking-wide">Quick Links</h3>
           <ul class="space-y-2 text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">${quickLinks}</ul>
+        </div>
+
+        <div>
+          <h3 class="font-display text-sm font-semibold mb-3 uppercase tracking-wide">Our Brands</h3>
+          <ul class="space-y-2 text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">${brandLinks}</ul>
         </div>
 
         <div>

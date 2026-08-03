@@ -23,14 +23,12 @@ export function renderNavbar(activeHref = "") {
 
   return `
   <a href="#main-content" class="skip-link">Skip to content</a>
-  <header class="sticky top-0 z-40 backdrop-blur bg-[var(--paper)]/90 dark:bg-[var(--paper-dark)]/90 border-b rule">
+  <header class="fixed top-0 inset-x-0 z-40 backdrop-blur bg-[var(--paper)]/90 dark:bg-[var(--paper-dark)]/90 border-b rule">
     <div id="reading-progress"></div>
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between" aria-label="Primary">
-      <a href="${SITE_ROOT}" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
-        <span class="w-8 h-8 rounded flex items-center justify-center bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--pine)]">
-        <img src=${siteConfig.logo} alt="Elmate Stationery Logo">
-        </span>
-      Elmate Stationery
+      <a href="${SITE_ROOT}" class="flex items-center shrink-0" aria-label="${siteConfig.siteName} — Home">
+        <img src="${SITE_ROOT}${siteConfig.logo}" alt="${siteConfig.siteName}" class="h-9 w-auto"
+          onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'font-display font-semibold text-lg tracking-tight', textContent: '${siteConfig.siteName}' }))" />
       </a>
 
       <div class="hidden md:flex items-center gap-6">
