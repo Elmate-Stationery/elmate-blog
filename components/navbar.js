@@ -1,12 +1,13 @@
 // components/navbar.js
 import { siteConfig } from "../data/config.js";
+import { SITE_ROOT } from "../assets/js/site-root.js";
 
 export function renderNavbar(activeHref = "") {
   const links = siteConfig.navigation.primary
     .map((link) => {
       const isActive = activeHref === link.href;
       return `
-        <a href="${link.href}"
+        <a href="${SITE_ROOT}${link.href}"
            class="px-1 py-2 text-sm ${isActive ? "text-[var(--pine)] border-b-2 border-[var(--pine)]" : "text-current border-b-2 border-transparent hover:text-[var(--pine)]"} transition-colors">
           ${link.label}
         </a>`;
@@ -16,7 +17,7 @@ export function renderNavbar(activeHref = "") {
   const mobileLinks = siteConfig.navigation.primary
     .map(
       (link) => `
-        <a href="${link.href}" class="block py-3 text-base border-b rule">${link.label}</a>`
+        <a href="${SITE_ROOT}${link.href}" class="block py-3 text-base border-b rule">${link.label}</a>`
     )
     .join("");
 
@@ -25,7 +26,7 @@ export function renderNavbar(activeHref = "") {
   <header class="sticky top-0 z-40 backdrop-blur bg-[var(--paper)]/90 dark:bg-[var(--paper-dark)]/90 border-b rule">
     <div id="reading-progress"></div>
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between" aria-label="Primary">
-      <a href="index.html" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
+      <a href="${SITE_ROOT}" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
         <span class="w-8 h-8 rounded flex items-center justify-center bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--pine)]">${siteConfig.logoMark}</span>
         ${siteConfig.siteName}
       </a>

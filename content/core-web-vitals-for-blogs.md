@@ -1,6 +1,6 @@
 ## The audit nobody runs on a blog
 
-Core Web Vitals get treated like an e-commerce problem — something you fix on a checkout flow, not on a blog. That's backwards. A blog is mostly static text and images, which means it has _no excuse_ to fail these metrics, and yet most of them do, quietly, for years, because nobody thinks to check.
+Core Web Vitals get treated like an e-commerce problem — something you fix on a checkout flow, not on a blog. That's backwards. A blog is mostly static text and images, which means it has *no excuse* to fail these metrics, and yet most of them do, quietly, for years, because nobody thinks to check.
 
 If you haven't looked at your site's [Core Web Vitals](https://web.dev/vitals/) recently, here's what they actually measure and why a content site should care.
 
@@ -50,7 +50,7 @@ Core Web Vitals aren't a framework feature or a hosting-tier upsell — they're 
 
 ### One more thing: lazy loading isn't automatically a win
 
-A quick caveat, because this trips people up: adding `loading="lazy"` to every image on a page sounds like a universal performance win, but applied carelessly it can _hurt_ your LCP score. If your hero image — the one that determines LCP — is marked lazy, the browser deprioritizes it and your "largest contentful paint" arrives later, not sooner. The rule of thumb: lazy-load everything below the fold, and load anything above the fold (especially your cover image) eagerly, with `fetchpriority="high"` if your target browsers support it. This is a five-minute fix once you know to look for it, and it's exactly the kind of detail a generic "add lazy loading everywhere" checklist gets wrong.
+A quick caveat, because this trips people up: adding `loading="lazy"` to every image on a page sounds like a universal performance win, but applied carelessly it can *hurt* your LCP score. If your hero image — the one that determines LCP — is marked lazy, the browser deprioritizes it and your "largest contentful paint" arrives later, not sooner. The rule of thumb: lazy-load everything below the fold, and load anything above the fold (especially your cover image) eagerly, with `fetchpriority="high"` if your target browsers support it. This is a five-minute fix once you know to look for it, and it's exactly the kind of detail a generic "add lazy loading everywhere" checklist gets wrong.
 
 ### Set a baseline, then check quarterly
 

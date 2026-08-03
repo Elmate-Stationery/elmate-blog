@@ -2,49 +2,56 @@
 <rss version="2.0">
   <channel>
     <title>Marginalia</title>
-    <link>https://elmate-stationery.github.io/elmate-blog//index.html</link>
+    <link>https://elmate-stationery.github.io/elmate-blog/</link>
     <description>Marginalia is a field-notes blog on product, code, and craft — short, practical writing for people who build things.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 Aug 2026 10:17:34 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 03 Aug 2026 04:27:38 GMT</lastBuildDate>
+    <item>
+      <title>Core Web Vitals for a Blog Nobody&apos;s Auditing</title>
+      <link>https://elmate-stationery.github.io/elmate-blog/blog/?slug=core-web-vitals-for-blogs</link>
+      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog/blog/?slug=core-web-vitals-for-blogs</guid>
+      <description>A practical checklist for improving LCP, INP, and CLS on content-driven static sites.</description>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Static Sites Still Win in 2026</title>
-      <link>https://elmate-stationery.github.io/elmate-blog//blog.html?slug=static-sites-still-win</link>
-      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog//blog.html?slug=static-sites-still-win</guid>
+      <link>https://elmate-stationery.github.io/elmate-blog/blog/?slug=static-sites-still-win</link>
+      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog/blog/?slug=static-sites-still-win</guid>
       <description>Why plain HTML, CSS, and vanilla JS remain the best default for content-driven websites in 2026.</description>
       <pubDate>Tue, 02 Jun 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>Designing a Token System That Survives Contact With Real Work</title>
-      <link>https://elmate-stationery.github.io/elmate-blog//blog.html?slug=designing-a-token-system</link>
-      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog//blog.html?slug=designing-a-token-system</guid>
+      <link>https://elmate-stationery.github.io/elmate-blog/blog/?slug=designing-a-token-system</link>
+      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog/blog/?slug=designing-a-token-system</guid>
       <description>How to build a color, type, and spacing token system your team will actually follow.</description>
       <pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>SEO for Product Pages Nobody Is Searching For (Yet)</title>
-      <link>https://elmate-stationery.github.io/elmate-blog//blog.html?slug=seo-for-product-pages</link>
-      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog//blog.html?slug=seo-for-product-pages</guid>
+      <link>https://elmate-stationery.github.io/elmate-blog/blog/?slug=seo-for-product-pages</link>
+      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog/blog/?slug=seo-for-product-pages</guid>
       <description>How to rewrite e-commerce product and collection pages around actual Search Console query data.</description>
       <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>Reading Time Estimates Are a Lie (And That&apos;s Fine)</title>
-      <link>https://elmate-stationery.github.io/elmate-blog//blog.html?slug=reading-time-is-a-lie</link>
-      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog//blog.html?slug=reading-time-is-a-lie</guid>
+      <link>https://elmate-stationery.github.io/elmate-blog/blog/?slug=reading-time-is-a-lie</link>
+      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog/blog/?slug=reading-time-is-a-lie</guid>
       <description>Why reading-time estimates are inaccurate, and what they&apos;re actually useful for.</description>
       <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>Building Instant Search Without a Server</title>
-      <link>https://elmate-stationery.github.io/elmate-blog//blog.html?slug=building-search-without-a-server</link>
-      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog//blog.html?slug=building-search-without-a-server</guid>
+      <link>https://elmate-stationery.github.io/elmate-blog/blog/?slug=building-search-without-a-server</link>
+      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog/blog/?slug=building-search-without-a-server</guid>
       <description>How to ship fast, typo-tolerant search on a static site using Fuse.js — no server required.</description>
       <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>Accessible by Default: A Checklist for Content Sites</title>
-      <link>https://elmate-stationery.github.io/elmate-blog//blog.html?slug=accessible-by-default</link>
-      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog//blog.html?slug=accessible-by-default</guid>
+      <link>https://elmate-stationery.github.io/elmate-blog/blog/?slug=accessible-by-default</link>
+      <guid isPermaLink="true">https://elmate-stationery.github.io/elmate-blog/blog/?slug=accessible-by-default</guid>
       <description>A pragmatic accessibility checklist for static, content-heavy websites.</description>
       <pubDate>Sat, 28 Mar 2026 00:00:00 GMT</pubDate>
     </item>

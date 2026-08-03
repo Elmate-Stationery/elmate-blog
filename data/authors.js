@@ -3,7 +3,7 @@ export const authors = [
   {
     id: "author-najmul",
     name: "Najmul Hasan",
-    avatar: "/elmate-blog/public/images/authors/najmul.jpg",
+    avatar: "public/images/authors/najmul.jpg",
     designation: "Founder & Product Builder",
     bio: "Builds e-commerce brands and the tools behind them. Writes about product, front-end craft, and shipping in public.",
     website: "https://example.com",
@@ -14,7 +14,7 @@ export const authors = [
   {
     id: "author-rima",
     name: "Rima Chowdhury",
-    avatar: "/elmate-blog/public/images/authors/rima.jpg",
+    avatar: "public/images/authors/rima.jpg",
     designation: "Design Systems Lead",
     bio: "Obsessed with type scales, tokens, and the small details that make interfaces feel considered.",
     website: "",

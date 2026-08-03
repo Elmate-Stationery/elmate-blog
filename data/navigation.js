@@ -6,7 +6,7 @@ import { siteConfig } from "./config.js";
 export const primaryNav = siteConfig.navigation.primary;
 
 export const sidebarLinks = [
-  { label: "Popular this week", href: "blogs.html?sort=popular" },
-  { label: "All categories", href: "categories.html" },
-  { label: "All tags", href: "tags.html" },
+  { label: "Popular this week", href: "blogs/?sort=popular" },
+  { label: "All categories", href: "categories/" },
+  { label: "All tags", href: "tags/" },
 ];

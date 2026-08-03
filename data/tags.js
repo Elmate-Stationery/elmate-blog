@@ -6,7 +6,7 @@
 // To introduce a new tag: just type it into a post's `tags` array
 // (e.g. tags: ["JavaScript", "Web Performance"]). It will automatically
 // appear in the tag cloud, sidebar, footer, filters, and get its own
-// tag.html page — no need to register it anywhere first.
+// tag/ page — no need to register it anywhere first.
 
 import { blogs } from "./blogs.js";
 import { slugify } from "../assets/js/slugify.js";

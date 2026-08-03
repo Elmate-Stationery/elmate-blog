@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: https://elmate-stationery.github.io/elmate-blog//public/sitemap.xml
+Sitemap: https://elmate-stationery.github.io/elmate-blog/public/sitemap.xml
