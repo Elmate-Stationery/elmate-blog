@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elmate Stationery Blogs — Field notes on building things well</title>
+    <title>Elmate Stationery — Field notes on building things well</title>
     <meta
       name="description"
       content="Practical, no-fluff writing on product development, front-end engineering, and design systems."
@@ -15,7 +15,7 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Elmate Stationery Blogs — Field notes on building things well"
+      content="Elmate Stationery — Field notes on building things well"
     />
     <meta
       property="og:description"
@@ -23,7 +23,7 @@
     />
     <meta property="og:image" content="public/images/og/default-og.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="public/favicon/favicon.ico" />
+    <link rel="icon" href="public/favicon/favicon.png" />
     <link rel="manifest" href="public/site.webmanifest" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,7 +55,7 @@
       {
         "@context": "https://schema.org",
         "@type": "Blog",
-        "name": "Elmate Stationery Blogs",
+        "name": "Elmate Stationery",
         "description": "Practical, no-fluff writing on product development, front-end engineering, and design systems."
       }
     </script>
@@ -145,6 +145,9 @@
         ></div>
       </section>
 
+      <!-- Our other brands -->
+      <div id="brands-section-root"></div>
+
       <!-- Tags -->
       <section class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
         <h2 class="font-display text-2xl font-semibold mb-6">Popular tags</h2>
@@ -176,6 +179,7 @@
         bindBookmarkButtons,
       } from "./components/blog-card.js";
       import { renderSidebar } from "./components/sidebar.js";
+      import { renderBrandsSection } from "./components/brands-marquee.js";
 
       bootLayout("");
 
@@ -217,6 +221,8 @@
 
       bindBookmarkButtons();
       initIcons();
+      document.getElementById("brands-section-root").innerHTML =
+        renderBrandsSection();
       initAnimations();
     </script>
   </body>
