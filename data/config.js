@@ -3,22 +3,23 @@
 // Edit this file to rebrand the entire site.
 
 export const siteConfig = {
-  siteName: "Marginalia",
+  siteName: "Elmate Stationery Blogs",
   tagline: "Field notes on building things well",
   siteDescription:
-    "Marginalia is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
+    "Elmate Stationery Blogs is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
   url: "https://elmate-stationery.github.io/elmate-blog",
-  logo: "public/images/logo/logo.png",
+  logo: "/public/images/logo/Elmate-Stationery-logo.png",
   logoMark: "M", // fallback text mark if no logo image is present
   favicon: "public/favicon/favicon.ico",
 
   defaultSEO: {
-    titleTemplate: "%s — Marginalia",
-    defaultTitle: "Marginalia — Field notes on building things well",
+    titleTemplate: "%s — Elmate Stationery Blogs",
+    defaultTitle:
+      "Elmate Stationery Blogs — Field notes on building things well",
     metaDescription:
       "Practical, no-fluff writing on product development, front-end engineering, and design systems.",
     ogImage: "public/images/og/default-og.jpg",
-    twitterHandle: "@marginalia",
+    twitterHandle: "@Elmate Stationery Blogs",
     locale: "en_US",
   },
 
@@ -31,7 +32,7 @@ export const siteConfig = {
   },
 
   contact: {
-    email: "hello@marginalia.blog",
+    email: "hello@Elmate Stationery Blogs.blog",
     location: "Dhaka, Bangladesh",
     formspreeEndpoint: "", // e.g. "https://formspree.io/f/xxxxxx" — leave blank to disable
   },
@@ -58,7 +59,7 @@ export const siteConfig = {
 
   theme: {
     default: "system", // "light" | "dark" | "system"
-    storageKey: "marginalia:theme",
+    storageKey: "Elmate Stationery Blogs:theme",
   },
 
   pagination: {
@@ -67,7 +68,7 @@ export const siteConfig = {
 
   analytics: {
     googleAnalyticsId: "", // e.g. "G-XXXXXXX"
-    plausibleDomain: "", // e.g. "marginalia.blog"
+    plausibleDomain: "", // e.g. "Elmate Stationery Blogs.blog"
   },
 
   giscus: {

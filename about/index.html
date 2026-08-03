@@ -1,69 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About — Marginalia</title>
-<meta name="description" content="About Marginalia — a field-notes blog on product, code, and craft." />
-<link rel="icon" href="../public/favicon/favicon.ico" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = { darkMode: "class", theme: { extend: { fontFamily: {
-    display: ["Space Grotesk", "sans-serif"], body: ["Source Serif 4", "serif"], mono: ["IBM Plex Mono", "monospace"],
-  } } } };
-</script>
-<link rel="stylesheet" href="../assets/css/main.css" />
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-</head>
-<body class="font-body antialiased">
-<div id="navbar-root"></div>
-<div id="search-modal-root"></div>
-<main id="main-content" class="max-w-3xl mx-auto px-4 sm:px-6 py-14">
-  <div data-aos="fade-up">
-    <span class="annotation font-mono text-xs">About</span>
-    <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2 mb-6">Notes from the margins</h1>
-    <p class="text-lg text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] leading-relaxed">
-      Marginalia is a small, personal blog about the practical side of building products —
-      the front-end decisions, the design-system trade-offs, and the SEO work that rarely gets written about
-      because it isn't glamorous. It's written the way I'd explain it to a colleague: short, direct, and grounded in something I actually shipped.
-    </p>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Elmate Stationery Blogs</title>
+    <meta
+      name="description"
+      content="About Elmate Stationery Blogs — a field-notes blog on product, code, and craft."
+    />
+    <link rel="icon" href="../public/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Source Serif 4", "serif"],
+              mono: ["IBM Plex Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  </head>
+  <body class="font-body antialiased">
+    <div id="navbar-root"></div>
+    <div id="search-modal-root"></div>
+    <main id="main-content" class="max-w-3xl mx-auto px-4 sm:px-6 py-14">
+      <div data-aos="fade-up">
+        <span class="annotation font-mono text-xs">About</span>
+        <h1 class="font-display text-3xl sm:text-4xl font-semibold mt-2 mb-6">
+          Notes from the margins
+        </h1>
+        <p
+          class="text-lg text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] leading-relaxed"
+        >
+          Elmate Stationery Blogs is a small, personal blog about the practical
+          side of building products — the front-end decisions, the design-system
+          trade-offs, and the SEO work that rarely gets written about because it
+          isn't glamorous. It's written the way I'd explain it to a colleague:
+          short, direct, and grounded in something I actually shipped.
+        </p>
+      </div>
 
-  <div class="grid sm:grid-cols-2 gap-8 mt-14" id="author-cards"></div>
+      <div class="grid sm:grid-cols-2 gap-8 mt-14" id="author-cards"></div>
 
-  <div class="mt-16" data-aos="fade-up">
-    <h2 class="font-display text-xl font-semibold mb-4">Skills &amp; focus areas</h2>
-    <div class="flex flex-wrap gap-2" id="skills-list"></div>
-  </div>
+      <div class="mt-16" data-aos="fade-up">
+        <h2 class="font-display text-xl font-semibold mb-4">
+          Skills &amp; focus areas
+        </h2>
+        <div class="flex flex-wrap gap-2" id="skills-list"></div>
+      </div>
 
-  <div class="mt-16" data-aos="fade-up">
-    <h2 class="font-display text-xl font-semibold mb-6">A rough timeline</h2>
-    <div class="space-y-6 border-l rule pl-6" id="experience-list"></div>
-  </div>
+      <div class="mt-16" data-aos="fade-up">
+        <h2 class="font-display text-xl font-semibold mb-6">
+          A rough timeline
+        </h2>
+        <div class="space-y-6 border-l rule pl-6" id="experience-list"></div>
+      </div>
 
-  <div class="mt-16 flex gap-3" data-aos="fade-up">
-    <a href="../contact/" class="btn-primary">Get in touch</a>
-    <a href="../blogs/" class="btn-outline">Read the archive</a>
-  </div>
-</main>
-<div id="footer-root"></div>
-<button id="back-to-top" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
-<script type="module">
-  import { bootLayout, initIcons, initAnimations } from "../assets/js/layout.js";
-  import { authors } from "../data/authors.js";
-  import { socialIconMarkup } from "../assets/js/social-icons.js";
-  import { SITE_ROOT } from "../assets/js/site-root.js";
-  bootLayout("about/");
+      <div class="mt-16 flex gap-3" data-aos="fade-up">
+        <a href="../contact/" class="btn-primary">Get in touch</a>
+        <a href="../blogs/" class="btn-outline">Read the archive</a>
+      </div>
+    </main>
+    <div id="footer-root"></div>
+    <button id="back-to-top" aria-label="Back to top">
+      <i data-lucide="arrow-up" class="w-4 h-4"></i>
+    </button>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    <script type="module">
+      import {
+        bootLayout,
+        initIcons,
+        initAnimations,
+      } from "../assets/js/layout.js";
+      import { authors } from "../data/authors.js";
+      import { socialIconMarkup } from "../assets/js/social-icons.js";
+      import { SITE_ROOT } from "../assets/js/site-root.js";
+      bootLayout("about/");
 
-  document.getElementById("author-cards").innerHTML = authors
-    .map(
-      (a) => `
+      document.getElementById("author-cards").innerHTML = authors
+        .map(
+          (a) => `
       <div class="blog-card rounded-lg p-6" data-aos="fade-up">
         <img src="${SITE_ROOT}${a.avatar}" alt="" class="w-16 h-16 rounded-full object-cover mb-4 bg-[var(--rule)]"
           onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop'" />
@@ -75,31 +106,51 @@
           ${a.linkedin ? `<a href="${a.linkedin}" class="theme-toggle hover:border-[var(--pine)]" aria-label="LinkedIn">${socialIconMarkup("linkedin")}</a>` : ""}
           ${a.twitter ? `<a href="${a.twitter}" class="theme-toggle hover:border-[var(--pine)]" aria-label="Twitter">${socialIconMarkup("twitter")}</a>` : ""}
         </div>
-      </div>`
-    )
-    .join("");
+      </div>`,
+        )
+        .join("");
 
-  const skills = ["HTML & CSS", "JavaScript (ES6+)", "Design Systems", "Tailwind CSS", "SEO & Content Strategy", "Accessibility", "Performance", "Static Site Architecture"];
-  document.getElementById("skills-list").innerHTML = skills.map((s) => `<span class="tag-chip">${s}</span>`).join("");
+      const skills = [
+        "HTML & CSS",
+        "JavaScript (ES6+)",
+        "Design Systems",
+        "Tailwind CSS",
+        "SEO & Content Strategy",
+        "Accessibility",
+        "Performance",
+        "Static Site Architecture",
+      ];
+      document.getElementById("skills-list").innerHTML = skills
+        .map((s) => `<span class="tag-chip">${s}</span>`)
+        .join("");
 
-  const experience = [
-    { year: "2026", text: "Writing Marginalia — practical, field-tested notes on product and front-end work." },
-    { year: "2023–2025", text: "Built and shipped e-commerce, design-system, and content-driven web projects." },
-    { year: "Earlier", text: "Learned the hard way that most of good engineering is good writing about decisions." },
-  ];
-  document.getElementById("experience-list").innerHTML = experience
-    .map(
-      (e) => `
+      const experience = [
+        {
+          year: "2026",
+          text: "Writing Elmate Stationery Blogs — practical, field-tested notes on product and front-end work.",
+        },
+        {
+          year: "2023–2025",
+          text: "Built and shipped e-commerce, design-system, and content-driven web projects.",
+        },
+        {
+          year: "Earlier",
+          text: "Learned the hard way that most of good engineering is good writing about decisions.",
+        },
+      ];
+      document.getElementById("experience-list").innerHTML = experience
+        .map(
+          (e) => `
       <div class="relative">
         <span class="absolute -left-[27px] top-1.5 w-2.5 h-2.5 rounded-full bg-[var(--pine)]"></span>
         <p class="font-mono text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">${e.year}</p>
         <p class="text-sm mt-1">${e.text}</p>
-      </div>`
-    )
-    .join("");
+      </div>`,
+        )
+        .join("");
 
-  initIcons();
-  initAnimations();
-</script>
-</body>
+      initIcons();
+      initAnimations();
+    </script>
+  </body>
 </html>

@@ -1,6 +1,6 @@
 /* assets/css/main.css
    ============================================================
-   Design system: "Marginalia"
+   Design system: "Elmate Stationery Blogs"
    A field-notes blog. The signature idea is the margin rail —
    a thin ruled column of monospace annotations that runs beside
    long-form content, echoing handwritten notes in a notebook.
@@ -71,7 +71,9 @@ body {
   background-color: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 html.dark body {
@@ -79,11 +81,25 @@ html.dark body {
   color: #eceae4;
 }
 
-h1, h2, h3, h4, h5, h6, .font-display, nav, button, .btn {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display,
+nav,
+button,
+.btn {
   font-family: var(--font-display);
 }
 
-code, pre, kbd, .font-mono, .meta, .annotation {
+code,
+pre,
+kbd,
+.font-mono,
+.meta,
+.annotation {
   font-family: var(--font-mono);
 }
 
@@ -181,7 +197,9 @@ html.dark .margin-tick {
 .blog-card {
   border: 1px solid var(--rule);
   background: #fff;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 html.dark .blog-card {
   border-color: var(--rule-dark);
@@ -223,7 +241,9 @@ html.dark .badge.badge-ochre {
   padding: 3px 10px;
   border-radius: 999px;
   color: var(--text-muted);
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 html.dark .tag-chip {
   border-color: var(--rule-dark);
@@ -329,7 +349,9 @@ html.dark .theme-toggle {
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
   z-index: 50;
 }
 #back-to-top.visible {
@@ -363,22 +385,41 @@ html.dark .search-highlight {
 
 /* ---------- Skeleton loading ---------- */
 .skeleton {
-  background: linear-gradient(90deg, var(--rule) 25%, #eeeae0 37%, var(--rule) 63%);
+  background: linear-gradient(
+    90deg,
+    var(--rule) 25%,
+    #eeeae0 37%,
+    var(--rule) 63%
+  );
   background-size: 400% 100%;
   animation: skeleton-loading 1.4s ease infinite;
 }
 html.dark .skeleton {
-  background: linear-gradient(90deg, var(--rule-dark) 25%, #3a4046 37%, var(--rule-dark) 63%);
+  background: linear-gradient(
+    90deg,
+    var(--rule-dark) 25%,
+    #3a4046 37%,
+    var(--rule-dark) 63%
+  );
   background-size: 400% 100%;
 }
 @keyframes skeleton-loading {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0 50%; }
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
 }
 
 /* ---------- Print styles ---------- */
 @media print {
-  nav, footer, #back-to-top, .no-print, .margin-rail, #reading-progress {
+  nav,
+  footer,
+  #back-to-top,
+  .no-print,
+  .margin-rail,
+  #reading-progress {
     display: none !important;
   }
   body {

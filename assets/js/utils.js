@@ -20,7 +20,11 @@ export function setQs(params) {
 
 export function formatDate(iso) {
   const d = new Date(iso + "T00:00:00");
-  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 export function categoryById(id) {
@@ -55,8 +59,8 @@ export function debounce(fn, wait = 200) {
 
 // ---- localStorage-backed feature stores ----
 const LS = {
-  bookmarks: "marginalia:bookmarks",
-  history: "marginalia:history",
+  bookmarks: "Elmate Stationery Blogs:bookmarks",
+  history: "Elmate Stationery Blogs:history",
 };
 
 function readList(key) {

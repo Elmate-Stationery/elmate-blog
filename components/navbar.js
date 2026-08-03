@@ -17,7 +17,7 @@ export function renderNavbar(activeHref = "") {
   const mobileLinks = siteConfig.navigation.primary
     .map(
       (link) => `
-        <a href="${SITE_ROOT}${link.href}" class="block py-3 text-base border-b rule">${link.label}</a>`
+        <a href="${SITE_ROOT}${link.href}" class="block py-3 text-base border-b rule">${link.label}</a>`,
     )
     .join("");
 
@@ -27,8 +27,10 @@ export function renderNavbar(activeHref = "") {
     <div id="reading-progress"></div>
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between" aria-label="Primary">
       <a href="${SITE_ROOT}" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
-        <span class="w-8 h-8 rounded flex items-center justify-center bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--pine)]">${siteConfig.logoMark}</span>
-        ${siteConfig.siteName}
+        <span class="w-8 h-8 rounded flex items-center justify-center bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--pine)]">
+        <img src=${siteConfig.logo} alt="Elmate Stationery Logo">
+        </span>
+      Elmate Stationery
       </a>
 
       <div class="hidden md:flex items-center gap-6">
@@ -79,7 +81,7 @@ export function mountNavbar(activeHref) {
     elm.addEventListener("click", () => {
       drawer.classList.add("hidden");
       openBtn?.setAttribute("aria-expanded", "false");
-    })
+    }),
   );
 
   // Reading progress bar
