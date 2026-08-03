@@ -3,21 +3,21 @@
 // Edit this file to rebrand the entire site.
 
 export const siteConfig = {
-  siteName: "Elmate Stationery",
+  siteName: "Marginalia",
   tagline: "Field notes on building things well",
   siteDescription:
     "Marginalia is a field-notes blog on product, code, and craft — short, practical writing for people who build things.",
-  url: "https://elmate-stationery.github.io/elmate-blog/",
-  logo: "/elmate-blog/public/images/logo/logo.png",
+  url: "https://elmate-stationery.github.io/elmate-blog",
+  logo: "public/images/logo/logo.png",
   logoMark: "M", // fallback text mark if no logo image is present
-  favicon: "/public/favicon/favicon.ico",
+  favicon: "public/favicon/favicon.ico",
 
   defaultSEO: {
     titleTemplate: "%s — Marginalia",
     defaultTitle: "Marginalia — Field notes on building things well",
     metaDescription:
       "Practical, no-fluff writing on product development, front-end engineering, and design systems.",
-    ogImage: "/elmate-blog/public/images/og/default-og.jpg",
+    ogImage: "public/images/og/default-og.jpg",
     twitterHandle: "@marginalia",
     locale: "en_US",
   },
@@ -27,7 +27,7 @@ export const siteConfig = {
     twitter: "https://twitter.com/",
     linkedin: "https://linkedin.com/",
     facebook: "https://facebook.com/",
-    rss: "/public/rss.xml",
+    rss: "public/rss.xml",
   },
 
   contact: {
@@ -38,21 +38,21 @@ export const siteConfig = {
 
   navigation: {
     primary: [
-      { label: "Home", href: "index.html" },
-      { label: "Blogs", href: "blogs.html" },
-      { label: "Categories", href: "categories.html" },
-      { label: "Tags", href: "tags.html" },
-      // { label: "About", href: "about.html" },
-      // { label: "Contact", href: "contact.html" },
+      { label: "Home", href: "" },
+      { label: "Blogs", href: "blogs/" },
+      { label: "Categories", href: "categories/" },
+      { label: "Tags", href: "tags/" },
+      { label: "About", href: "about/" },
+      { label: "Contact", href: "contact/" },
     ],
   },
 
   footerLinks: {
     quickLinks: [
-      // { label: "About", href: "about.html" },
-      // { label: "Contact", href: "contact.html" },
-      { label: "Privacy Policy", href: "privacy-policy.html" },
-      { label: "Terms & Conditions", href: "terms.html" },
+      { label: "About", href: "about/" },
+      { label: "Contact", href: "contact/" },
+      { label: "Privacy Policy", href: "privacy-policy/" },
+      { label: "Terms & Conditions", href: "terms/" },
     ],
   },
 
@@ -62,7 +62,7 @@ export const siteConfig = {
   },
 
   pagination: {
-    perPage: 15,
+    perPage: 6,
   },
 
   analytics: {

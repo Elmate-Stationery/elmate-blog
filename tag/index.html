@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title id="page-title">Tag — Marginalia</title>
 <meta id="meta-description" name="description" content="" />
-<link rel="icon" href="/public/favicon/favicon.ico" />
+<link rel="icon" href="../public/favicon/favicon.ico" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -15,7 +15,7 @@
     display: ["Space Grotesk", "sans-serif"], body: ["Source Serif 4", "serif"], mono: ["IBM Plex Mono", "monospace"],
   } } } };
 </script>
-<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="../assets/css/main.css" />
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 </head>
 <body class="font-body antialiased">
@@ -35,13 +35,13 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
 <script type="module">
-  import { bootLayout, initIcons, initAnimations } from "./assets/js/layout.js";
-  import { getTagBySlug, tags } from "./data/tags.js";
-  import { getBlogsByTag } from "./data/blogs.js";
-  import { renderBlogCard, bindBookmarkButtons } from "./components/blog-card.js";
-  import { qs } from "./assets/js/utils.js";
+  import { bootLayout, initIcons, initAnimations } from "../assets/js/layout.js";
+  import { getTagBySlug, tags } from "../data/tags.js";
+  import { getBlogsByTag } from "../data/blogs.js";
+  import { renderBlogCard, bindBookmarkButtons } from "../components/blog-card.js";
+  import { qs } from "../assets/js/utils.js";
 
-  bootLayout("tags.html");
+  bootLayout("tags/");
 
   const slug = qs("slug");
   const tag = getTagBySlug(slug) || tags[0];

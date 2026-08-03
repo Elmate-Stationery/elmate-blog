@@ -19,16 +19,18 @@ const ROOT = path.resolve(__dirname, "..");
 const SITE_URL = siteConfig.url.replace(/\/$/, "");
 
 // Static, non-post pages to include in the sitemap.
-// [path, changefreq, priority]
+// [path, changefreq, priority] — path is empty string for the homepage,
+// otherwise a folder name with trailing slash (matches the site's clean
+// URL structure: page.html now lives at page/index.html).
 const STATIC_PAGES = [
-  ["index.html", "weekly", "1.0"],
-  ["blogs.html", "daily", "0.9"],
-  ["categories.html", "weekly", "0.6"],
-  ["tags.html", "weekly", "0.5"],
-  ["about.html", "monthly", "0.4"],
-  ["contact.html", "monthly", "0.4"],
-  ["privacy-policy.html", "yearly", "0.2"],
-  ["terms.html", "yearly", "0.2"],
+  ["", "weekly", "1.0"],
+  ["blogs/", "daily", "0.9"],
+  ["categories/", "weekly", "0.6"],
+  ["tags/", "weekly", "0.5"],
+  ["about/", "monthly", "0.4"],
+  ["contact/", "monthly", "0.4"],
+  ["privacy-policy/", "yearly", "0.2"],
+  ["terms/", "yearly", "0.2"],
 ];
 
 function escapeXml(str = "") {
@@ -57,7 +59,7 @@ function buildSitemap() {
     .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate))
     .map(
       (b) => `  <url>
-    <loc>${SITE_URL}/blog.html?slug=${b.slug}</loc>
+    <loc>${SITE_URL}/blog/?slug=${b.slug}</loc>
     <lastmod>${b.updatedDate || b.publishDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -77,8 +79,8 @@ function buildRss() {
     .map(
       (b) => `    <item>
       <title>${escapeXml(b.title)}</title>
-      <link>${SITE_URL}/blog.html?slug=${b.slug}</link>
-      <guid isPermaLink="true">${SITE_URL}/blog.html?slug=${b.slug}</guid>
+      <link>${SITE_URL}/blog/?slug=${b.slug}</link>
+      <guid isPermaLink="true">${SITE_URL}/blog/?slug=${b.slug}</guid>
       <description>${escapeXml(b.metaDescription || b.description)}</description>
       <pubDate>${toRfc822(b.publishDate)}</pubDate>
     </item>`
@@ -88,7 +90,7 @@ function buildRss() {
 <rss version="2.0">
   <channel>
     <title>${escapeXml(siteConfig.siteName)}</title>
-    <link>${SITE_URL}/index.html</link>
+    <link>${SITE_URL}/</link>
     <description>${escapeXml(siteConfig.siteDescription)}</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>

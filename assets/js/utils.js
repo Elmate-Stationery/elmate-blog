@@ -20,11 +20,7 @@ export function setQs(params) {
 
 export function formatDate(iso) {
   const d = new Date(iso + "T00:00:00");
-  return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
 
 export function categoryById(id) {
