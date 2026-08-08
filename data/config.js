@@ -44,15 +44,11 @@ export const siteConfig = {
       { label: "Blogs", href: "blogs/" },
       { label: "Categories", href: "categories/" },
       { label: "Tags", href: "tags/" },
-      { label: "About", href: "about/" },
-      { label: "Contact", href: "contact/" },
     ],
   },
 
   footerLinks: {
     quickLinks: [
-      { label: "About", href: "about/" },
-      { label: "Contact", href: "contact/" },
       { label: "Privacy Policy", href: "privacy-policy/" },
       { label: "Terms & Conditions", href: "terms/" },
       { label: "Studio", href: "studio/" },
