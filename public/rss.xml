@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>Elmate Stationery Blogs</title>
+    <title>Elmate Stationery</title>
     <link>https://elmate-stationery.github.io/elmate-blog/</link>
-    <description>Elmate Stationery Blogs is a field-notes blog on product, code, and craft — short, practical writing for people who build things.</description>
+    <description>Elmate Stationery is a field-notes blog on product, code, and craft — short, practical writing for people who build things.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Aug 2026 04:27:38 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2026 08:06:22 GMT</lastBuildDate>
     <item>
       <title>Core Web Vitals for a Blog Nobody&apos;s Auditing</title>
       <link>https://elmate-stationery.github.io/elmate-blog/blog/?slug=core-web-vitals-for-blogs</link>

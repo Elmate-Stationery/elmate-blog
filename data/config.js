@@ -18,20 +18,22 @@ export const siteConfig = {
     metaDescription:
       "Practical, no-fluff writing on product development, front-end engineering, and design systems.",
     ogImage: "public/images/og/default-og.jpg",
-    twitterHandle: "@Elmate Stationery",
+    twitterHandle: "", // e.g. "@elmatestationery" — leave blank to omit
     locale: "en_US",
   },
 
+  // Social profile URLs. Leave any entry blank ("") to hide its icon in the
+  // footer. Fill these in with your real profile URLs before launch.
   social: {
-    github: "https://github.com/",
-    twitter: "https://twitter.com/",
-    linkedin: "https://linkedin.com/",
-    facebook: "https://facebook.com/",
+    github: "",
+    twitter: "",
+    linkedin: "",
+    facebook: "",
     rss: "public/rss.xml",
   },
 
   contact: {
-    email: "hello@Elmate Stationery.blog",
+    email: "hello@elmatestationery.com",
     location: "Dhaka, Bangladesh",
     formspreeEndpoint: "", // e.g. "https://formspree.io/f/xxxxxx" — leave blank to disable
   },

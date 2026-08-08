@@ -6,7 +6,8 @@
     <title id="page-title">Article — Elmate Stationery Blogs</title>
     <meta id="meta-description" name="description" content="" />
     <link id="canonical-link" rel="canonical" href="" />
-    <meta id="og-title" property="og:type" content="article" />
+    <meta property="og:type" content="article" />
+    <meta id="og-title" property="og:title" content="" />
     <meta id="og-desc" property="og:description" content="" />
     <meta id="og-image" property="og:image" content="" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -17,26 +18,12 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            fontFamily: {
-              display: ["Space Grotesk", "sans-serif"],
-              body: ["Source Serif 4", "serif"],
-              mono: ["IBM Plex Mono", "monospace"],
-            },
-          },
-        },
-      };
-    </script>
+    <link rel="stylesheet" href="../assets/css/tailwind.css" />
     <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/highlight.js@11.9.0/styles/atom-one-dark.min.css"
+      href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/atom-one-dark.min.css"
     />
     <script type="application/ld+json" id="article-schema"></script>
   </head>
@@ -196,8 +183,7 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/fuse.js@7.0.0/dist/fuse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://unpkg.com/highlight.js@11.9.0/lib/highlight.js"></script>
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
 
     <script type="module">
       import {
@@ -223,6 +209,7 @@
       } from "../components/blog-card.js";
       import { socialIconMarkup } from "../assets/js/social-icons.js";
       import { SITE_ROOT } from "../assets/js/site-root.js";
+      import { normalizeArticleHTML } from "../assets/js/html-content.js";
 
       bootLayout("");
 
@@ -308,18 +295,22 @@
           ?.classList.toggle("text-[var(--ochre)]", active);
       });
 
-      // Fetch + render markdown
+      // Fetch + render article HTML
       const contentEl = document.getElementById("article-content");
-      fetch(blog.markdown)
-        .then((r) => r.text())
-        .then((md) => {
-          contentEl.innerHTML = marked.parse(md, {
-            headerIds: true,
-            mangle: false,
-          });
+      fetch(SITE_ROOT + blog.contentFile)
+        .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
+        .then((raw) => {
+          // Article bodies are HTML. normalizeArticleHTML cleans up messy
+          // WordPress-style exports (bare <span> paragraphs, layout <div>s,
+          // inline styles) and rebuilds real <p> tags. It is a no-op on HTML
+          // that is already clean.
+          contentEl.innerHTML = normalizeArticleHTML(raw);
 
-          // Word count + rail index
-          const words = md.split(/\s+/).filter(Boolean).length;
+          // Word count + rail index (from rendered text, not raw markup)
+          const words = contentEl.textContent
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean).length;
           document.getElementById("rail-words").textContent =
             `${words.toLocaleString()} words`;
           document.getElementById("rail-index").textContent =
