@@ -44,7 +44,7 @@ export function renderNavbar(activeHref = "") {
           <i data-lucide="sun" data-icon="sun" class="w-4 h-4"></i>
           <i data-lucide="moon" data-icon="moon" class="w-4 h-4 hidden"></i>
         </button>
-        <button id="mobile-menu-trigger" aria-label="Open menu" aria-expanded="false" class="theme-toggle md:hidden">
+        <button id="mobile-menu-trigger" aria-label="Open menu" aria-expanded="false" class="theme-toggle md:!hidden">
           <i data-lucide="menu" class="w-4 h-4"></i>
         </button>
       </div>
