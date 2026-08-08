@@ -85,11 +85,15 @@ export function mountNavbar(activeHref) {
   // Reading progress bar
   const bar = document.getElementById("reading-progress");
   if (bar) {
-    window.addEventListener("scroll", () => {
-      const h = document.documentElement;
-      const scrolled = h.scrollTop;
-      const max = h.scrollHeight - h.clientHeight;
-      bar.style.width = max > 0 ? `${(scrolled / max) * 100}%` : "0%";
-    });
+    window.addEventListener(
+      "scroll",
+      () => {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop;
+        const max = h.scrollHeight - h.clientHeight;
+        bar.style.width = max > 0 ? `${(scrolled / max) * 100}%` : "0%";
+      },
+      { passive: true },
+    );
   }
 }

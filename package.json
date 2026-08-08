@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Static blog — no build step for the site itself; this package.json exists only to run the sitemap/RSS generator script.",
+  "description": "Static blog. Two build steps: compile Tailwind to a static CSS file, and regenerate sitemap/RSS from data/blogs.js. Both run in CI on deploy.",
   "scripts": {
-    "generate:seo": "node scripts/generate-seo.mjs"
+    "generate:seo": "node scripts/generate-seo.mjs",
+    "build:css": "tailwindcss -i ./assets/css/tailwind-src.css -o ./assets/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/tailwind-src.css -o ./assets/css/tailwind.css --watch",
+    "build": "npm run build:css && npm run generate:seo"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "tailwindcss": "^3.4.17"
   }
 }

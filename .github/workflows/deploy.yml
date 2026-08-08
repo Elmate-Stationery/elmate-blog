@@ -1,9 +1,9 @@
 name: Deploy site
 
-# Runs on every push to main. Regenerates sitemap.xml and rss.xml from
-# data/blogs.js, then deploys the site to GitHub Pages. No commit is made
-# back to the repo — the generated files are only part of the deployed
-# artifact, so data/blogs.js stays the single source of truth.
+# Runs on every push to main. Compiles the Tailwind stylesheet and regenerates
+# sitemap.xml and rss.xml from data/blogs.js, then deploys the site to GitHub
+# Pages. No commit is made back to the repo — the generated files are only part
+# of the deployed artifact, so the source files stay the single source of truth.
 
 on:
   push:
@@ -33,9 +33,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: npm
 
-      - name: Regenerate sitemap.xml and rss.xml
-        run: node scripts/generate-seo.mjs
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build CSS + regenerate sitemap.xml and rss.xml
+        run: npm run build
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

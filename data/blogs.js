@@ -1,5 +1,5 @@
 // data/blogs.js
-// Metadata only. Article body lives in content/<markdown>.md
+// Metadata only. Article body lives in content/<slug>.html
 import { slugify } from "../assets/js/slugify.js";
 
 export const blogs = [
@@ -15,7 +15,7 @@ export const blogs = [
     tags: ["Static Sites", "Performance", "JavaScript"],
     coverImage: "public/images/blog/static-sites-cover.jpg",
     thumbnail: "public/images/blog/static-sites-thumb.jpg",
-    markdown: "content/static-sites-still-win.md",
+    contentFile: "content/static-sites-still-win.html",
     publishDate: "2026-06-02",
     updatedDate: "2026-06-04",
     readingTime: 6,
@@ -39,7 +39,7 @@ export const blogs = [
     tags: ["Design Systems", "Typography", "CSS"],
     coverImage: "public/images/blog/token-system-cover.jpg",
     thumbnail: "public/images/blog/token-system-thumb.jpg",
-    markdown: "content/designing-a-token-system.md",
+    contentFile: "content/designing-a-token-system.html",
     publishDate: "2026-05-20",
     updatedDate: "2026-05-20",
     readingTime: 8,
@@ -63,7 +63,7 @@ export const blogs = [
     tags: ["SEO", "E-commerce", "Writing"],
     coverImage: "public/images/blog/seo-cover.jpg",
     thumbnail: "public/images/blog/seo-thumb.jpg",
-    markdown: "content/seo-for-product-pages.md",
+    contentFile: "content/seo-for-product-pages.html",
     publishDate: "2026-05-08",
     updatedDate: "2026-05-08",
     readingTime: 7,
@@ -87,7 +87,7 @@ export const blogs = [
     tags: ["Writing", "Accessibility"],
     coverImage: "public/images/blog/reading-time-cover.jpg",
     thumbnail: "public/images/blog/reading-time-thumb.jpg",
-    markdown: "content/reading-time-is-a-lie.md",
+    contentFile: "content/reading-time-is-a-lie.html",
     publishDate: "2026-04-22",
     updatedDate: "2026-04-22",
     readingTime: 4,
@@ -111,7 +111,7 @@ export const blogs = [
     tags: ["JavaScript", "Static Sites", "Performance"],
     coverImage: "public/images/blog/search-cover.jpg",
     thumbnail: "public/images/blog/search-thumb.jpg",
-    markdown: "content/building-search-without-a-server.md",
+    contentFile: "content/building-search-without-a-server.html",
     publishDate: "2026-04-10",
     updatedDate: "2026-04-15",
     readingTime: 9,
@@ -135,7 +135,7 @@ export const blogs = [
     tags: ["Accessibility", "CSS"],
     coverImage: "public/images/blog/a11y-cover.jpg",
     thumbnail: "public/images/blog/a11y-thumb.jpg",
-    markdown: "content/accessible-by-default.md",
+    contentFile: "content/accessible-by-default.html",
     publishDate: "2026-03-28",
     updatedDate: "2026-03-28",
     readingTime: 6,
@@ -159,7 +159,7 @@ export const blogs = [
     tags: ["Performance", "SEO", "Static Sites"],
     coverImage: "public/images/blog/core-web-vitals-cover.jpg",
     thumbnail: "public/images/blog/core-web-vitals-thumb.jpg",
-    markdown: "content/core-web-vitals-for-blogs.md",
+    contentFile: "content/core-web-vitals-for-blogs.html",
     publishDate: "2026-08-01",
     updatedDate: "2026-08-01",
     readingTime: 6,

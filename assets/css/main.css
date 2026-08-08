@@ -498,6 +498,14 @@ html.dark .brand-card {
   line-height: 1.4;
 }
 
+/* ---------- AOS fallback ----------
+   If aos.js fails to load, layout.js adds .no-aos to <html>; without this,
+   aos.css would leave every [data-aos] element stuck at opacity:0. */
+html.no-aos [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ---------- Print styles ---------- */
 @media print {
   nav,

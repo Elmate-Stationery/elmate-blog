@@ -18,20 +18,20 @@ export const brands = [
     title: "Freeze Ur Memories",
     slogan: "Custom keepsakes and memory-casting, made to last",
     logo: "public/images/brands/freeze-ur-memories-logo.png",
-    url: "https://freezeurmemories.com",
+    url: "https://freezeurmemories. com",
   },
   {
     id: "brand-luminary",
     title: "Luminary",
     slogan: "Premium gifting for people who notice the details",
     logo: "public/images/brands/luminary-logo.png",
-    url: "https://luminarygifts.com",
+    url: "https://luminarygifts.  .com",
   },
   {
     id: "brand-chitrokatha",
     title: "Chitrokatha",
     slogan: "Stationery inspired by Bengali art and storytelling",
     logo: "public/images/brands/chitrokatha-logo.png",
-    url: "https://chitrokatha.com",
+    url: "https://chitrokatha...com",
   },
 ];

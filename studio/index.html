@@ -3,30 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Studio — Elmate Stationery</title>
+    <title>Studio — Marginalia</title>
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" href="../public/favicon/favicon.png" />
+    <link rel="icon" href="../public/favicon/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            fontFamily: {
-              display: ["Space Grotesk", "sans-serif"],
-              body: ["Source Serif 4", "serif"],
-              mono: ["IBM Plex Mono", "monospace"],
-            },
-          },
-        },
-      };
-    </script>
+    <link rel="stylesheet" href="../assets/css/tailwind.css" />
     <link rel="stylesheet" href="../assets/css/main.css" />
     <style>
       .studio-input {
@@ -73,6 +59,335 @@
         border-radius: 8px;
         max-height: 340px;
         overflow-y: auto;
+      }
+
+      /* ---- Classic Editor (TinyMCE) look for the content editor ---- */
+      .tinymce-toolbar {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2px;
+        background: #f0f0f1;
+        border: 1px solid var(--rule);
+        border-bottom: none;
+        border-radius: 6px 6px 0 0;
+        padding: 4px 6px;
+      }
+      html.dark .tinymce-toolbar {
+        background: #2a2a28;
+        border-color: var(--rule-dark);
+      }
+      .tinymce-format-select {
+        font-family: var(--font-body);
+        font-size: 13px;
+        border: 1px solid transparent;
+        background: transparent;
+        padding: 4px 6px;
+        border-radius: 4px;
+        margin-right: 4px;
+        cursor: pointer;
+      }
+      .tinymce-format-select:hover {
+        border-color: var(--rule);
+      }
+      html.dark .tinymce-format-select:hover {
+        border-color: var(--rule-dark);
+      }
+      .tinymce-btn {
+        width: 28px;
+        height: 28px;
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        background: transparent;
+        font-family: var(--font-display);
+        font-size: 12px;
+        color: #32373c;
+        cursor: pointer;
+      }
+      html.dark .tinymce-btn {
+        color: #d8d6d0;
+      }
+      .tinymce-btn:hover {
+        background: #dcdcde;
+      }
+      html.dark .tinymce-btn:hover {
+        background: #3a3a37;
+      }
+      .tinymce-sep {
+        width: 1px;
+        height: 20px;
+        background: var(--rule);
+        margin: 0 4px;
+      }
+      html.dark .tinymce-sep {
+        background: var(--rule-dark);
+      }
+      .tinymce-frame {
+        border: 1px solid var(--rule);
+        border-radius: 0;
+        background: #fff;
+      }
+      html.dark .tinymce-frame {
+        border-color: var(--rule-dark);
+        background: var(--surface-dark);
+      }
+      .tinymce-frame .rich-editable {
+        border: none;
+        border-radius: 0;
+        min-height: 420px;
+        padding: 14px 16px;
+      }
+      .tinymce-status {
+        display: flex;
+        justify-content: flex-end;
+        padding: 4px 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-muted);
+        background: #f0f0f1;
+        border: 1px solid var(--rule);
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+      }
+      html.dark .tinymce-status {
+        background: #2a2a28;
+        border-color: var(--rule-dark);
+        color: var(--text-muted-dark);
+      }
+
+      .rich-editable {
+        cursor: text;
+        line-height: 1.6;
+      }
+      .rich-editable:empty::before {
+        content: attr(data-placeholder);
+        color: var(--text-muted);
+      }
+      html.dark .rich-editable:empty::before {
+        color: var(--text-muted-dark);
+      }
+      .rich-editable p {
+        margin: 0 0 0.9em;
+      }
+      .rich-editable h1 {
+        font-family: var(--font-display);
+        font-size: 1.6em;
+        font-weight: 700;
+        margin: 0.6em 0 0.4em;
+      }
+      .rich-editable h2 {
+        font-family: var(--font-display);
+        font-size: 1.35em;
+        font-weight: 700;
+        margin: 0.6em 0 0.4em;
+      }
+      .rich-editable h3 {
+        font-family: var(--font-display);
+        font-size: 1.15em;
+        font-weight: 600;
+        margin: 0.6em 0 0.3em;
+      }
+      .rich-editable h4,
+      .rich-editable h5,
+      .rich-editable h6 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        margin: 0.6em 0 0.3em;
+      }
+      .rich-editable b,
+      .rich-editable strong {
+        font-weight: 700;
+      }
+      .rich-editable i,
+      .rich-editable em {
+        font-style: italic;
+      }
+      .rich-editable a {
+        color: var(--pine);
+        text-decoration: underline;
+      }
+      .rich-editable a.btn-primary {
+        display: inline-block;
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 6px;
+      }
+      .rich-editable ul,
+      .rich-editable ol {
+        padding-left: 1.4em;
+        margin: 0 0 0.9em;
+      }
+      .rich-editable ul {
+        list-style: disc;
+      }
+      .rich-editable ol {
+        list-style: decimal;
+      }
+      .rich-editable blockquote {
+        border-left: 3px solid var(--rule);
+        margin: 0 0 0.9em;
+        padding-left: 12px;
+        font-style: italic;
+        color: var(--text-muted);
+      }
+      html.dark .rich-editable blockquote {
+        border-color: var(--rule-dark);
+        color: var(--text-muted-dark);
+      }
+      .rich-editable pre {
+        background: var(--ink);
+        color: #eceae4;
+        padding: 10px 12px;
+        border-radius: 6px;
+        font-family: var(--font-mono);
+        font-size: 12.5px;
+        overflow-x: auto;
+        margin: 0 0 0.9em;
+      }
+      .rich-editable img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 0.4em 0;
+      }
+      .rich-editable table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0 0 0.9em;
+      }
+      .rich-editable th,
+      .rich-editable td {
+        border: 1px solid var(--rule);
+        padding: 6px 10px;
+        text-align: left;
+      }
+      html.dark .rich-editable th,
+      html.dark .rich-editable td {
+        border-color: var(--rule-dark);
+      }
+
+      /* ---- Editor panel chrome (header, tabs, status bar, fullscreen) ---- */
+      #editor-panel {
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      #editor-panel .tinymce-toolbar,
+      #editor-panel .tinymce-frame {
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+      }
+      #editor-panel .tinymce-frame {
+        flex: 1 1 auto;
+        overflow-y: auto;
+      }
+      .editor-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-bottom: 1px solid var(--rule);
+        background: #f6f6f6;
+      }
+      html.dark .editor-header {
+        border-color: var(--rule-dark);
+        background: #262624;
+      }
+      .editor-title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .editor-tabs {
+        display: flex;
+        margin-left: auto;
+      }
+      .editor-tab {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 5px 14px;
+        border: 1px solid var(--rule);
+        background: transparent;
+        color: var(--text-muted);
+        cursor: pointer;
+      }
+      .editor-tab:first-child {
+        border-radius: 4px 0 0 4px;
+      }
+      .editor-tab:last-child {
+        border-left: none;
+        border-radius: 0 4px 4px 0;
+      }
+      .editor-tab.active {
+        background: var(--ink);
+        color: var(--paper);
+        border-color: var(--ink);
+      }
+      html.dark .editor-tab {
+        border-color: var(--rule-dark);
+        color: var(--text-muted-dark);
+      }
+      html.dark .editor-tab.active {
+        background: var(--pine);
+        border-color: var(--pine);
+        color: #fff;
+      }
+      .content-code {
+        flex: 1 1 auto;
+        width: 100%;
+        min-height: 440px;
+        border: none;
+        padding: 14px 16px;
+        resize: none;
+        outline: none;
+        font-family: var(--font-mono);
+        font-size: 12.5px;
+        line-height: 1.6;
+        background: var(--ink);
+        color: #eceae4;
+      }
+      .editor-statusbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+        padding: 6px 12px;
+        border-top: 1px solid var(--rule);
+        background: #f6f6f6;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+      html.dark .editor-statusbar {
+        border-color: var(--rule-dark);
+        background: #262624;
+        color: var(--text-muted-dark);
+      }
+      #editor-panel.fullscreen {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        margin: 0;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+        background: var(--paper);
+      }
+      html.dark #editor-panel.fullscreen {
+        background: var(--paper-dark);
+      }
+      body.studio-fullscreen-lock {
+        overflow: hidden;
       }
     </style>
   </head>
@@ -141,8 +456,143 @@
           </div>
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-8">
-          <!-- Left: form -->
+        <div class="grid lg:grid-cols-[minmax(0,1fr),340px] gap-6 items-start">
+          <!-- MAIN: content editor (Visual / Code tabs + fullscreen) -->
+          <div id="editor-panel" class="studio-block">
+            <div class="editor-header">
+              <span class="editor-title">Content</span>
+              <div class="editor-tabs" role="tablist" aria-label="Editor mode">
+                <button id="tab-visual" type="button" class="editor-tab active" aria-selected="true">Visual</button>
+                <button id="tab-code" type="button" class="editor-tab" aria-selected="false">Code</button>
+              </div>
+              <button id="fullscreen-btn" type="button" class="tinymce-btn" aria-label="Toggle fullscreen" title="Fullscreen">
+                <i data-lucide="maximize-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <div id="editor-toolbar" class="tinymce-toolbar">
+                <select id="format-select" class="tinymce-format-select">
+                  <option value="P">Paragraph</option>
+                  <option value="H1">Heading 1</option>
+                  <option value="H2">Heading 2</option>
+                  <option value="H3">Heading 3</option>
+                  <option value="H4">Heading 4</option>
+                  <option value="H5">Heading 5</option>
+                  <option value="H6">Heading 6</option>
+                  <option value="BLOCKQUOTE">Quote</option>
+                  <option value="PRE">Code block</option>
+                </select>
+                <span class="tinymce-sep"></span>
+                <button
+                  type="button"
+                  data-format="bold"
+                  class="tinymce-btn font-bold"
+                  aria-label="Bold"
+                >
+                  B
+                </button>
+                <button
+                  type="button"
+                  data-format="italic"
+                  class="tinymce-btn italic"
+                  aria-label="Italic"
+                >
+                  I
+                </button>
+                <button
+                  type="button"
+                  data-format="unorderedList"
+                  class="tinymce-btn"
+                  aria-label="Bullet list"
+                >
+                  <i data-lucide="list" class="w-3.5 h-3.5"></i>
+                </button>
+                <button
+                  type="button"
+                  data-format="orderedList"
+                  class="tinymce-btn"
+                  aria-label="Numbered list"
+                >
+                  <i data-lucide="list-ordered" class="w-3.5 h-3.5"></i>
+                </button>
+                <span class="tinymce-sep"></span>
+                <button
+                  type="button"
+                  data-format="alignLeft"
+                  class="tinymce-btn"
+                  aria-label="Align left"
+                >
+                  <i data-lucide="align-left" class="w-3.5 h-3.5"></i>
+                </button>
+                <button
+                  type="button"
+                  data-format="alignCenter"
+                  class="tinymce-btn"
+                  aria-label="Align center"
+                >
+                  <i data-lucide="align-center" class="w-3.5 h-3.5"></i>
+                </button>
+                <button
+                  type="button"
+                  data-format="alignRight"
+                  class="tinymce-btn"
+                  aria-label="Align right"
+                >
+                  <i data-lucide="align-right" class="w-3.5 h-3.5"></i>
+                </button>
+                <span class="tinymce-sep"></span>
+                <button
+                  type="button"
+                  data-format="link"
+                  class="tinymce-btn"
+                  aria-label="Insert link"
+                >
+                  <i data-lucide="link" class="w-3.5 h-3.5"></i>
+                </button>
+                <button
+                  type="button"
+                  data-format="image"
+                  class="tinymce-btn"
+                  aria-label="Insert image"
+                >
+                  <i data-lucide="image" class="w-3.5 h-3.5"></i>
+                </button>
+                <button
+                  type="button"
+                  data-format="cta"
+                  class="tinymce-btn"
+                  aria-label="Insert CTA button"
+                >
+                  <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            <div class="tinymce-frame" id="visual-pane">
+              <div
+                id="content-editor"
+                contenteditable="true"
+                class="rich-editable"
+                data-placeholder="Write or paste your blog content here. Select any text and use the toolbar above to format it as a heading, paragraph, list, quote, link, etc."
+              ></div>
+            </div>
+            <textarea
+              id="content-code"
+              class="content-code hidden"
+              spellcheck="false"
+              placeholder="&lt;h2&gt;Section title&lt;/h2&gt;&#10;&lt;p&gt;Your paragraph…&lt;/p&gt;"
+            ></textarea>
+
+            <div class="editor-statusbar">
+              <span id="word-count">0 words</span>
+              <div class="flex items-center gap-2">
+                <code id="md-filename" class="opacity-70">content/your-slug.html</code>
+                <button id="regen-btn" type="button" class="btn-outline text-xs px-2.5 py-1" title="Re-clean and rebuild the HTML from the editor">Regenerate</button>
+                <button id="copy-md-btn" type="button" class="btn-outline text-xs px-2.5 py-1">Copy HTML</button>
+                <button id="download-md-btn" type="button" class="btn-outline text-xs px-2.5 py-1">Download .html</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIDEBAR: post details + blogs.js entry -->
           <div class="space-y-6">
             <!-- Metadata -->
             <div class="studio-block space-y-4">
@@ -307,131 +757,12 @@
               </details>
             </div>
 
-            <!-- Blocks -->
-            <div class="studio-block space-y-4">
-              <div class="flex items-center justify-between">
-                <h2
-                  class="font-display font-semibold text-sm uppercase tracking-wide"
-                >
-                  Content blocks
-                </h2>
-                <span
-                  id="word-count"
-                  class="text-xs font-mono text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]"
-                ></span>
-              </div>
-              <div id="blocks-list" class="space-y-3"></div>
-              <div class="flex flex-wrap gap-2 pt-2 border-t rule">
-                <button
-                  data-add-block="h2"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Heading (H2)
-                </button>
-                <button
-                  data-add-block="h3"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Heading (H3)
-                </button>
-                <button
-                  data-add-block="p"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Paragraph
-                </button>
-                <button
-                  data-add-block="ul"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Bullet list
-                </button>
-                <button
-                  data-add-block="ol"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Numbered list
-                </button>
-                <button
-                  data-add-block="quote"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Quote
-                </button>
-                <button
-                  data-add-block="code"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Code
-                </button>
-                <button
-                  data-add-block="image"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Image
-                </button>
-                <button
-                  data-add-block="btn"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  + Button/CTA
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: output -->
-          <div class="space-y-6">
             <div class="studio-block space-y-3">
               <div class="flex items-center justify-between">
-                <h2
-                  class="font-display font-semibold text-sm uppercase tracking-wide"
-                >
-                  Markdown file
-                </h2>
-                <div class="flex gap-2">
-                  <button
-                    id="copy-md-btn"
-                    class="btn-outline text-xs px-3 py-1.5"
-                  >
-                    Copy
-                  </button>
-                  <button
-                    id="download-md-btn"
-                    class="btn-outline text-xs px-3 py-1.5"
-                  >
-                    Download .md
-                  </button>
-                </div>
+                <h2 class="font-display font-semibold text-sm uppercase tracking-wide">blogs.js entry</h2>
+                <button id="copy-obj-btn" type="button" class="btn-outline text-xs px-3 py-1.5">Copy</button>
               </div>
-              <p
-                class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]"
-              >
-                Save this as <code id="md-filename">content/your-slug.md</code>
-              </p>
-              <pre id="md-output" class="studio-output"></pre>
-            </div>
-
-            <div class="studio-block space-y-3">
-              <div class="flex items-center justify-between">
-                <h2
-                  class="font-display font-semibold text-sm uppercase tracking-wide"
-                >
-                  blogs.js entry
-                </h2>
-                <button
-                  id="copy-obj-btn"
-                  class="btn-outline text-xs px-3 py-1.5"
-                >
-                  Copy
-                </button>
-              </div>
-              <p
-                class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]"
-              >
-                Paste this object inside the <code>blogs</code> array in
-                <code>data/blogs.js</code>
-              </p>
+              <p class="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">Paste this object inside the <code>blogs</code> array in <code>data/blogs.js</code></p>
               <pre id="obj-output" class="studio-output"></pre>
             </div>
           </div>
@@ -453,6 +784,7 @@
       import { authors } from "../data/authors.js";
       import { categories } from "../data/categories.js";
       import { slugify } from "../assets/js/slugify.js";
+      import { normalizeArticleHTML } from "../assets/js/html-content.js";
 
       bootLayout("");
 
@@ -476,10 +808,6 @@
         gate.classList.add("hidden");
         app.classList.remove("hidden");
         initStudio();
-      }
-
-      if (sessionStorage.getItem(SESSION_KEY) === "1") {
-        showApp();
       }
 
       document
@@ -536,18 +864,6 @@
           categorySelect.appendChild(opt);
         });
 
-        const blockTypeLabels = {
-          h2: "Heading (H2)",
-          h3: "Heading (H3)",
-          p: "Paragraph",
-          ul: "Bullet list",
-          ol: "Numbered list",
-          quote: "Quote",
-          code: "Code",
-          image: "Image",
-          btn: "Button / CTA",
-        };
-
         let state = {
           meta: {
             title: "",
@@ -568,13 +884,15 @@
             seoTitle: "",
             metaDesc: "",
           },
-          blocks: [{ id: crypto.randomUUID(), type: "p", content: "" }],
+          // The whole post body lives here as one raw HTML string (pasted or
+          // typed). It is cleaned via normalizeArticleHTML on output.
+          content: "",
         };
 
         function loadDraft() {
           try {
             const saved = JSON.parse(localStorage.getItem(DRAFT_KEY));
-            if (saved && saved.meta && Array.isArray(saved.blocks)) {
+            if (saved && saved.meta && typeof saved.content === "string") {
               state = saved;
             }
           } catch {
@@ -590,57 +908,84 @@
             "Draft saved " + new Date().toLocaleTimeString();
         }
 
+        // ---- Rich-text (WYSIWYG) editor ----
+        // The editor body is kept as a sanitized HTML subset: headings,
+        // paragraphs, bold/italic, links, lists, blockquotes, code blocks,
+        // images/CTA buttons, and pasted tables. On export it's run through
+        // normalizeArticleHTML (shared with the article page) to rebuild real
+        // <p> tags and drop any junk, producing the final content/<slug>.html.
+        const ALLOWED_RICH_TAGS = new Set([
+          "H1", "H2", "H3", "H4", "H5", "H6",
+          "P", "B", "STRONG", "I", "EM", "A", "BR",
+          "UL", "OL", "LI", "BLOCKQUOTE", "PRE", "CODE", "IMG",
+          "TABLE", "THEAD", "TBODY", "TFOOT", "TR", "TD", "TH",
+          "FIGURE", "FIGCAPTION",
+        ]);
+
+        function sanitizeRichHTML(html) {
+          const container = document.createElement("div");
+          container.innerHTML = html || "";
+          (function clean(node) {
+            [...node.childNodes].forEach((child) => {
+              if (child.nodeType === Node.TEXT_NODE) return;
+              if (child.nodeType !== Node.ELEMENT_NODE) {
+                child.remove();
+                return;
+              }
+              if (!ALLOWED_RICH_TAGS.has(child.tagName)) {
+                // Paste from elsewhere (Word, Google Docs, WordPress) often
+                // wraps lines in DIV/SPAN — treat a DIV boundary as a line
+                // break, then unwrap; anything else just gets unwrapped.
+                if (child.tagName === "DIV") {
+                  child.replaceWith(
+                    ...child.childNodes,
+                    document.createElement("br"),
+                  );
+                } else {
+                  child.replaceWith(...child.childNodes);
+                }
+              } else {
+                [...child.attributes].forEach((attr) => {
+                  const keep =
+                    (child.tagName === "A" &&
+                      (attr.name === "href" ||
+                        (attr.name === "class" &&
+                          attr.value === "btn-primary"))) ||
+                    (child.tagName === "IMG" &&
+                      (attr.name === "src" || attr.name === "alt"));
+                  if (!keep) child.removeAttribute(attr.name);
+                });
+              }
+              clean(child);
+            });
+          })(container);
+          return container.innerHTML;
+        }
+
+        function plainTextFromHTML(html) {
+          const container = document.createElement("div");
+          container.innerHTML = html || "";
+          return container.textContent || "";
+        }
+
         function wordCount() {
-          return state.blocks.reduce(
-            (sum, b) =>
-              sum +
-              (b.content || "").trim().split(/\s+/).filter(Boolean).length,
-            0,
-          );
+          return plainTextFromHTML(state.content)
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean).length;
         }
 
-        function blockToMarkdown(b) {
-          const content = (b.content || "").trim();
-          switch (b.type) {
-            case "h2":
-              return `## ${content}`;
-            case "h3":
-              return `### ${content}`;
-            case "p":
-              return content;
-            case "quote":
-              return content
-                .split("\n")
-                .map((l) => `> ${l}`)
-                .join("\n");
-            case "ul":
-              return content
-                .split("\n")
-                .filter(Boolean)
-                .map((l) => `- ${l}`)
-                .join("\n");
-            case "ol":
-              return content
-                .split("\n")
-                .filter(Boolean)
-                .map((l, i) => `${i + 1}. ${l}`)
-                .join("\n");
-            case "code":
-              return "```" + (b.lang || "") + "\n" + content + "\n```";
-            case "image":
-              return `![${b.alt || ""}](${b.url || ""})`;
-            case "btn":
-              return `<a href="${b.url || "#"}" class="btn-primary" target="_blank" rel="noopener">${content || "Learn more"}</a>`;
-            default:
-              return content;
-          }
+        function escapeHtml(s) {
+          return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
         }
 
-        function buildMarkdown() {
-          return (
-            state.blocks.map(blockToMarkdown).filter(Boolean).join("\n\n") +
-            "\n"
-          );
+        // Final export: sanitized editor HTML, tidied by the shared normalizer.
+        function buildHtml() {
+          return normalizeArticleHTML(state.content) + "\n";
         }
 
         function buildObjectLiteral() {
@@ -662,7 +1007,7 @@
     tags: [${tags.map((t) => jsStr(t)).join(", ")}],
     coverImage: "${m.cover || `public/images/blog/${slug}-cover.jpg`}",
     thumbnail: "${m.thumb || `public/images/blog/${slug}-thumb.jpg`}",
-    markdown: "content/${slug}.md",
+    contentFile: "content/${slug}.html",
     publishDate: "${m.publishDate}",
     updatedDate: "${m.publishDate}",
     readingTime: ${m.readingTime || 1},
@@ -675,8 +1020,8 @@
   },`;
         }
 
+        // ---- render metadata + output panels (not the editor body — see hydrateEditor) ----
         function render() {
-          // metadata fields
           document.getElementById("f-title").value = state.meta.title;
           document.getElementById("f-slug").value = state.meta.slug;
           document.getElementById("f-subtitle").value = state.meta.subtitle;
@@ -695,62 +1040,30 @@
           document.getElementById("f-og").value = state.meta.og;
           document.getElementById("f-seotitle").value = state.meta.seoTitle;
           document.getElementById("f-metadesc").value = state.meta.metaDesc;
+          updateOutputs();
+        }
 
-          // blocks
-          const list = document.getElementById("blocks-list");
-          list.innerHTML = state.blocks
-            .map(
-              (b, i) => `
-        <div class="studio-block" data-block-id="${b.id}">
-          <div class="flex items-center justify-between mb-2">
-            <select data-field="type" class="studio-input w-auto text-xs py-1">
-              ${Object.entries(blockTypeLabels)
-                .map(
-                  ([val, label]) =>
-                    `<option value="${val}" ${b.type === val ? "selected" : ""}>${label}</option>`,
-                )
-                .join("")}
-            </select>
-            <div class="flex gap-1">
-              <button data-action="up" ${i === 0 ? "disabled" : ""} class="theme-toggle disabled:opacity-30" aria-label="Move up"><i data-lucide="chevron-up" class="w-4 h-4"></i></button>
-              <button data-action="down" ${i === state.blocks.length - 1 ? "disabled" : ""} class="theme-toggle disabled:opacity-30" aria-label="Move down"><i data-lucide="chevron-down" class="w-4 h-4"></i></button>
-              <button data-action="remove" class="theme-toggle hover:border-red-400" aria-label="Remove block"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-            </div>
-          </div>
-          ${
-            b.type === "image"
-              ? `<input data-field="url" placeholder="Image URL or path" class="studio-input mb-2" value="${(b.url || "").replace(/"/g, "&quot;")}" />
-                 <input data-field="alt" placeholder="Alt text" class="studio-input" value="${(b.alt || "").replace(/"/g, "&quot;")}" />`
-              : b.type === "btn"
-                ? `<input data-field="content" placeholder="Button label" class="studio-input mb-2" value="${(b.content || "").replace(/"/g, "&quot;")}" />
-                 <input data-field="url" placeholder="Link URL" class="studio-input" value="${(b.url || "").replace(/"/g, "&quot;")}" />`
-                : b.type === "code"
-                  ? `<input data-field="lang" placeholder="Language (optional, e.g. js)" class="studio-input mb-2" value="${(b.lang || "").replace(/"/g, "&quot;")}" />
-                 <textarea data-field="content" rows="4" placeholder="Code" class="studio-input font-mono">${b.content || ""}</textarea>`
-                  : b.type === "ul" || b.type === "ol"
-                    ? `<textarea data-field="content" rows="3" placeholder="One item per line" class="studio-input">${b.content || ""}</textarea>`
-                    : `<textarea data-field="content" rows="${b.type === "p" ? 4 : 2}" placeholder="Text" class="studio-input">${b.content || ""}</textarea>`
-          }
-        </div>`,
-            )
-            .join("");
-
-          document.getElementById("word-count").textContent =
-            `${wordCount()} words`;
+        function updateOutputs() {
+          const count = wordCount();
+          document.getElementById("word-count").textContent = `${count} words`;
           if (!state.meta.readingTimeTouched) {
-            state.meta.readingTime = Math.max(1, Math.round(wordCount() / 200));
+            state.meta.readingTime = Math.max(1, Math.round(count / 200));
             document.getElementById("f-readingtime").value =
               state.meta.readingTime;
           }
-
           const slug = state.meta.slug || slugify(state.meta.title);
           document.getElementById("md-filename").textContent =
-            `content/${slug || "your-slug"}.md`;
-          document.getElementById("md-output").textContent = buildMarkdown();
+            `content/${slug || "your-slug"}.html`;
           document.getElementById("obj-output").textContent =
             buildObjectLiteral();
+        }
 
-          initIcons();
+        // Syncs both editor panes (Visual + Code) from state — only on
+        // load/reset, so the caret isn't disturbed on every keystroke.
+        function hydrateEditor() {
+          contentEditor.innerHTML = state.content || "";
+          const code = document.getElementById("content-code");
+          if (code) code.value = state.content || "";
         }
 
         // ---- metadata field bindings ----
@@ -807,87 +1120,268 @@
             saveDraft();
           });
 
-        // ---- block add buttons ----
-        document.querySelectorAll("[data-add-block]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            state.blocks.push({
-              id: crypto.randomUUID(),
-              type: btn.dataset.addBlock,
-              content: "",
-            });
-            render();
-            saveDraft();
-          });
+        // ---- content editor ----
+        const contentEditor = document.getElementById("content-editor");
+        const formatSelect = document.getElementById("format-select");
+        hydrateEditor();
+
+        // ---- Visual / Code tabs ----
+        const contentCode = document.getElementById("content-code");
+        const tabVisual = document.getElementById("tab-visual");
+        const tabCode = document.getElementById("tab-code");
+        const toolbarEl = document.getElementById("editor-toolbar");
+        const visualPane = document.getElementById("visual-pane");
+        let editorMode = "visual";
+
+        function setEditorMode(next) {
+          if (next === editorMode) return;
+          if (next === "code") {
+            // Leaving Visual: show the current HTML source for editing.
+            contentCode.value = state.content || "";
+            toolbarEl.classList.add("hidden");
+            visualPane.classList.add("hidden");
+            contentCode.classList.remove("hidden");
+          } else {
+            // Leaving Code: push any hand-edited HTML back into the editor.
+            contentEditor.innerHTML = state.content || "";
+            contentCode.classList.add("hidden");
+            toolbarEl.classList.remove("hidden");
+            visualPane.classList.remove("hidden");
+          }
+          editorMode = next;
+          tabVisual.classList.toggle("active", next === "visual");
+          tabCode.classList.toggle("active", next === "code");
+          tabVisual.setAttribute("aria-selected", String(next === "visual"));
+          tabCode.setAttribute("aria-selected", String(next === "code"));
+        }
+        tabVisual.addEventListener("click", () => setEditorMode("visual"));
+        tabCode.addEventListener("click", () => setEditorMode("code"));
+
+        contentCode.addEventListener("input", () => {
+          state.content = contentCode.value;
+          updateOutputs();
+          saveDraft();
         });
 
-        // ---- block editing (delegated) ----
-        document
-          .getElementById("blocks-list")
-          .addEventListener("input", (e) => {
-            const blockEl = e.target.closest("[data-block-id]");
-            if (!blockEl) return;
-            const block = state.blocks.find(
-              (b) => b.id === blockEl.dataset.blockId,
-            );
-            const field = e.target.dataset.field;
-            if (block && field) {
-              block[field] = e.target.value;
-              document.getElementById("word-count").textContent =
-                `${wordCount()} words`;
-              document.getElementById("md-output").textContent =
-                buildMarkdown();
-              document.getElementById("obj-output").textContent =
-                buildObjectLiteral();
-              saveDraft();
+        // ---- fullscreen toggle ----
+        const editorPanel = document.getElementById("editor-panel");
+        const fullscreenBtn = document.getElementById("fullscreen-btn");
+        fullscreenBtn.addEventListener("click", () => {
+          const on = editorPanel.classList.toggle("fullscreen");
+          document.body.classList.toggle("studio-fullscreen-lock", on);
+          fullscreenBtn.innerHTML = on
+            ? '<i data-lucide="minimize-2" class="w-4 h-4"></i>'
+            : '<i data-lucide="maximize-2" class="w-4 h-4"></i>';
+          initIcons();
+        });
+
+        // Preserve the editor's selection across focus loss. Clicking the
+        // format <select> moves focus (and the Selection) away from the editor
+        // before the change event fires, so we snapshot the Range and restore
+        // it before applying a block format.
+        let savedRange = null;
+
+        function saveSelection() {
+          const sel = window.getSelection();
+          if (sel.rangeCount && contentEditor.contains(sel.anchorNode)) {
+            savedRange = sel.getRangeAt(0).cloneRange();
+          }
+        }
+
+        contentEditor.addEventListener("mouseup", saveSelection);
+        contentEditor.addEventListener("keyup", saveSelection);
+        formatSelect.addEventListener("mousedown", saveSelection);
+
+        // Make Enter create <p> blocks instead of browser-default <div>s.
+        function ensureParagraphSeparator() {
+          document.execCommand("defaultParagraphSeparator", false, "p");
+        }
+        ensureParagraphSeparator();
+        contentEditor.addEventListener("focus", ensureParagraphSeparator);
+
+        contentEditor.addEventListener("input", () => {
+          state.content = sanitizeRichHTML(contentEditor.innerHTML);
+          updateOutputs();
+          saveDraft();
+        });
+
+        function syncFormatSelect() {
+          const val = (
+            document.queryCommandValue("formatBlock") || "p"
+          ).toUpperCase();
+          formatSelect.value = formatSelect.querySelector(
+            `option[value="${val}"]`,
+          )
+            ? val
+            : "P";
+        }
+        ["keyup", "mouseup", "focus"].forEach((evt) =>
+          contentEditor.addEventListener(evt, syncFormatSelect),
+        );
+
+        // execCommand('formatBlock', ...) is deprecated and unreliable across
+        // browsers, so we find the block-level ancestor of the selection and
+        // swap its tag directly — deterministic, no execCommand quirks.
+        const BLOCK_TAGS = new Set([
+          "P", "H1", "H2", "H3", "H4", "H5", "H6", "BLOCKQUOTE", "PRE",
+        ]);
+
+        function applyBlockFormat(tagName) {
+          const sel = window.getSelection();
+          let range =
+            sel.rangeCount && contentEditor.contains(sel.anchorNode)
+              ? sel.getRangeAt(0)
+              : savedRange;
+          if (!range) return;
+
+          let node = range.startContainer;
+          if (node.nodeType === Node.TEXT_NODE) node = node.parentNode;
+          while (
+            node &&
+            node !== contentEditor &&
+            !BLOCK_TAGS.has(node.tagName)
+          ) {
+            node = node.parentNode;
+          }
+          if (!node || node === contentEditor) {
+            // Caret isn't inside a recognized block (e.g. a single line typed
+            // before any Enter, which the browser leaves as a bare text node).
+            if (!contentEditor.childNodes.length) return; // truly empty
+            const onlyChild =
+              contentEditor.children.length === 1
+                ? contentEditor.children[0]
+                : null;
+            if (onlyChild && BLOCK_TAGS.has(onlyChild.tagName)) {
+              // Already a single block — retarget it (don't nest a new block).
+              node = onlyChild;
+            } else {
+              // Loose inline/text content — wrap it in a block first.
+              const wrap = document.createElement("p");
+              while (contentEditor.firstChild)
+                wrap.appendChild(contentEditor.firstChild);
+              contentEditor.appendChild(wrap);
+              node = wrap;
             }
-          });
+          }
+
+          const tag =
+            tagName === "BLOCKQUOTE"
+              ? "blockquote"
+              : tagName === "PRE"
+                ? "pre"
+                : tagName.toLowerCase();
+          const newEl = document.createElement(tag);
+
+          if (tagName === "PRE") {
+            const codeEl = document.createElement("code");
+            codeEl.textContent = node.textContent;
+            newEl.appendChild(codeEl);
+          } else {
+            while (node.firstChild) newEl.appendChild(node.firstChild);
+          }
+          node.replaceWith(newEl);
+
+          const newRange = document.createRange();
+          newRange.selectNodeContents(newEl);
+          newRange.collapse(false);
+          sel.removeAllRanges();
+          sel.addRange(newRange);
+          savedRange = newRange.cloneRange();
+        }
+
+        formatSelect.addEventListener("change", () => {
+          // Capture the chosen value BEFORE touching focus. Focusing the editor
+          // fires its focus handler (syncFormatSelect), which would reset the
+          // <select> back to the current block's format — making the format
+          // change a silent no-op. applyBlockFormat works off the range saved
+          // on the <select>'s mousedown, so it doesn't need focus first.
+          const chosen = formatSelect.value;
+          applyBlockFormat(chosen);
+          contentEditor.focus();
+          state.content = sanitizeRichHTML(contentEditor.innerHTML);
+          updateOutputs();
+          saveDraft();
+        });
+
+        const EXEC_COMMANDS = {
+          bold: "bold",
+          italic: "italic",
+          unorderedList: "insertUnorderedList",
+          orderedList: "insertOrderedList",
+          alignLeft: "justifyLeft",
+          alignCenter: "justifyCenter",
+          alignRight: "justifyRight",
+        };
         document
-          .getElementById("blocks-list")
-          .addEventListener("change", (e) => {
-            const blockEl = e.target.closest("[data-block-id]");
-            if (!blockEl) return;
-            const block = state.blocks.find(
-              (b) => b.id === blockEl.dataset.blockId,
-            );
-            if (block && e.target.dataset.field === "type") {
-              block.type = e.target.value;
-              render();
-              saveDraft();
-            }
-          });
-        document
-          .getElementById("blocks-list")
+          .getElementById("editor-toolbar")
           .addEventListener("click", (e) => {
-            const actionBtn = e.target.closest("[data-action]");
-            if (!actionBtn) return;
-            const blockEl = e.target.closest("[data-block-id]");
-            const idx = state.blocks.findIndex(
-              (b) => b.id === blockEl.dataset.blockId,
-            );
-            if (idx === -1) return;
-            if (actionBtn.dataset.action === "remove") {
-              if (state.blocks.length > 1) state.blocks.splice(idx, 1);
-            } else if (actionBtn.dataset.action === "up" && idx > 0) {
-              [state.blocks[idx - 1], state.blocks[idx]] = [
-                state.blocks[idx],
-                state.blocks[idx - 1],
-              ];
-            } else if (
-              actionBtn.dataset.action === "down" &&
-              idx < state.blocks.length - 1
-            ) {
-              [state.blocks[idx + 1], state.blocks[idx]] = [
-                state.blocks[idx],
-                state.blocks[idx + 1],
-              ];
+            const btn = e.target.closest("[data-format]");
+            if (!btn) return;
+            e.preventDefault();
+            contentEditor.focus();
+            const fmt = btn.dataset.format;
+
+            if (fmt === "link") {
+              const sel = window.getSelection();
+              const range = sel.rangeCount
+                ? sel.getRangeAt(0).cloneRange()
+                : null;
+              const url = prompt("Link URL:", "https://");
+              if (!url) return;
+              if (range) {
+                sel.removeAllRanges();
+                sel.addRange(range);
+              }
+              document.execCommand("createLink", false, url);
+            } else if (fmt === "image") {
+              const url = prompt("Image URL or path:", "https://");
+              if (!url) return;
+              const alt = prompt("Alt text:", "") || "";
+              document.execCommand(
+                "insertHTML",
+                false,
+                `<img src="${escapeHtml(url)}" alt="${escapeHtml(alt)}">`,
+              );
+            } else if (fmt === "cta") {
+              const label =
+                prompt("Button label:", "Learn more") || "Learn more";
+              const url = prompt("Button link URL:", "https://") || "#";
+              document.execCommand(
+                "insertHTML",
+                false,
+                `<a href="${escapeHtml(url)}" class="btn-primary">${escapeHtml(label)}</a>`,
+              );
+            } else if (EXEC_COMMANDS[fmt]) {
+              document.execCommand(EXEC_COMMANDS[fmt]);
             }
-            render();
+
+            state.content = sanitizeRichHTML(contentEditor.innerHTML);
+            updateOutputs();
             saveDraft();
           });
+
+        // ---- regenerate ----
+        // The HTML already rebuilds on every edit; this button forces a full
+        // re-clean: it pulls the latest from the active pane, normalizes it,
+        // and refreshes both editor panes and the outputs.
+        document.getElementById("regen-btn").addEventListener("click", () => {
+          state.content =
+            editorMode === "code"
+              ? contentCode.value
+              : sanitizeRichHTML(contentEditor.innerHTML);
+          state.content = normalizeArticleHTML(state.content);
+          hydrateEditor();
+          updateOutputs();
+          saveDraft();
+          const btn = document.getElementById("regen-btn");
+          const label = btn.textContent;
+          btn.textContent = "Regenerated ✓";
+          setTimeout(() => (btn.textContent = label), 1200);
+        });
 
         // ---- copy / download ----
         document.getElementById("copy-md-btn").addEventListener("click", () => {
-          navigator.clipboard.writeText(buildMarkdown());
+          navigator.clipboard.writeText(buildHtml());
         });
         document
           .getElementById("copy-obj-btn")
@@ -899,10 +1393,10 @@
           .addEventListener("click", () => {
             const slug =
               state.meta.slug || slugify(state.meta.title) || "untitled";
-            const blob = new Blob([buildMarkdown()], { type: "text/markdown" });
+            const blob = new Blob([buildHtml()], { type: "text/html" });
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
-            a.download = `${slug}.md`;
+            a.download = `${slug}.html`;
             a.click();
             URL.revokeObjectURL(a.href);
           });
@@ -937,13 +1431,21 @@
                 seoTitle: "",
                 metaDesc: "",
               },
-              blocks: [{ id: crypto.randomUUID(), type: "p", content: "" }],
+              content: "",
             };
+            hydrateEditor();
             render();
             saveDraft();
           });
 
         render();
+        initIcons();
+      }
+
+      // Auto-open the app for an already-authenticated session. Runs last, so
+      // initStudio and its module-scoped state are fully initialized first.
+      if (sessionStorage.getItem(SESSION_KEY) === "1") {
+        showApp();
       }
     </script>
   </body>

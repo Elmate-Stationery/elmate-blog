@@ -1,27 +1,27 @@
 # Elmate Stationery Blogs — Static Blog
 
-A fast, static, SEO-friendly blog built with plain HTML5, Tailwind CSS, and vanilla JavaScript (ES6 modules). No backend, no database, no build step. Designed to be hosted for free on GitHub Pages.
+A fast, static, SEO-friendly blog built with plain HTML5, Tailwind CSS, and vanilla JavaScript (ES6 modules). No backend, no database. The only build steps are compiling the Tailwind stylesheet and regenerating the sitemap/RSS — both run automatically in CI on deploy. Designed to be hosted for free on GitHub Pages.
 
 ---
 
 ## 1. Project Overview
 
-**What it is:** A content-driven blog website. All content (posts, authors, categories, tags, site settings) lives in plain JavaScript data files and Markdown files. There is no CMS, no server, and no compilation step — you edit files directly and the site updates immediately.
+**What it is:** A content-driven blog website. All content (posts, authors, categories, tags, site settings) lives in plain JavaScript data files, with each article's body in an HTML file. There is no CMS and no server — you edit files directly. Two build steps (Tailwind CSS compile + sitemap/RSS generation) run automatically in CI on deploy.
 
 **Tech stack:**
 
 | Layer    | Choice                                                                                            |
 | -------- | ------------------------------------------------------------------------------------------------- |
 | Markup   | HTML5                                                                                             |
-| Styling  | Tailwind CSS (CDN build) + a small custom design-token stylesheet                                 |
+| Styling  | Tailwind CSS (compiled to a static file via the Tailwind CLI) + a small custom design-token stylesheet |
 | Behavior | Vanilla JavaScript, ES6 modules (`import`/`export`) — no framework, no bundler                    |
-| Content  | JavaScript objects (`data/*.js`) for metadata, Markdown files (`content/*.md`) for article bodies |
+| Content  | JavaScript objects (`data/*.js`) for metadata, HTML files (`content/*.html`) for article bodies |
 | Hosting  | GitHub Pages (or any static file host)                                                            |
 
-**Libraries (all loaded via CDN — nothing to `npm install`):**
+**Tailwind CSS** is compiled ahead of time by the Tailwind CLI (a dev dependency) into `assets/css/tailwind.css` — no runtime CDN compiler. Build it locally with `npm run build:css`, or `npm run watch:css` while editing. CI runs it automatically on deploy.
 
-- **Tailwind CSS** — utility-first styling
-- **Marked.js** — renders Markdown into HTML
+**Libraries loaded via CDN at runtime:**
+
 - **Highlight.js** — syntax highlighting for code blocks
 - **AOS** — scroll-reveal animations
 - **Lucide** — icon set
@@ -80,8 +80,8 @@ Elmate Stationery Blogs/
 │   └── tags.js                   Auto-derived from data/blogs.js — don't hand-edit, see Section 6
 │   └── navigation.js
 │
-├── content/                    Article bodies, one Markdown file per post
-│   └── your-post-slug.md
+├── content/                    Article bodies, one HTML file per post
+│   └── your-post-slug.html
 │
 ├── public/
 │   ├── favicon/                 favicon.png, apple-touch-icon.png, icon-192.png, icon-512.png
@@ -98,7 +98,7 @@ Elmate Stationery Blogs/
 ├── .github/workflows/
 │   └── deploy.yml               Runs generate-seo.mjs then deploys to GitHub Pages on every push
 │
-├── package.json                 Only needed to run the generator script (no site build step)
+├── package.json                 Dev deps + scripts: build:css (Tailwind) and generate:seo
 └── README.md
 ```
 
@@ -110,7 +110,7 @@ Elmate Stationery Blogs/
 2. A `<script type="module">` block at the bottom of each page imports `assets/js/layout.js` and calls `bootLayout()`, which renders the navbar, footer, and search modal, then initializes theme, icons, and animations.
 3. The page then imports whatever `data/*.js` it needs (e.g. `blogs.js`) and whatever `components/*.js` it needs (e.g. `blog-card.js`), and renders content into the page's containers using plain DOM/`innerHTML` calls.
 4. List/detail pages (`blog/`, `category/`, `tag/`) read an identifier from the URL query string (`?slug=...`) with the `qs()` helper in `utils.js`, look up the matching record in `data/`, and render it.
-5. Article bodies are not stored as HTML — `blog/index.html` `fetch()`s the Markdown file referenced in the post's metadata (`markdown: "content/your-post.md"`) and renders it client-side with Marked.js.
+5. Article bodies are stored as HTML — `blog/index.html` `fetch()`s the file referenced in the post's metadata (`contentFile: "content/your-post.html"`) and injects it client-side after running it through `assets/js/html-content.js`, which cleans messy exports and rebuilds real `<p>` tags. The article body is styled by Tailwind Typography (the `prose` classes).
 
 Because this relies on `fetch()` and ES module imports, **the site must be served over HTTP** — opening files directly via `file://` will not work (see Section 4).
 
@@ -149,7 +149,7 @@ Image paths in `data/blogs.js`, `data/categories.js`, and `data/authors.js` foll
    ```
 
 3. Open the printed URL in your browser (typically `http://localhost:3000` or `http://localhost:8000`).
-4. Navigate the site as a visitor would — click through links rather than typing `.html` paths, since those no longer exist. Any edits to `data/*.js`, `content/*.md`, or `assets/css/main.css` are reflected on a page refresh — no build/compile step.
+4. Navigate the site as a visitor would — click through links rather than typing `.html` paths, since those no longer exist. Edits to `data/*.js`, `content/*.html`, or `assets/css/main.css` are reflected on a page refresh. If you change Tailwind classes in the markup, run `npm run watch:css` (or `npm run build:css`) so the compiled `assets/css/tailwind.css` picks them up.
 
 ---
 
@@ -177,15 +177,15 @@ This project deploys via a **GitHub Actions workflow** (`.github/workflows/deplo
 
 ## 6. Step-by-Step: Publishing a New Post
 
-1. Write the article body as Markdown and save it to `content/your-post-slug.md`.
-2. Open `data/blogs.js` and copy an existing post object as a template. Fill in:
+1. Write the article body as **HTML** and save it to `content/your-post-slug.html`. Start headings at `<h2>` (the `<h1>` title comes from the metadata) and use real `<p>` tags. If you already have finished HTML, just save it there. If you don't, use the **Studio** tool (`/studio/`) — a WYSIWYG editor where you write/paste content, format it with a toolbar, then download the ready `.html` file and copy the matching `blogs.js` entry (see the Studio section below).
+2. Open `data/blogs.js` and copy an existing post object as a template (or paste the one Studio generated). Fill in:
    - `slug` — must match the URL you'll link to (`blog/?slug=your-post-slug`)
    - `title`, `subtitle`, `description`
    - `author` — must match an existing `id` in `data/authors.js` (or add a new author there first)
    - `category` — must match an existing `id` in `data/categories.js`
    - `tags` — array of plain tag names, e.g. `["JavaScript", "Performance"]`. Tags are **not** a fixed list — any name you type here is picked up automatically (see the note below).
    - `coverImage`, `thumbnail` — paths under `public/images/blog/`
-   - `markdown` — path to the file from step 1, e.g. `"content/your-post-slug.md"`
+   - `contentFile` — path to the file from step 1, e.g. `"content/your-post-slug.html"`
    - `publishDate`, `updatedDate`, `readingTime` (minutes, estimated)
    - `featured` / `featuredOrder` — set `featured: true` to surface it on the home page
    - `seoTitle`, `metaDescription`, `ogImage` — used for `<title>`, meta description, and social share cards
@@ -196,6 +196,36 @@ This project deploys via a **GitHub Actions workflow** (`.github/workflows/deplo
 **Adding a new author or category:** add an object to `data/authors.js` or `data/categories.js` following the existing pattern before referencing its `id` from a post.
 
 **Tags work differently — they're automatic.** `data/tags.js` doesn't hold a hand-maintained list; it scans every post in `data/blogs.js` and builds the tag list, tag cloud, and per-tag pages from whatever names actually appear there. Type a new tag directly into a post's `tags` array and it just works — no registration step, no ID to look up. Tag URLs (`tag/?slug=...`) are generated by slugifying the tag name (e.g. `"E-commerce"` → `ecommerce`), so keep tag names reasonably consistent in spelling/casing across posts — `"SEO"` and `"seo"` will collapse to the same tag page, but `"SEO"` and `"Search Engine Optimization"` will not.
+
+### The Studio content generator (`/studio/`)
+
+Studio is a small in-browser **WYSIWYG editor** (styled like the WordPress Classic Editor / TinyMCE) plus a metadata form. It produces the two things a post needs: a clean `content/<slug>.html` file and a ready-to-paste `data/blogs.js` object. It runs entirely client-side — there is no server and nothing is uploaded.
+
+You only need Studio when you _don't_ already have HTML. If you already have a finished HTML body, skip Studio and drop the file straight into `content/`.
+
+**Access.** Studio sits behind a soft login gate (`data/studio-auth.js`). It is **not real security** — a static site can't hide a secret from anyone who opens DevTools. It only keeps casual visitors out. `studio/` is also excluded from search engines via `robots.txt` and a `noindex` meta tag. Change the default password before relying on it (instructions are in `data/studio-auth.js`).
+
+**Workflow:**
+
+1. **Fill in the metadata** (left panel): title, subtitle, description, author, category, tags, dates, featured flag, and optional image/SEO overrides. The slug auto-derives from the title (editable), and reading time is auto-estimated from word count (editable).
+2. **Write or paste your content** in the main editor, then use the toolbar to format it — the format dropdown assigns Paragraph / Heading 1–6 / Quote / Code block, and the buttons do bold, italic, lists, alignment, links, images, and a CTA button. Start headings at Heading 2 (the `<h1>` title comes from the metadata).
+   - The editor has **Visual** and **Code** tabs (like the WordPress editor): _Visual_ is the WYSIWYG view; _Code_ shows the raw HTML for hand-editing. Switching between them keeps both in sync.
+   - A **fullscreen** button (top-right of the editor) expands it for distraction-free writing.
+3. **Fill in Post details** and read the outputs in the **right sidebar** (both update live, so you never scroll away from the editor):
+   - **Post details** — title, slug, author, category, tags, dates, etc.
+   - **blogs.js entry** — click _Copy_ and paste it into the `blogs` array in `data/blogs.js`.
+4. **Save the HTML.** In the editor's status bar, click _Download .html_ (or _Copy HTML_) and save it as `content/<slug>.html`.
+5. Add any referenced images to `public/images/`, commit, and deploy.
+
+**How the HTML is produced.** As you edit, the editor's markup is sanitized (`sanitizeRichHTML` — keeps a safe subset of tags, drops inline styles and unknown wrappers) and, on export, run through the shared cleaner `assets/js/html-content.js` (`normalizeArticleHTML`) — the same cleaner the live article page uses. It:
+
+- **Rebuilds paragraphs** from loose text/inline runs separated by blank lines (the problem WordPress solves with `wpautop`), while leaving headings, lists, **tables**, blockquotes, figures, and `<details>` intact, and dropping empty paragraphs.
+- **Removes junk** — unwraps layout-only `<div>`/`<section>`/`<span>` wrappers and strips inline `style="…"` attributes.
+- **Is idempotent** — running it on already-clean HTML changes nothing, so both Studio output and hand-written files pass through safely.
+
+**Drafts.** Your in-progress post is auto-saved to `localStorage` (per browser), so a refresh won't lose it. _New draft_ clears the form; _Log out_ ends the session.
+
+**Note:** Studio only generates files for you to save and commit — it can't write to the repo (static sites have no backend). The copy/download/paste step is how the content reaches your project.
 
 ---
 

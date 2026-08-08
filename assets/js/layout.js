@@ -23,9 +23,13 @@ export function bootLayout(activeHref = "") {
 function initBackToTop() {
   const btn = document.getElementById("back-to-top");
   if (!btn) return;
-  window.addEventListener("scroll", () => {
-    btn.classList.toggle("visible", window.scrollY > 500);
-  });
+  window.addEventListener(
+    "scroll",
+    () => {
+      btn.classList.toggle("visible", window.scrollY > 500);
+    },
+    { passive: true },
+  );
   btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
@@ -34,5 +38,13 @@ export function initIcons() {
 }
 
 export function initAnimations() {
-  if (window.AOS) window.AOS.init({ duration: 500, once: true, offset: 40 });
+  if (window.AOS) {
+    window.AOS.init({ duration: 500, once: true, offset: 40 });
+  } else {
+    // AOS's stylesheet sets [data-aos] elements to opacity:0 and relies on
+    // its script to reveal them. If the script fails to load (blocked/slow
+    // CDN), the page would stay permanently invisible — so force-reveal all
+    // animated content as a fallback.
+    document.documentElement.classList.add("no-aos");
+  }
 }
