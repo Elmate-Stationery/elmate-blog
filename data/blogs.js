@@ -171,6 +171,32 @@ export const blogs = [
     canonical: "",
     ogImage: "public/images/og/core-web-vitals-og.jpg",
   },
+  {
+    id: "blog-yalong-12-pcs-color-pencil-price-in-bangladesh",
+    slug: "yalong-12-pcs-color-pencil-price-in-bangladesh",
+    title: "Yalong 12 Pcs Color Pencil Price in Bangladesh",
+    subtitle: "Bring creativity to life",
+    description: "Bring creativity to life with the Yalong 12 Pcs Color Pencil",
+    author: "author-najmul",
+    category: "cat-engineering",
+    tags: ["Color Pencil", "Rong Pencil"],
+    coverImage:
+      "public/images/blog/yalong-12-pcs-color-pencil-price-in-bangladesh-cover.jpg",
+    thumbnail:
+      "public/images/blog/yalong-12-pcs-color-pencil-price-in-bangladesh-thumb.jpg",
+    contentFile: "content/yalong-12-pcs-color-pencil-price-in-bangladesh.html",
+    publishDate: "2026-08-08",
+    updatedDate: "2026-08-08",
+    readingTime: 3,
+    featured: true,
+    featuredOrder: 1,
+    seoTitle: "Yalong 12 Pcs Color Pencil Price in Bangladesh",
+    metaDescription:
+      "Bring creativity to life with the Yalong 12 Pcs Color Pencil",
+    canonical: "",
+    ogImage:
+      "public/images/og/yalong-12-pcs-color-pencil-price-in-bangladesh-og.jpg",
+  },
 ];
 
 export function getBlogBySlug(slug) {
@@ -198,7 +224,7 @@ export function getLatestBlogs(limit = blogs.length) {
     .slice(0, limit);
 }
 
-export function getRelatedBlogs(blog, limit = 3) {
+export function getRelatedBlogs(blog, limit = 4) {
   const blogTagSlugs = blog.tags.map(slugify);
   return blogs
     .filter((b) => b.id !== blog.id)

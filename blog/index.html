@@ -142,7 +142,7 @@
               <h2 class="font-display text-xl font-semibold mb-5">
                 Related articles
               </h2>
-              <div id="related-grid" class="grid sm:grid-cols-3 gap-5"></div>
+              <div id="related-grid" class="grid sm:grid-cols-2 gap-5"></div>
             </div>
 
             <!-- Comments -->
@@ -448,7 +448,7 @@
         navCard(prev, "← Previous", "left") + navCard(next, "Next →", "right");
 
       // Related
-      const related = getRelatedBlogs(blog, 3);
+      const related = getRelatedBlogs(blog, 4);
       document.getElementById("related-grid").innerHTML = related.length
         ? related.map((b) => renderBlogCard(b)).join("")
         : `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No related articles yet.</p>`;
