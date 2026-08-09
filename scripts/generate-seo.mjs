@@ -59,7 +59,7 @@ function buildSitemap() {
     .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate))
     .map(
       (b) => `  <url>
-    <loc>${SITE_URL}/blog/?slug=${b.slug}</loc>
+    <loc>${SITE_URL}/blog/${b.slug}/</loc>
     <lastmod>${b.updatedDate || b.publishDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -79,8 +79,8 @@ function buildRss() {
     .map(
       (b) => `    <item>
       <title>${escapeXml(b.title)}</title>
-      <link>${SITE_URL}/blog/?slug=${b.slug}</link>
-      <guid isPermaLink="true">${SITE_URL}/blog/?slug=${b.slug}</guid>
+      <link>${SITE_URL}/blog/${b.slug}/</link>
+      <guid isPermaLink="true">${SITE_URL}/blog/${b.slug}/</guid>
       <description>${escapeXml(b.metaDescription || b.description)}</description>
       <pubDate>${toRfc822(b.publishDate)}</pubDate>
     </item>`
@@ -104,13 +104,13 @@ async function main() {
   const sitemap = buildSitemap();
   const rss = buildRss();
 
-  const sitemapPath = path.join(ROOT, "public", "sitemap.xml");
+  const sitemapPath = path.join(ROOT, "sitemap.xml");
   const rssPath = path.join(ROOT, "public", "rss.xml");
 
   await writeFile(sitemapPath, sitemap, "utf8");
   await writeFile(rssPath, rss, "utf8");
 
-  console.log(`Generated public/sitemap.xml (${blogs.length} posts + ${STATIC_PAGES.length} static pages)`);
+  console.log(`Generated sitemap.xml (${blogs.length} posts + ${STATIC_PAGES.length} static pages)`);
   console.log(`Generated public/rss.xml (${blogs.length} items)`);
 }
 

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /studio/
+
+Sitemap: https://elmate-stationery.github.io/elmate-blog/sitemap.xml

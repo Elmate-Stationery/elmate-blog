@@ -6,6 +6,7 @@ import { brands } from "../data/brands.js";
 import { renderNewsletter } from "./newsletter.js";
 import { socialIconMarkup } from "../assets/js/social-icons.js";
 import { SITE_ROOT } from "../assets/js/site-root.js";
+import { escapeHtml } from "../assets/js/utils.js";
 
 export function renderFooter() {
   const year = new Date().getFullYear();
@@ -62,8 +63,9 @@ export function renderFooter() {
       <div class="grid grid-cols-2 md:grid-cols-5 gap-10 mt-14">
         <div class="col-span-2">
           <a href="https://www.elmatestationery.com" target="_blank" class="flex items-center mb-3" aria-label="${siteConfig.siteName} — Home">
-            <img src="${SITE_ROOT}${siteConfig.logo}" alt="${siteConfig.siteName}" class="h-9 w-auto"
-              onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'font-display font-semibold text-lg', textContent: '${siteConfig.siteName}' }))" />
+            <img src="${SITE_ROOT}${siteConfig.logo}" alt="${escapeHtml(siteConfig.siteName)}" class="h-9 w-auto"
+              data-fallback="${escapeHtml(siteConfig.siteName)}"
+              onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'font-display font-semibold text-lg', textContent: this.dataset.fallback }))" />
           </a>
           <p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] max-w-xs">${siteConfig.siteDescription}</p>
           <div class="flex gap-2 mt-4">${socialIcons}</div>
