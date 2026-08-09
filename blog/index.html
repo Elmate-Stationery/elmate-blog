@@ -209,11 +209,15 @@
       } from "../components/blog-card.js";
       import { socialIconMarkup } from "../assets/js/social-icons.js";
       import { SITE_ROOT } from "../assets/js/site-root.js";
+      import { postUrl } from "../assets/js/urls.js";
       import { normalizeArticleHTML } from "../assets/js/html-content.js";
 
       bootLayout("");
 
-      const slug = qs("slug");
+      // Prerendered pages live at blog/<slug>/ and declare their slug via
+      // window.__PRERENDER_SLUG__. The legacy blog/?slug=<slug> form still
+      // works, so previously shared links keep resolving.
+      const slug = qs("slug") || window.__PRERENDER_SLUG__ || "";
       const blog = getBlogBySlug(slug) || blogs[0];
       const category = categories.find((c) => c.id === blog.category);
       const author = getAuthorById(blog.author);
@@ -228,7 +232,7 @@
         .getElementById("canonical-link")
         .setAttribute(
           "href",
-          blog.canonical || `${siteConfig.url}/blog/?slug=${blog.slug}`,
+          blog.canonical || `${siteConfig.url}/blog/${blog.slug}/`,
         );
       document.getElementById("og-title").setAttribute("content", blog.title);
       document
@@ -295,10 +299,18 @@
           ?.classList.toggle("text-[var(--ochre)]", active);
       });
 
-      // Fetch + render article HTML
+      // Render article HTML. On a prerendered page the body is already in the
+      // markup (so crawlers and no-JS visitors see it); we then reuse it
+      // instead of re-fetching. Otherwise fetch the content file.
       const contentEl = document.getElementById("article-content");
-      fetch(SITE_ROOT + blog.contentFile)
-        .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
+      const inlined = contentEl.innerHTML.trim();
+      const source = inlined
+        ? Promise.resolve(inlined)
+        : fetch(SITE_ROOT + blog.contentFile).then((r) =>
+            r.ok ? r.text() : Promise.reject(r.status),
+          );
+
+      source
         .then((raw) => {
           // Article bodies are HTML. normalizeArticleHTML cleans up messy
           // WordPress-style exports (bare <span> paragraphs, layout <div>s,
@@ -388,7 +400,7 @@
 
       // Share buttons
       const shareUrl = encodeURIComponent(
-        `${siteConfig.url}/blog/?slug=${blog.slug}`,
+        `${siteConfig.url}/blog/${blog.slug}/`,
       );
       const shareTitle = encodeURIComponent(blog.title);
       const shareLinks = [
@@ -439,7 +451,7 @@
       const next = blogs[idx + 1];
       const navCard = (b, label, align) =>
         b
-          ? `<a href="${SITE_ROOT}blog/?slug=${b.slug}" class="blog-card rounded-lg p-5 flex flex-col ${align === "right" ? "text-right items-end" : ""}">
+          ? `<a href="${postUrl(b.slug)}" class="blog-card rounded-lg p-5 flex flex-col ${align === "right" ? "text-right items-end" : ""}">
           <span class="annotation">${label}</span>
           <span class="font-display font-medium mt-1">${b.title}</span>
         </a>`
@@ -448,7 +460,7 @@
         navCard(prev, "← Previous", "left") + navCard(next, "Next →", "right");
 
       // Related
-      const related = getRelatedBlogs(blog, 4);
+      const related = getRelatedBlogs(blog, 2);
       document.getElementById("related-grid").innerHTML = related.length
         ? related.map((b) => renderBlogCard(b)).join("")
         : `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)]">No related articles yet.</p>`;

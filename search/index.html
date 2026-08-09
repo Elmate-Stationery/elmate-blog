@@ -62,7 +62,12 @@
         renderBlogCard,
         bindBookmarkButtons,
       } from "../components/blog-card.js";
-      import { qs, setQs, debounce } from "../assets/js/utils.js";
+      import {
+        qs,
+        setQs,
+        debounce,
+        escapeHtml,
+      } from "../assets/js/utils.js";
 
       bootLayout("");
 
@@ -91,7 +96,7 @@
         const hits = fuse.search(query).map((h) => h.item);
         results.innerHTML = hits.length
           ? hits.map((b) => renderBlogCard(b, { layout: "list" })).join("")
-          : `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] text-center py-12">No results for "${query}". Try a broader term.</p>`;
+          : `<p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] text-center py-12">No results for "${escapeHtml(query)}". Try a broader term.</p>`;
         bindBookmarkButtons();
         initIcons();
       }

@@ -4,6 +4,7 @@ import { categories } from "../data/categories.js";
 import { tags } from "../data/tags.js";
 import { formatDate } from "../assets/js/utils.js";
 import { SITE_ROOT } from "../assets/js/site-root.js";
+import { postUrl } from "../assets/js/urls.js";
 
 export function renderSidebar({ exclude = null } = {}) {
   const popular = getLatestBlogs(4).filter((b) => b.slug !== exclude);
@@ -11,7 +12,7 @@ export function renderSidebar({ exclude = null } = {}) {
   const popularItems = popular
     .map(
       (b) => `
-      <a href="${SITE_ROOT}blog/?slug=${b.slug}" class="flex gap-3 group py-2.5 border-b rule last:border-0">
+      <a href="${postUrl(b.slug)}" class="flex gap-3 group py-2.5 border-b rule last:border-0">
         <img src="${SITE_ROOT}${b.thumbnail}" alt="" loading="lazy"
           onerror="this.src='https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=100&h=100&fit=crop'"
           class="w-14 h-14 rounded object-cover shrink-0" />

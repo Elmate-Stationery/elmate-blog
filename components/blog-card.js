@@ -8,6 +8,7 @@ import {
 } from "../assets/js/utils.js";
 import { escapeHtml } from "../assets/js/utils.js";
 import { SITE_ROOT } from "../assets/js/site-root.js";
+import { postUrl } from "../assets/js/urls.js";
 
 export function renderBlogCard(blog, { layout = "grid" } = {}) {
   const author = authorFor(blog);
@@ -17,7 +18,7 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
   if (layout === "list") {
     return `
     <article class="blog-card rounded-lg overflow-hidden flex flex-col sm:flex-row" data-aos="fade-up">
-      <a href="${SITE_ROOT}blog/?slug=${blog.slug}" class="sm:w-56 shrink-0 block aspect-video sm:aspect-square overflow-hidden bg-[var(--rule)]">
+      <a href="${postUrl(blog.slug)}" class="sm:w-56 shrink-0 block aspect-video sm:aspect-square overflow-hidden bg-[var(--rule)]">
         <img src="${SITE_ROOT}${blog.thumbnail}" alt="" loading="lazy"
           onerror="this.src='https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=600&fit=crop'"
           class="w-full h-full object-cover" />
@@ -28,7 +29,7 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
           ${blog.featured ? `<span class="badge badge-ochre">Featured</span>` : ""}
         </div>
         <h3 class="font-display text-lg font-semibold leading-snug">
-          <a href="${SITE_ROOT}blog/?slug=${blog.slug}" class="hover:text-[var(--pine)] transition-colors">${escapeHtml(blog.title)}</a>
+          <a href="${postUrl(blog.slug)}" class="hover:text-[var(--pine)] transition-colors">${escapeHtml(blog.title)}</a>
         </h3>
         <p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] line-clamp-2">${escapeHtml(blog.description)}</p>
         <div class="flex items-center gap-3 text-xs text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] mt-1 font-mono">
@@ -44,7 +45,7 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
 
   return `
   <article class="blog-card rounded-lg overflow-hidden flex flex-col h-full" data-aos="fade-up">
-    <a href="${SITE_ROOT}blog/?slug=${blog.slug}" class="block aspect-video overflow-hidden bg-[var(--rule)] relative">
+    <a href="${postUrl(blog.slug)}" class="block aspect-video overflow-hidden bg-[var(--rule)] relative">
       <img src="${SITE_ROOT}${blog.thumbnail}" alt="" loading="lazy"
         onerror="this.src='https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop'"
         class="w-full h-full object-cover" />
@@ -58,7 +59,7 @@ export function renderBlogCard(blog, { layout = "grid" } = {}) {
         </button>
       </div>
       <h3 class="font-display text-lg font-semibold leading-snug">
-        <a href="${SITE_ROOT}blog/?slug=${blog.slug}" class="hover:text-[var(--pine)] transition-colors">${escapeHtml(blog.title)}</a>
+        <a href="${postUrl(blog.slug)}" class="hover:text-[var(--pine)] transition-colors">${escapeHtml(blog.title)}</a>
       </h3>
       <p class="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted-dark)] line-clamp-2 flex-1">${escapeHtml(blog.description)}</p>
       <div class="flex flex-wrap gap-1.5 mt-1">

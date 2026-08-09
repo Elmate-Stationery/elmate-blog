@@ -1,6 +1,7 @@
 // components/navbar.js
 import { siteConfig } from "../data/config.js";
 import { SITE_ROOT } from "../assets/js/site-root.js";
+import { escapeHtml } from "../assets/js/utils.js";
 
 export function renderNavbar(activeHref = "") {
   const links = siteConfig.navigation.primary
@@ -27,8 +28,9 @@ export function renderNavbar(activeHref = "") {
     <div id="reading-progress"></div>
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between" aria-label="Primary">
       <a href="${SITE_ROOT}" class="flex items-center shrink-0" aria-label="${siteConfig.siteName} — Home">
-        <img src="${SITE_ROOT}${siteConfig.logo}" alt="${siteConfig.siteName}" class="h-9 w-auto"
-          onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'font-display font-semibold text-lg tracking-tight', textContent: '${siteConfig.siteName}' }))" />
+        <img src="${SITE_ROOT}${siteConfig.logo}" alt="${escapeHtml(siteConfig.siteName)}" class="h-9 w-auto"
+          data-fallback="${escapeHtml(siteConfig.siteName)}"
+          onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'font-display font-semibold text-lg tracking-tight', textContent: this.dataset.fallback }))" />
       </a>
 
       <div class="hidden md:flex items-center gap-6">

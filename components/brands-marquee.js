@@ -7,7 +7,8 @@ function brandCard(b) {
   return `
     <a href="${b.url}" target="_blank" rel="noopener" class="brand-card" aria-label="${escapeHtml(b.title)} — opens in a new tab">
       <img src="${SITE_ROOT}${b.logo}" alt="${escapeHtml(b.title)}" loading="lazy"
-        onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'font-display font-semibold text-lg', textContent: '${escapeHtml(b.title)}' }))" />
+        data-fallback="${escapeHtml(b.title)}"
+        onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'font-display font-semibold text-lg', textContent: this.dataset.fallback }))" />
       <span class="brand-card-slogan">${escapeHtml(b.slogan || "")}</span>
     </a>`;
 }

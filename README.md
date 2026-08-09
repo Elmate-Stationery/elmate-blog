@@ -1,12 +1,12 @@
 # Elmate Stationery Blogs — Static Blog
 
-A fast, static, SEO-friendly blog built with plain HTML5, Tailwind CSS, and vanilla JavaScript (ES6 modules). No backend, no database. The only build steps are compiling the Tailwind stylesheet and regenerating the sitemap/RSS — both run automatically in CI on deploy. Designed to be hosted for free on GitHub Pages.
+A fast, static, SEO-friendly blog built with plain HTML5, Tailwind CSS, and vanilla JavaScript (ES6 modules). No backend, no database. The build steps — compiling the Tailwind stylesheet, prerendering each post to static HTML, and regenerating the sitemap/RSS — all run automatically in CI on deploy. Designed to be hosted for free on GitHub Pages.
 
 ---
 
 ## 1. Project Overview
 
-**What it is:** A content-driven blog website. All content (posts, authors, categories, tags, site settings) lives in plain JavaScript data files, with each article's body in an HTML file. There is no CMS and no server — you edit files directly. Two build steps (Tailwind CSS compile + sitemap/RSS generation) run automatically in CI on deploy.
+**What it is:** A content-driven blog website. All content (posts, authors, categories, tags, site settings) lives in plain JavaScript data files, with each article's body in an HTML file. There is no CMS and no server — you edit files directly. Three build steps (Tailwind CSS compile, post prerendering, sitemap/RSS generation) run automatically in CI on deploy.
 
 **Tech stack:**
 
@@ -39,9 +39,11 @@ Pages use **clean URLs** — each page lives at `<name>/index.html` instead of `
 Elmate Stationery Blogs/
 │
 ├── index.html               Home page (stays at root)
+├── robots.txt               Crawler rules (must sit at the site root)
+├── sitemap.xml              Auto-generated — see Section 7, don't hand-edit
 ├── 404.html                 Custom 404 page (must stay at root — GitHub Pages requirement)
 ├── blogs/index.html          All-articles listing (search, filter, sort, paginate)   → /blogs/
-├── blog/index.html            Single article (reads ?slug=... from the URL)          → /blog/?slug=...
+├── blog/index.html            Single-article template; prerendered per post at build   → /blog/<slug>/
 ├── categories/index.html    All categories                                          → /categories/
 ├── category/index.html       Single category (reads ?slug=...)                       → /category/?slug=...
 ├── tags/index.html           Tag cloud                                               → /tags/
@@ -87,18 +89,17 @@ Elmate Stationery Blogs/
 │   ├── favicon/                 favicon.png, apple-touch-icon.png, icon-192.png, icon-512.png
 │   ├── images/
 │   │   ├── logo/, authors/, categories/, blog/, og/
-│   ├── robots.txt
-│   ├── sitemap.xml              Auto-generated — see Section 7, don't hand-edit
 │   ├── rss.xml                    Auto-generated — see Section 7, don't hand-edit
 │   └── site.webmanifest / manifest.json
 │
 ├── scripts/
+│   ├── prerender.mjs           Generates static blog/<slug>/index.html pages with baked SEO tags
 │   └── generate-seo.mjs        Regenerates sitemap.xml + rss.xml from data/blogs.js
 │
 ├── .github/workflows/
-│   └── deploy.yml               Runs generate-seo.mjs then deploys to GitHub Pages on every push
+│   └── deploy.yml               Runs `npm run build` then deploys to GitHub Pages on every push
 │
-├── package.json                 Dev deps + scripts: build:css (Tailwind) and generate:seo
+├── package.json                 Dev deps + scripts: build:css, prerender, generate:seo
 └── README.md
 ```
 
@@ -231,10 +232,11 @@ You only need Studio when you _don't_ already have HTML. If you already have a f
 
 ## 7. Auto-Updating Sitemap & RSS
 
-`public/sitemap.xml` and `public/rss.xml` are **generated files** — don't hand-edit them, they get overwritten on the next deploy.
+`sitemap.xml` (site root) and `public/rss.xml` are **generated files** — don't hand-edit them, they get overwritten on the next deploy.
 
 **How it works:**
 
+- `scripts/prerender.mjs` writes a static page per post to `blog/<slug>/index.html`, baking in the title, meta description, canonical, Open Graph/Twitter tags and JSON-LD, and inlining the article body — so search engines *and* social crawlers (which do not run JavaScript) see real content and link previews.
 - `scripts/generate-seo.mjs` reads every post from `data/blogs.js` (plus a fixed list of static pages) and writes fresh `sitemap.xml` and `rss.xml` files.
 - `.github/workflows/deploy.yml` runs this script automatically on every push to `main`, _before_ deploying to GitHub Pages. So the moment you commit a new post to `data/blogs.js`, the next deploy ships an updated sitemap and RSS feed — no manual step required.
 - This requires **Settings → Pages → Source = "GitHub Actions"** (set once — see Section 5, step 3). The older "deploy from branch" method serves the raw repo contents as-is and would skip generation entirely.
