@@ -32,9 +32,8 @@ export const siteConfig = {
     rss: "public/rss.xml",
   },
 
-  contact: {
-    email: "hello@elmatestationery.com",
-    location: "Dhaka, Bangladesh",
+  // Used by the newsletter sign-up form in the footer.
+  newsletter: {
     formspreeEndpoint: "", // e.g. "https://formspree.io/f/xxxxxx" — leave blank to disable
   },
 

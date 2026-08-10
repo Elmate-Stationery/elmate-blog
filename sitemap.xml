@@ -21,16 +21,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/about/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/contact/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://elmate-stationery.github.io/elmate-blog/privacy-policy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
@@ -41,50 +31,8 @@
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/blog/yalong-12-pcs-color-pencil-price-in-bangladesh/</loc>
-    <lastmod>2026-08-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/blog/core-web-vitals-for-blogs/</loc>
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/blog/static-sites-still-win/</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/blog/designing-a-token-system/</loc>
-    <lastmod>2026-05-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/blog/seo-for-product-pages/</loc>
-    <lastmod>2026-05-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/blog/reading-time-is-a-lie/</loc>
-    <lastmod>2026-04-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/blog/building-search-without-a-server/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://elmate-stationery.github.io/elmate-blog/blog/accessible-by-default/</loc>
-    <lastmod>2026-03-28</lastmod>
+    <loc>https://elmate-stationery.github.io/elmate-blog/blog/stationery-items-a-complete-guide-to-essential-school-office-creative-supplies/</loc>
+    <lastmod>2026-08-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

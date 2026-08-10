@@ -14,7 +14,7 @@
 //
 // Run with: npm run prerender  (also part of `npm run build`)
 
-import { mkdir, readFile, writeFile, rm } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile, rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -112,6 +112,17 @@ async function main() {
   const SCHEMA_TAG = '<script type="application/ld+json" id="article-schema"></script>';
   if (!template.includes(SCHEMA_TAG)) {
     throw new Error("prerender: could not locate the article-schema script tag");
+  }
+
+  // Remove stale generated directories for posts that no longer exist in
+  // data/blogs.js (renamed or deleted), so they can't linger and get indexed.
+  const blogDir = path.join(ROOT, "blog");
+  const current = new Set(blogs.map((b) => b.slug));
+  for (const entry of await readdir(blogDir, { withFileTypes: true })) {
+    if (entry.isDirectory() && !current.has(entry.name)) {
+      await rm(path.join(blogDir, entry.name), { recursive: true, force: true });
+      console.log(`  - removed stale page blog/${entry.name}/`);
+    }
   }
 
   let written = 0;

@@ -11,7 +11,7 @@ export const blogs = [
     subtitle: "",
     description: "",
     author: "author-najmul",
-    category: "cat-Stationery Items",
+    category: "cat-stationery-items",
     tags: ["Stationery"],
     coverImage:
       "public/images/blog/stationery-items-a-complete-guide-to-essential-school-office-creative-supplies-cover.jpg",
@@ -30,6 +30,33 @@ export const blogs = [
     canonical: "",
     ogImage:
       "public/images/og/stationery-items-a-complete-guide-to-essential-school-office-creative-supplies-og.jpg",
+  },
+  {
+    id: "blog-where-to-find-cheap-office-supplies-10-smart-ways-to-save-money",
+    slug: "where-to-find-cheap-office-supplies-10-smart-ways-to-save-money",
+    title: "Where to Find Cheap Office Supplies: 10 Smart Ways to Save Money",
+    subtitle: "",
+    description: "",
+    author: "author-najmul",
+    category: "cat-office-supplies",
+    tags: ["where to find cheap office supplies"],
+    coverImage:
+      "public/images/blog/where-to-find-cheap-office-supplies-10-smart-ways-to-save-money-cover.webp",
+    thumbnail:
+      "public/images/blog/where-to-find-cheap-office-supplies-10-smart-ways-to-save-money-cover.webp",
+    contentFile:
+      "content/where-to-find-cheap-office-supplies-10-smart-ways-to-save-money.html",
+    publishDate: "2026-08-10",
+    updatedDate: "2026-08-10",
+    readingTime: 7,
+    featured: true,
+    featuredOrder: 1,
+    seoTitle:
+      "Where to Find Cheap Office Supplies: 10 Smart Ways to Save Money",
+    metaDescription: "",
+    canonical: "",
+    ogImage:
+      "public/images/og/where-to-find-cheap-office-supplies-10-smart-ways-to-save-money-og.jpg",
   },
 ];
 

@@ -25,7 +25,7 @@ export function initNewsletter() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("newsletter-email").value;
-    const endpoint = siteConfig.contact.formspreeEndpoint;
+    const endpoint = siteConfig.newsletter.formspreeEndpoint;
 
     if (!endpoint) {
       status.textContent = `Thanks — ${email} would be subscribed once a Formspree/Mailchimp endpoint is configured in data/config.js.`;
