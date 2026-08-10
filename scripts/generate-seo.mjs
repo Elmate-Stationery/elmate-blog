@@ -27,8 +27,6 @@ const STATIC_PAGES = [
   ["blogs/", "daily", "0.9"],
   ["categories/", "weekly", "0.6"],
   ["tags/", "weekly", "0.5"],
-  ["about/", "monthly", "0.4"],
-  ["contact/", "monthly", "0.4"],
   ["privacy-policy/", "yearly", "0.2"],
   ["terms/", "yearly", "0.2"],
 ];

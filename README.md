@@ -49,8 +49,6 @@ Elmate Stationery Blogs/
 ├── tags/index.html           Tag cloud                                               → /tags/
 ├── tag/index.html             Single tag (reads ?slug=...)                            → /tag/?slug=...
 ├── search/index.html         Dedicated search page                                   → /search/
-├── about/index.html          About page                                              → /about/
-├── contact/index.html         Contact page + form                                     → /contact/
 ├── privacy-policy/index.html                                                          → /privacy-policy/
 ├── terms/index.html                                                                    → /terms/
 │
@@ -119,7 +117,7 @@ Because this relies on `fetch()` and ES module imports, **the site must be serve
 
 Every page other than the homepage and `404.html` lives at `<name>/index.html`. Any static file server — Live Server, `python3 -m http.server`, and GitHub Pages all included — automatically serves a folder's `index.html` when that folder is requested, so `/blogs/` just works with no server configuration.
 
-The tricky part is that shared components (navbar, footer, blog cards, sidebar, etc.) render identical HTML regardless of which page — root-level or nested one level deep — is currently using them. A hardcoded relative link like `"blogs/"` would be correct from `index.html` but wrong from inside `about/index.html` (it'd try to load `about/blogs/`, which doesn't exist).
+The tricky part is that shared components (navbar, footer, blog cards, sidebar, etc.) render identical HTML regardless of which page — root-level or nested one level deep — is currently using them. A hardcoded relative link like `"blogs/"` would be correct from `index.html` but wrong from inside `blogs/index.html` (it’d try to load `blogs/blogs/`, which doesn’t exist).
 
 `assets/js/site-root.js` solves this without hardcoding anything:
 
@@ -253,7 +251,7 @@ This only needs Node.js — nothing else in the project requires a `node_modules
 
 ## 8. Step-by-Step: Customizing the Site
 
-**Site-wide settings** (name, logo, tagline, SEO defaults, social links, navigation, footer links, contact info, pagination size, default theme, analytics IDs, Giscus comment settings) are all controlled from one file:
+**Site-wide settings** (name, logo, tagline, SEO defaults, social links, navigation, footer links, newsletter endpoint, pagination size, default theme, analytics IDs, Giscus comment settings) are all controlled from one file:
 
 ```
 data/config.js
@@ -267,7 +265,7 @@ assets/css/main.css
 
 Change a token there (e.g. `--pine`, `--ochre`, `--font-display`) and it updates everywhere it's used. Tailwind utility classes handle layout throughout the HTML; bespoke, reused visual patterns (cards, badges, buttons, the margin-rail) are defined as named classes in this same file.
 
-**Forms:** the newsletter form (in the footer) and the contact form work as static UI out of the box. To make them actually send submissions, set `siteConfig.contact.formspreeEndpoint` in `data/config.js` to a Formspree endpoint URL.
+**Forms:** the newsletter form (in the footer) works as static UI out of the box. To make it actually send submissions, set `siteConfig.newsletter.formspreeEndpoint` in `data/config.js` to a Formspree endpoint URL.
 
 **Comments:** disabled by default. Enable by setting `giscus.enabled: true` in `data/config.js` and filling in your GitHub Discussions repo details.
 
@@ -303,5 +301,5 @@ Change a token there (e.g. `--pine`, `--ochre`, `--font-display`) and it updates
 | New post doesn't appear                                                          | Check the `slug` is unique, and that `author`/`category`/`tag` IDs referenced in `data/blogs.js` actually exist in their respective data files             |
 | Broken image                                                                     | File path in `data/blogs.js` (or `authors.js`/`categories.js`) doesn't match the actual file in `public/images/`                                           |
 | Search returns nothing it should find                                            | Fuse.js searches `title`, `description`, `author`, `category`, and `tags` fields only — not article body text                                              |
-| Newsletter/contact form shows a "would be subscribed" message instead of sending | No Formspree endpoint configured — see Section 8                                                                                                           |
+| Newsletter form shows a "would be subscribed" message instead of sending | No Formspree endpoint configured — see Section 8                                                                                                           |
 | Sitemap/RSS not updating after deploy                                            | Confirm **Settings → Pages → Source** is set to **"GitHub Actions"**, not "Deploy from a branch" — check the Actions tab for the workflow run and its logs |

@@ -222,35 +222,42 @@
       const category = categories.find((c) => c.id === blog.category);
       const author = getAuthorById(blog.author);
 
-      // SEO
-      document.getElementById("page-title").textContent =
-        `${blog.seoTitle || blog.title} — ${siteConfig.siteName}`;
-      document
-        .getElementById("meta-description")
-        .setAttribute("content", blog.metaDescription || blog.description);
-      document
-        .getElementById("canonical-link")
-        .setAttribute(
-          "href",
-          blog.canonical || `${siteConfig.url}/blog/${blog.slug}/`,
-        );
-      document.getElementById("og-title").setAttribute("content", blog.title);
-      document
-        .getElementById("og-desc")
-        .setAttribute("content", blog.metaDescription || blog.description);
-      document
-        .getElementById("og-image")
-        .setAttribute("content", SITE_ROOT + (blog.ogImage || blog.coverImage));
-      document.getElementById("article-schema").textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Article",
-        headline: blog.title,
-        description: blog.metaDescription || blog.description,
-        author: { "@type": "Person", name: author?.name },
-        datePublished: blog.publishDate,
-        dateModified: blog.updatedDate,
-        image: SITE_ROOT + (blog.ogImage || blog.coverImage),
-      });
+      // SEO — only needed on the dynamic blog/?slug=… page. A prerendered
+      // page already has these baked into the HTML (with absolute production
+      // URLs), so re-writing them here would only risk drift.
+      if (!window.__PRERENDER_SLUG__) {
+        document.getElementById("page-title").textContent =
+          `${blog.seoTitle || blog.title} — ${siteConfig.siteName}`;
+        document
+          .getElementById("meta-description")
+          .setAttribute("content", blog.metaDescription || blog.description);
+        document
+          .getElementById("canonical-link")
+          .setAttribute(
+            "href",
+            blog.canonical || `${siteConfig.url}/blog/${blog.slug}/`,
+          );
+        document.getElementById("og-title").setAttribute("content", blog.title);
+        document
+          .getElementById("og-desc")
+          .setAttribute("content", blog.metaDescription || blog.description);
+        document
+          .getElementById("og-image")
+          .setAttribute(
+            "content",
+            SITE_ROOT + (blog.ogImage || blog.coverImage),
+          );
+        document.getElementById("article-schema").textContent = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: blog.title,
+          description: blog.metaDescription || blog.description,
+          author: { "@type": "Person", name: author?.name },
+          datePublished: blog.publishDate,
+          dateModified: blog.updatedDate,
+          image: SITE_ROOT + (blog.ogImage || blog.coverImage),
+        });
+      }
 
       // Breadcrumb
       document.getElementById("breadcrumb").innerHTML = `

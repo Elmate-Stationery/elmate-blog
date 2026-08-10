@@ -16,10 +16,9 @@
 //          .then(buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join(""))
 //   3. Copy the resulting string into passwordHash below.
 //
-// Default password is: ChangeMe123!  — change it before relying on this.
 
 export const studioAuth = {
   email: "admin@elmatestationery.com",
   passwordHash:
-    "9a4aabf0e5cf71cae2cea646613ce7e2a5919fa758e56819704be25a3a2c1f0b",
+    "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646",
 };

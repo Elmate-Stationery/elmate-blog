@@ -92,5 +92,62 @@ export function normalizeArticleHTML(raw) {
   flush();
 
   root.replaceChildren(...out);
-  return root.innerHTML.trim();
+  return formatArticleHTML(out);
+}
+
+// ---- Pretty-printing ----
+//
+// The DOM serializes to one long line, which makes the generated content file
+// unreadable and impossible to diff. These helpers put each block element on
+// its own line, and indent the children of list/table-style containers.
+// Whitespace between block-level tags is insignificant in HTML, so this
+// changes nothing about how the article renders — with one exception: <pre>
+// IS whitespace-sensitive, so its contents are emitted verbatim.
+
+const INDENT = "  ";
+
+// Containers whose children are worth breaking onto their own lines.
+const CONTAINER_TAGS = new Set([
+  "UL", "OL", "TABLE", "THEAD", "TBODY", "TFOOT", "TR",
+  "BLOCKQUOTE", "FIGURE", "DETAILS",
+]);
+
+// Rebuild the opening tag from attributes rather than slicing outerHTML,
+// which would break on an attribute value containing ">".
+function openTag(el) {
+  const attrs = [...el.attributes]
+    .map((a) => ` ${a.name}="${String(a.value).replace(/"/g, "&quot;")}"`)
+    .join("");
+  return `<${el.tagName.toLowerCase()}${attrs}>`;
+}
+
+function serializeNode(node, depth) {
+  const pad = INDENT.repeat(depth);
+  if (node.nodeType === Node.TEXT_NODE) {
+    const text = node.textContent.trim();
+    return text ? pad + text : "";
+  }
+  if (node.nodeType !== Node.ELEMENT_NODE) return "";
+
+  // <pre> is whitespace-sensitive — never reformat inside it.
+  if (node.tagName === "PRE" || !CONTAINER_TAGS.has(node.tagName)) {
+    return pad + node.outerHTML;
+  }
+
+  const inner = [...node.childNodes]
+    .map((child) => serializeNode(child, depth + 1))
+    .filter(Boolean)
+    .join("\n");
+
+  return inner
+    ? `${pad}${openTag(node)}\n${inner}\n${pad}</${node.tagName.toLowerCase()}>`
+    : pad + node.outerHTML;
+}
+
+export function formatArticleHTML(nodes) {
+  return nodes
+    .map((n) => serializeNode(n, 0))
+    .filter(Boolean)
+    .join("\n")
+    .trim();
 }
