@@ -1,6 +1,6 @@
 {
   "name": "Elmate Stationery Blogs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "Static blog. Two build steps: compile Tailwind to a static CSS file, and regenerate sitemap/RSS from data/blogs.js. Both run in CI on deploy.",
