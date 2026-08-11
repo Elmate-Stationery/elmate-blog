@@ -4,7 +4,7 @@ export const categories = [
     id: "cat-stationery-items",
     name: "Stationery Items",
     slug: "stationery-items",
-    image: "public/images/categories/stationery.jpg",
+    image: "public/images/categories/Stationery-cat.jpg",
     description:
       "Essential stationery items, everyday supplies, and practical guides for school, office, and personal use.",
   },
@@ -12,7 +12,7 @@ export const categories = [
     id: "cat-pens",
     name: "Pens",
     slug: "pens",
-    image: "public/images/categories/pens.jpg",
+    image: "public/images/categories/pens.webp",
     description:
       "Ballpoint pens, gel pens, rollerball pens, and other writing tools for school, office, and everyday use.",
   },
@@ -20,7 +20,7 @@ export const categories = [
     id: "cat-pencils",
     name: "Pencils",
     slug: "pencils",
-    image: "public/images/categories/pencils.jpg",
+    image: "public/images/categories/Cat-Pencil.jpg",
     description:
       "Graphite pencils, mechanical pencils, colored pencils, and essential writing tools for students and creatives.",
   },
@@ -28,7 +28,7 @@ export const categories = [
     id: "cat-notebooks",
     name: "Notebooks & Paper",
     slug: "notebooks-paper",
-    image: "public/images/categories/notebooks.jpg",
+    image: "public/images/categories/notebook.png",
     description:
       "Notebooks, writing pads, paper products, and everyday essentials for studying, planning, and note-taking.",
   },
@@ -36,7 +36,7 @@ export const categories = [
     id: "cat-school-supplies",
     name: "School Supplies",
     slug: "school-supplies",
-    image: "public/images/categories/school-supplies.jpg",
+    image: "public/images/categories/school-supplies.png",
     description:
       "Essential school stationery, student supplies, and practical guides for studying and classroom needs.",
   },
@@ -44,7 +44,7 @@ export const categories = [
     id: "cat-office-supplies",
     name: "Office Supplies",
     slug: "office-supplies",
-    image: "public/images/categories/office-supplies.jpg",
+    image: "public/images/categories/office-supplies.png",
     description:
       "Practical office stationery, desk essentials, and supplies for productive workplaces and everyday tasks.",
   },
@@ -52,18 +52,11 @@ export const categories = [
     id: "cat-art-craft",
     name: "Art & Craft",
     slug: "art-craft",
-    image: "public/images/categories/art-craft.jpg",
+    image: "public/images/categories/Art-and-Craft.jpg",
     description:
       "Art materials, coloring tools, craft supplies, and creative essentials for artists, students, and hobbyists.",
   },
-  {
-    id: "cat-writing-tools",
-    name: "Writing Tools",
-    slug: "writing-tools",
-    image: "public/images/categories/writing-tools.jpg",
-    description:
-      "Guides to everyday writing instruments, including markers, highlighters, fineliners, and specialty writing tools.",
-  },
+
   {
     id: "cat-correction-adhesives",
     name: "Correction & Adhesives",
@@ -108,7 +101,7 @@ export const categories = [
     id: "cat-stationery-trends",
     name: "Stationery Trends",
     slug: "stationery-trends",
-    image: "public/images/categories/stationery-trends.jpg",
+    image: "public/images/categories/stationery-trends.webp",
     description:
       "New stationery trends, popular products, creative desk setups, and ideas shaping the stationery world.",
   },
