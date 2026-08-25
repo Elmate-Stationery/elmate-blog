@@ -1175,8 +1175,20 @@
           saveDraft();
         });
         document.getElementById("f-slug").addEventListener("input", (e) => {
-          state.meta.slug = e.target.value;
+          // Always slugify what's typed here. The slug becomes a URL and a
+          // filename, so pasting a title or sentence (spaces, commas, colons)
+          // would generate a page that can't be served — the post would show
+          // in listings but 404 when opened. Keep a trailing "-" while typing
+          // so words can still be separated.
+          const raw = e.target.value;
+          const cleaned = slugify(raw) + (/[\s-]$/.test(raw) ? "-" : "");
+          state.meta.slug = cleaned;
           state.meta.slugTouched = true;
+          if (e.target.value !== cleaned) {
+            const atEnd = e.target.selectionStart === raw.length;
+            e.target.value = cleaned;
+            if (atEnd) e.target.setSelectionRange(cleaned.length, cleaned.length);
+          }
           render();
           saveDraft();
         });

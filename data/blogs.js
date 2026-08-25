@@ -98,8 +98,8 @@ export const blogs = [
       "public/images/og/stationery-items-complete-guide-to-school-office-art-supplies-in-bangladesh-og.jpg",
   },
   {
-    id: "blog-Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.",
-    slug: "Stationery Items for School, Office and Creative Work: What You Actually Need",
+    id: "blog-stationery-items-for-school-office-and-creative-work-what-you-actually-need",
+    slug: "stationery-items-for-school-office-and-creative-work-what-you-actually-need",
     title:
       "Stationery Items for School, Office and Creative Work: What You Actually Need",
     subtitle:
@@ -126,11 +126,11 @@ export const blogs = [
       "stationery shop Bangladesh",
     ],
     coverImage:
-      "public/images/blog/Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.-cover.jpg",
+      "public/images/blog/stationery-items-for-school-office-and-creative-work-what-you-actually-need-cover.jpg",
     thumbnail:
-      "public/images/blog/Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.-cover.jpg",
+      "public/images/blog/stationery-items-for-school-office-and-creative-work-what-you-actually-need-cover.jpg",
     contentFile:
-      "content/Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh..html",
+      "content/stationery-items-for-school-office-and-creative-work-what-you-actually-need.html",
     publishDate: "2026-08-06",
     updatedDate: "2026-08-06",
     readingTime: 6,
@@ -142,7 +142,7 @@ export const blogs = [
       "Explore stationery items for writing, schoolwork, office tasks, art, crafts, organization, and learning, including pencils, pens, geometry boxes, colours, staplers, markers, stationery sets, and more.",
     canonical: "",
     ogImage:
-      "public/images/og/Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.-og.jpg",
+      "public/images/og/stationery-items-for-school-office-and-creative-work-what-you-actually-need-og.jpg",
   },
 ];
 

@@ -23,6 +23,7 @@ import { blogs } from "../data/blogs.js";
 import { siteConfig } from "../data/config.js";
 import { authors } from "../data/authors.js";
 import { categories } from "../data/categories.js";
+import { slugify } from "../assets/js/slugify.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -114,6 +115,43 @@ async function main() {
     throw new Error("prerender: could not locate the article-schema script tag");
   }
 
+  // Validate every post BEFORE generating anything. A post with a malformed
+  // slug or a missing content file still renders on the listing pages (those
+  // read data/blogs.js directly), so if we only warned here the site would
+  // deploy with a link that 404s. Fail the build instead.
+  const problems = [];
+  const seen = new Map();
+  for (const blog of blogs) {
+    const slug = blog.slug ?? "";
+    if (!slug) {
+      problems.push(`"${blog.title || blog.id}" has no slug`);
+    } else if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+      problems.push(
+        `slug "${slug}" is not URL-safe — use lowercase letters, digits and single hyphens ` +
+          `(suggested: "${slugify(blog.title || slug)}")`,
+      );
+    }
+    if (seen.has(slug)) {
+      problems.push(`duplicate slug "${slug}" (also used by ${seen.get(slug)})`);
+    }
+    seen.set(slug, blog.title || blog.id);
+
+    if (!blog.contentFile) {
+      problems.push(`"${slug}" has no contentFile`);
+    } else if (!existsSync(path.join(ROOT, blog.contentFile))) {
+      problems.push(`"${slug}" points at a missing file: ${blog.contentFile}`);
+    }
+  }
+  if (problems.length) {
+    console.error("Cannot prerender — fix these entries in data/blogs.js:\n");
+    problems.forEach((p) => console.error(`  • ${p}`));
+    console.error(
+      "\nEach post needs a URL-safe slug and a contentFile that exists on disk,\n" +
+        "otherwise its page is never generated and the link 404s in production.\n",
+    );
+    process.exit(1);
+  }
+
   // Remove stale generated directories for posts that no longer exist in
   // data/blogs.js (renamed or deleted), so they can't linger and get indexed.
   const blogDir = path.join(ROOT, "blog");
@@ -127,12 +165,7 @@ async function main() {
 
   let written = 0;
   for (const blog of blogs) {
-    const contentPath = path.join(ROOT, blog.contentFile);
-    if (!existsSync(contentPath)) {
-      console.warn(`  ! skipped ${blog.slug} — missing ${blog.contentFile}`);
-      continue;
-    }
-    const body = await readFile(contentPath, "utf8");
+    const body = await readFile(path.join(ROOT, blog.contentFile), "utf8");
 
     const { seo, schemaScript } = buildSeoBlock(blog);
     let page =
