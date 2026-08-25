@@ -12,7 +12,7 @@
 // To change the password:
 //   1. Open any browser's console (F12) on any page of this site.
 //   2. Run:
-//        await crypto.subtle.digest("SHA-256", new TextEncoder().encode("your-new-password"))
+//        await crypto.subtle.digest("SHA-256", new TextEncoder().encode("123456"))
 //          .then(buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join(""))
 //   3. Copy the resulting string into passwordHash below.
 //
@@ -20,5 +20,5 @@
 export const studioAuth = {
   email: "admin@elmatestationery.com",
   passwordHash:
-    "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646",
+    "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
 };
