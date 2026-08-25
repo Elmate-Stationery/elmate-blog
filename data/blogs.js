@@ -99,7 +99,7 @@ export const blogs = [
   },
   {
     id: "blog-Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.",
-    slug: "Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.",
+    slug: "Stationery Items for School, Office and Creative Work: What You Actually Need",
     title:
       "Stationery Items for School, Office and Creative Work: What You Actually Need",
     subtitle:
