@@ -97,6 +97,53 @@ export const blogs = [
     ogImage:
       "public/images/og/stationery-items-complete-guide-to-school-office-art-supplies-in-bangladesh-og.jpg",
   },
+  {
+    id: "blog-Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.",
+    slug: "Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.",
+    title:
+      "Stationery Items for School, Office and Creative Work: What You Actually Need",
+    subtitle:
+      "Explore essential stationery items for school, office, study, art, crafts, and everyday use in Bangladesh.",
+    description:
+      "Explore stationery items for writing, schoolwork, office tasks, art, crafts, organization, and learning, including pencils, pens, geometry boxes, colours, staplers, markers, stationery sets, and more.",
+    author: "author-najmul",
+    category: "cat-stationery-items",
+    tags: [
+      "stationery items",
+      "stationery",
+      "school stationery",
+      "office stationery",
+      "art supplies",
+      "stationery products",
+      "stationery items in Bangladesh",
+      "school supplies",
+      "office supplies",
+      "writing supplies",
+      "drawing supplies",
+      "stationery set",
+      "craft supplies",
+      "buy stationery online",
+      "stationery shop Bangladesh",
+    ],
+    coverImage:
+      "public/images/blog/Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.-cover.jpg",
+    thumbnail:
+      "public/images/blog/Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.-cover.jpg",
+    contentFile:
+      "content/Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh..html",
+    publishDate: "2026-08-06",
+    updatedDate: "2026-08-06",
+    readingTime: 6,
+    featured: true,
+    featuredOrder: 1,
+    seoTitle:
+      "Stationery Items for School, Office and Creative Work: What You Actually Need",
+    metaDescription:
+      "Explore stationery items for writing, schoolwork, office tasks, art, crafts, organization, and learning, including pencils, pens, geometry boxes, colours, staplers, markers, stationery sets, and more.",
+    canonical: "",
+    ogImage:
+      "public/images/og/Discover essential stationery items for students, offices, creative projects, crafts, and everyday use in Bangladesh.-og.jpg",
+  },
 ];
 
 export function getBlogBySlug(slug) {
