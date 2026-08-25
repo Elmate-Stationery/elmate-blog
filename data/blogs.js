@@ -58,6 +58,45 @@ export const blogs = [
     ogImage:
       "public/images/og/where-to-find-cheap-office-supplies-10-smart-ways-to-save-money-og.jpg",
   },
+  {
+    id: "blog-stationery-items-complete-guide-to-school-office-art-supplies-in-bangladesh",
+    slug: "stationery-items-complete-guide-to-school-office-art-supplies-in-bangladesh",
+    title:
+      "Stationery Items: Complete Guide to School, Office & Art Supplies in Bangladesh",
+    subtitle:
+      "Explore essential stationery items for school, office, study, art, crafts, and everyday use in Bangladesh.",
+    description:
+      "Discover a wide range of stationery items including pencils, pens, geometry boxes, art supplies, staplers, markers, office essentials, stationery sets, and creative products available online in Bangladesh.",
+    author: "author-najmul",
+    category: "cat-stationery-items",
+    tags: [
+      "school stationery",
+      "office stationery",
+      "art supplies",
+      "stationery items in bangladesh",
+      "stationery products",
+      "buy stationery online",
+      "stationery items price in bangladesh",
+    ],
+    coverImage:
+      "public/images/blog/stationery-items-complete-guide-to-school-office-art-supplies-in-bangladesh-cover.jpg",
+    thumbnail:
+      "public/images/blog/stationery-items-complete-guide-to-school-office-art-supplies-in-bangladesh-cover.jpg",
+    contentFile:
+      "content/stationery-items-complete-guide-to-school-office-art-supplies-in-bangladesh.html",
+    publishDate: "2026-08-06",
+    updatedDate: "2026-08-06",
+    readingTime: 6,
+    featured: true,
+    featuredOrder: 1,
+    seoTitle:
+      "Stationery Items: Complete Guide to School, Office & Art Supplies in Bangladesh",
+    metaDescription:
+      "Discover a wide range of stationery items including pencils, pens, geometry boxes, art supplies, staplers, markers, office essentials, stationery sets, and creative products available online in Bangladesh.",
+    canonical: "",
+    ogImage:
+      "public/images/og/stationery-items-complete-guide-to-school-office-art-supplies-in-bangladesh-og.jpg",
+  },
 ];
 
 export function getBlogBySlug(slug) {
